@@ -9,7 +9,7 @@ Tbapp::Application.routes.draw do
 
 	unauthenticated do
 	  devise_scope :user do
-	    root to: "devise/registrations#new", :as => "unauthenticated"
+	    root to: "devise/sessions#new", :as => "login"
 	  end
 	end
   resources :users

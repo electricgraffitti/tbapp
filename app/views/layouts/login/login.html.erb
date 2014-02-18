@@ -7,10 +7,14 @@
   <%= javascript_include_tag "vendor/modernizr", "vendor/browser_select" %>
 </head>
 <body>
-  <%# Flash Notice %>
-  <%= render :partial => 'layouts/shared/flash', :locals => {:flash => flash} %>
-  
-	<%= yield %>
+
+  <div class='container container-fluid'>
+    <%# Flash Notice %>
+    <%= render :partial => 'layouts/shared/flash', :locals => {:flash => flash} %>
+    <div class="row">
+      <div class="col-md-offset-7"><%= yield %></div>
+    </div>
+  </div>
 	<%= javascript_include_tag "login/login_js_manifest" %>
 </body>
 </html>
