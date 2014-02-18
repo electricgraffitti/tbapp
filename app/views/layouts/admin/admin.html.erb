@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mid School Math - Application</title>
+  <%= stylesheet_link_tag "admin/admin_css_manifest", media: "all" %>
+  <%= csrf_meta_tags %>
+  <%= javascript_include_tag "vendor/modernizr", "vendor/browser_select" %>
+</head>
+<body id='admin'>
+	<section id="wrapper" class="full_section admin">
+	  <header id="master_header" class="full_section silver_gradient box_shadow inner_shadow">
+	  	<span class="header_title"><%= raw(logo_text(" - Administrator Dashboard")) %></span> 
+	  	<%= logout_button('admin')%>
+	  </header>
+		<%= render :partial => 'layouts/shared/flash', :locals => {:flash => flash} %>
+  	  <section id="sidebar" class="inner_shadow">
+  	  	<div id="sidebar_scroller">
+  	  		<div id="sidebar_content">
+  	  			<%= yield :sidebar %>
+  	  		</div>
+  	  	</div>
+		  </section>
+		  <section id="content">
+		  	<header id="content_header" class="white_gradient box_shadow inner_shadow">
+		  		<%= yield :content_header %>
+		  	</header>
+		  	<div id="content_scroller">
+			  	<section class="inner_content">
+			  		<%= yield %>
+			  	</section>
+		  	</div>
+			</section>
+			<%= javascript_include_tag "admin/admin_js_manifest", "cocoon" %>
+	</section>
+</body>
+</html>

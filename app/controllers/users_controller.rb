@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  layout 'internal/internal'
   before_filter :authenticate_user!
 
   def index
@@ -7,7 +8,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    if current_user.has_role? :admin
+      # For now
+      @user = current_user
+      # @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
   end
   
   def update

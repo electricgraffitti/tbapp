@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mid School Math - Application</title>
+  <%= stylesheet_link_tag "internal/internal_css_manifest", media: "all" %>
+  <%= csrf_meta_tags %>
+  <%= javascript_include_tag "vendor/modernizr", "vendor/browser_select" %>
+</head>
+<body>    
+	<header class="navbar navbar-fixed-top">
+      <nav class="navbar-inner">
+        <div class="container">
+          <%= render 'layouts/internal/navigation' %>
+        </div>
+      </nav>
+    </header>
+	<%= yield %>
+	<div id="tracking-book">
+		
+	</div>
+	<% if Rails.env == 'development' %>
+		<%= javascript_include_tag "internal/internal_js_manifest" %>
+	<% else %>
+		<%= javascript_include_tag "internal/internal_js_manifest_production" %>
+	<% end %>
+</body>
+</html>
