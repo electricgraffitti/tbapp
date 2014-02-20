@@ -6,7 +6,7 @@ jQuery(function($) {
 
     // Make the context correct by replacing new_<parents> with the generated ID
     // of each of the parent objects
-    var context = ($(this).closest('.fields').find('input:first').attr('name') || '').replace(new RegExp('\[[a-z]+\]$'), '');
+    var context = ($(this).closest('.form-groups').find('input:first').attr('name') || '').replace(new RegExp('\[[a-z]+\]$'), '');
 
     // context will be something like this for a brand new form:
     // project[tasks_attributes][new_1255929127459][assignments_attributes][new_1255929128105]
@@ -44,7 +44,7 @@ jQuery(function($) {
     if(hidden_field) {
       hidden_field.value = '1';
     }
-    $(this).closest('.fields').hide();
+    $(this).closest('.form-groups').hide();
     $(this).closest("form").trigger('nested:fieldRemoved');
     return false;
   });

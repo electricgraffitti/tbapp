@@ -1,38 +1,25 @@
- <div class="panel panel-default">
-    <div class="panel-heading">
-        <span class="glyphicon glyphicon-lock"></span> Login</div>
-      <div class="panel-body">
-        <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal' }) do |f| %>
+ <div id='login_panel' class='panel'>
+    <header class='public_header'>Tracking Book Login</header>
+    <section class="panel-body">
+    <%= simple_form_for(resource, :as => resource_name, 
+        :url => session_path(resource_name), 
+        :html => {:class => 'form-horizontal' }) do |f| %>
+
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
-            <div class="col-sm-9">
-                <%= f.input :email, :autofocus => true %>
-            </div>
+          <%= f.input :email, :autofocus => true, input_html: { class: 'form-control' }%>
         </div>
         <div class="form-group">
-            <label for="inputPassword3" class="col-sm-3 control-label">
-                Password</label>
-            <div class="col-sm-9">
-                <%= f.input :password %>
-            </div>
+          <%= f.input :password, input_html: { class: 'form-control' }%>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"/>
-                        Remember me
-                    </label>
-                </div>
-            </div>
+          <label><input type="checkbox"/>Remember me</label>
         </div>
         <div class="form-group last">
-            <div class="col-sm-offset-3 col-sm-9">
-               <%= f.button :submit, "Sign in", :class => 'btn-primary' %>
-            </div>
+          <%= f.button :submit, "Sign in", :class => 'btn btn-default btn-wide' %>
         </div>
+
       <% end %>
-    </div>
-    <div class="panel-footer"><%= render "devise/shared/links" %></div>
+    </section>
+    <footer><%= render "devise/shared/links" %></footer>
 </div>
 

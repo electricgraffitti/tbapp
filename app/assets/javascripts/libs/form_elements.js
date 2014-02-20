@@ -99,7 +99,7 @@ var FormElements = {
   },
 
   customUploadElement: function (element) {
-    var parentField = element.parent('.field'),
+    var parentField = element.parent('.form-group'),
         parentFieldId = 'file_field_' + $(element).attr('id'),
         placeholderText = "Select File";
 
@@ -108,7 +108,7 @@ var FormElements = {
   },
 
   updateCustomUploadElement: function(element, fileToUpload) {
-    var parentField = element.parent('.field');
+    var parentField = element.parent('.form-group');
         fieldLabel = parentField.find('label'),
         existingLabelSize = fieldLabel.find('span'),
         fauxText = parentField.find('.faux_upload span.placeholder_text');

@@ -92,8 +92,8 @@
             field.bind(config.when || 'blur', field.testValid);
         }
 
-        for (item in config.fields) {
-            processField(config.fields[item], item);
+        for (item in config.form-groups) {
+            processField(config.form-groups[item], item);
         }
 
         if (config.submitButton) {

@@ -11,10 +11,11 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require vendor/jquery
-//= require_tree ./../vendor/flat-ui
+// require_tree ./../vendor/flat-ui
 
 //= require vendor/handlebars
 //= require vendor/ember
+//= require vendor/ember-data
 
 //= require_tree ./../libs
 //= require ./../config/app_init

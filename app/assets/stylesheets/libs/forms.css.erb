@@ -1,0 +1,92 @@
+/* Forms */
+form {position:relative;}
+#login_box form {width: 960px; }
+#msmapp form {width: 605px;}
+.form-group {position: relative;float: left;width: 100%;box-sizing: border-box;padding: 0px 10px;}
+.form-group.cc_field {width:330px;padding-top: 3px;}
+.form-group.full_field {width: 960px;}
+.form-group.small_input {width: 125px;}
+.form-group.small_input input {width: 87px;}
+#content .form-group.full_field {width: 735px;}
+#msmapp .form-group.full_field {width: 605px;}
+.form-control {padding: 0px 20px; height:31px;}
+.form-group label {width: 100%;display: block; color: #6F7986; font-size: 14px; padding: 0 0 5px 0;}
+.form-group label span {font-size: 13px;}
+.form-group input[type='checkbox'] {width: 17px;}
+.form-group input[type='file'] {padding: 0px;}
+.form-group.actions {padding: 20px 10px;}
+#msmapp .form-group input[type='file'] {padding: 7px;}
+.form-group.double_fields input {margin-top: 5px;}
+.form-group textarea {width: 277px;height: 50px; box-sizing: border-box;}
+.form-group.action {width: 100%;padding-top: 20px;}
+.form-group.action input, .processing_button {position: relative; float: left; width: 274px;}
+.form-group.action button {float:left; margin-right: 20px;}
+.form-group.action .cancel_link {position: relative;float: left;display: block; padding-top: 10px; color:#0088cc;}
+.form-group.action .cancel_link:hover {text-decoration: underline;}
+.checkbox_group, .inline_field,
+.checkbox_group label, .inline_field label,
+.checkbox_group input, .inline_field input {position: relative;float: left;}
+.inline_field {padding: 0px 10px 5px 0px;}
+.inline_field label {display: inline;padding-left: 5px;float: right; width: auto;}
+.inline_field input {padding-top: 2px;}
+.checkbox_group label {display: inline;width: auto;}
+.checkbox_group input {width: 17px;display: block;top: 2px;}
+select{padding:3px;}
+.simple_separator {padding-top: 20px; border-bottom: 1px solid #aaa; margin-bottom: 20px; width: 100%; position: relative; float:left;}
+.single_field {width: 40px;}
+form header {padding: 0px;font-size: 20px;position: relative; float: left; width: 50%;}
+form header.full_header {width: 100%;}
+form article {position: relative;float: left;padding-bottom: 10px;}
+.form_block {position: relative; float: left;width: 100%;}
+.nested-fields {position: relative;float: left;width: 100%;}
+.top-level.nested-fields {border: 1px solid #B4B9C0; margin-bottom: 10px; padding: 10px;box-sizing: border-box;}
+.nested-fields {background: #EFF2F5;}
+.nested-fields .nested-fields {background: #E6EAF0;}
+.nested-fields .nested-fields .nested-fields {background: rgb(211, 218, 230);}
+/* Custom Selects */
+.select_wrap {width: 177px;margin-bottom: 0;margin-right: 5px;}
+select.select {position: relative;height: 29px;line-height: 20px;padding-left: 2px;width:276px;z-index: 10;margin-bottom: 15px;}
+option {padding: 2px 1px 3px;}
+span.select, span.select_toggle {top: 24px; bottom: 0px;height: 23px;position: absolute;border: 1px solid #C6C6C6;background: #FFF;padding: 6px 0px 0px 5px;}
+span.select {left: 0;width: 268px;}
+span.select_toggle {left: 250px;display: block;width: 18px;border-left: 1px solid rgba(0, 0, 0, 0.2);z-index: 1;}
+span.select_toggle .toggle {border: 4px solid rgba(0, 0, 0, 0);border-top: 4px solid #444;width: 0;height: 0;position: absolute;top: 11px;left: 8px;display: block;}
+
+.inset_form {background: #f3f3f3;border-bottom: 1px solid #ccc;border-top: 1px solid #ccc;}
+.inset_form .form-group.action {width: 560px;}
+.cancel_link {cursor: pointer;}
+.inline_form label {font-size: 13px;}
+.inline_form .form-group.action {border: none; margin: 0px; padding: 0px;}
+.inset_form .content_header {width: 100%;}
+.inset_form .form-group {width: 290px;}
+.form-group.wysiwyg_field {width: 453px;}
+.inset_form .form-group.wysiwyg_field {width: 581px; padding-right: 0px;}
+.inset_form .full_content {padding: 10px 0px;width: 100%;}
+.inset_form .full_content.toggles {padding-top: 0px;}
+.form-group.update_resource {padding-top: 10px;}
+.form-group.update_resource label span {width: 50px;position: absolute;right: 0px;top: 14px;height: 22px;}
+
+/* Custom Upload Elements */
+.custom_upload {opacity: 0;}
+.faux_upload {position: absolute;width: 268px;height: 20px;top: 23px;border: 1px solid #B1B1B1;color: #CCC;padding: 5px; overflow: hidden;background:#fff;}
+.faux_upload span {display: block;padding: 3px 2px;white-space: nowrap;}
+.faux_upload span.select_toggle, .faux_upload span.select_toggle span.toggle {padding: 0px; cursor:pointer;}
+.faux_upload span.select_toggle {top: 0px; border:none; width:0px;}
+.faux_upload span.select_toggle span.toggle {top:13px;}
+
+
+/* Custom Radio Buttons */
+.radio_button {width: 10px;height: 10px;border: 1px solid #CCC;display: inline-block;border-radius: 16px;padding: 3px;position: absolute;left: 3px;top: 3px;}
+.radio_button span {background: #E6EAF0;display: inline-block;width: 14px;height: 15px;position: relative;top: -2px;left: -2px;border-radius: 6px;}
+.unanswered .active .radio_button, .unanswered .radio_button:hover {border: 1px solid #066392;background: #08C;}
+.correct .radio_button {border: 1px solid #218801;background: #39CC00;}
+.student_answer .radio_button {border: 1px solid #880101;background: #C00;}
+.student_answer.correct .radio_button {border: 1px solid #FFA300;background: #FFF500;}
+.unanswered .active .radio_button span,
+.unanswered .radio_button:hover span,
+.student_answer .radio_button span,
+.student_answer .radio_button:hover span,
+.correct .radio_button span,
+.correct .radio_button:hover span {background: #FFF;width: 8px;height: 9px;position: relative;top: -2.5px;left: 1px;}
+
+

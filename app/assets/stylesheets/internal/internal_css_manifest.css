@@ -8,11 +8,8 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require ./../vendor/bootstrap
  *= require ./../vendor/prettify
- *= require ./../vendor/less/flat-ui
- *= require ./../vendor/less/variables
- * require_tree ./../vendor/less/modules
+ *= require ./../vendor/flat-ui
  *= require_tree ./../libs
  *= require_self
  *= require_tree .

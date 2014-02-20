@@ -15,6 +15,11 @@ class UsersController < ApplicationController
     else
       @user = current_user
     end
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @user, serializer: UserSerializer }
+    end
   end
   
   def update
