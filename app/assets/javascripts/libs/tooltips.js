@@ -1,52 +1,48 @@
-var ToolTips = {
+﻿Nucleus.ToolTips = {
 
   initToolTips: function () {
-    ToolTips.triggerToolTips();
+    Nucleus.ToolTips.triggerToolTips();
   },
 
   toolTipSwitch: function (triggerElement) {
-    var toolTipType = triggerElement.data("tooltiptype") ? triggerElement.data("tooltiptype") : 'title';
-    ToolTips.removeToolTip();
+    var toolTipType = triggerElement.data("tooltiptype");
+    Nucleus.ToolTips.removeToolTip();
     switch (toolTipType) {
-      case 'title':
-        ToolTips.titleToolTip(triggerElement, toolTipType);
+      case 'micro':
+        Nucleus.ToolTips.microToolTip(triggerElement, toolTipType);
         break;
-      case 'content':
-        ToolTips.contentToolTip(triggerElement, toolTipType);
+      case 'info':
+        Nucleus.ToolTips.infoToolTip(triggerElement, toolTipType);
         break;
       default:
-        ToolTips.titleToolTip(triggerElement, toolTipType);
+        Nucleus.ToolTips.microToolTip(triggerElement, toolTipType);
         break;
     }
   },
 
   removeToolTip: function () {
-    var toolTip = $("#tool_tip_wrap");
+    var toolTip = jQuery("#tool_tip_wrap");
     toolTip.remove();
   },
 
-  titleToolTip: function (triggerElement, toolTipType) {
-    var toolTipContent = triggerElement.data("tooltiptitle") ? triggerElement.data("tooltiptitle") : triggerElement.attr("title"),
-        toolTip = ToolTips.createToolTip(toolTipType, toolTipContent);
+  microToolTip: function (triggerElement, toolTipType) {
+    var toolTipContent = Nucleus.ToolTips.getMicroTipValue(triggerElement),
+        toolTip = Nucleus.ToolTips.createToolTip(toolTipType, toolTipContent);
 
-    ToolTips.drawToolTip(triggerElement, toolTip);
+    Nucleus.ToolTips.drawToolTip(triggerElement, toolTip);
   },
 
-  contentToolTip: function (triggerElement, toolTipType) {
-    var toolTipHeader = $("<div id='tool_tip_header'>ToolTip</div>"),
-        toolTipContentUrl = triggerElement.data('tooltipdataurl'),
-        toolTipContent = ToolTips.getRemoteContent(toolTipContentUrl),
-        toolTip = ToolTips.createToolTip(toolTipType, toolTipContent);
+  infoToolTip: function (triggerElement, toolTipType) {
+    var toolTipContent = Nucleus.ToolTips.getRemoteContent(triggerElement.data('tooltipdataurl')),
+        toolTipHeader = Nucleus.ToolTips.buildToolTipHeader(triggerElement, toolTipContent),
+        toolTip = Nucleus.ToolTips.createToolTip(toolTipType, toolTipContent, toolTipHeader);
 
-    toolTipHeader.text(toolTipContent.find('.popup_header').text());
-    toolTip.prepend(toolTipHeader);
-
-    ToolTips.drawToolTip(triggerElement, toolTip);
+    Nucleus.ToolTips.drawToolTip(triggerElement, toolTip);
   },
 
   getRemoteContent: function (toolTipContentUrl) {
     var content;
-    $.ajax({
+    jQuery.ajax({
       url: toolTipContentUrl,
       cache: true,
       async: false,
@@ -57,12 +53,25 @@ var ToolTips = {
     return content;
   },
 
-  createToolTip: function (toolTipType, content) {
-    var toolTip = $("<div id='tool_tip_wrap' class='bottom left'></div>"),
-        toolTipContent = $("<div id='tool_tip_content'></div>"),
-        toolTipArrow = $("<div id='tool_tip_arrow'></div>");
+  getMicroTipValue: function (triggerElement) {
+    if (triggerElement.attr("data-tooltiptitle")) {
+      return triggerElement.attr("data-tooltiptitle");
+    } else if (triggerElement.attr("tooltiptitle")) {
+      return triggerElement.attr("tooltiptitle");
+    } else if (triggerElement.attr("title")) {
+      return triggerElement.attr("title");
+    } else {
+      return triggerElement.next().text();
+    }
+  },
+
+  createToolTip: function (toolTipType, content, header) {
+    var toolTip = Nucleus.ToolTips.createToolTipWrapperHtml(),
+        toolTipContent = Nucleus.ToolTips.createToolTipContentHtml(),
+        toolTipArrow = Nucleus.ToolTips.createToolTipArrowHtml();
 
     toolTipContent.html(content);
+    toolTip.append(header);
     toolTip.append(toolTipContent);
     toolTip.append(toolTipArrow);
     toolTip.addClass(toolTipType);
@@ -70,10 +79,61 @@ var ToolTips = {
     return toolTip;
   },
 
+  createToolTipWrapperHtml: function () {
+    return jQuery("<div id='tool_tip_wrap' class='bottom left'></div>");
+  },
+
+  createToolTipHeaderHtml: function () {
+    return $("<div id='tool_tip_header'>ToolTip</div>");
+  },
+
+  createToolTipContentHtml: function () {
+    return jQuery("<div id='tool_tip_content' class='tip_content'></div>");
+  },
+
+  createToolTipArrowHtml: function () {
+    return jQuery("<div id='tool_tip_arrow'></div>");
+  },
+
+  calculateHeaderText: function (triggerElement, toolTipContent) {
+    return triggerElement.data('tooltiptitle') ? triggerElement.data('tooltiptitle') : (toolTipContent.find('.popup_header').text() ? toolTipContent.find('.popup_header').text() : "");
+  },
+
+  infoTipPopupTriggerHtml: function (triggerElement, width, height) {
+    var popupWidth = width ? width : 300,
+        popupHeight = height ? height : 300,
+        popuptrigger = jQuery("<a id='tool_tip_popup_trigger' class='icon small_icon popup_window_icon popup_link' popupTitle='Code Desc' href='" + triggerElement.data('tooltipdataurl') + "' popupWidth='" + popupWidth + "' popupHeight='" + popupHeight + "'></a>");
+
+    return triggerElement.data('hastooltippopout') ? popuptrigger : "";
+  },
+
+  buildToolTipHeader: function (triggerElement, toolTipContent) {
+    var headerHtml = Nucleus.ToolTips.createToolTipHeaderHtml(),
+        toolTipPopupTrigger = Nucleus.ToolTips.infoTipPopupTriggerHtml(triggerElement),
+        headerTextValue = Nucleus.ToolTips.calculateHeaderText(triggerElement, toolTipContent);
+
+    headerHtml.text(headerTextValue);
+    headerHtml.append(toolTipPopupTrigger);
+    return headerHtml;
+  },
+
+  adjustForTableTip: function (tooltip) {
+    var toolTipHeader = tooltip.find('#tool_tip_header');
+
+    tooltip.removeClass('info');
+    tooltip.addClass('table_tip');
+    toolTipHeader.width(tooltip.find('#tool_tip_content').width());
+    tooltip.width(toolTipHeader.width() + 20);
+  },
+
   drawToolTip: function (triggerElement, tooltip) {
     var isTableTip = triggerElement.data('istabletip');
-    $("body").append(tooltip);
-    ToolTips.positionToolTip(triggerElement, tooltip);
+    jQuery("body").append(tooltip);
+    Nucleus.ToolTips.positionToolTip(triggerElement, tooltip);
+    if (isTableTip === true) {
+      Nucleus.ToolTips.adjustForTableTip(tooltip);
+    }
+    Nucleus.Popup.initScripts();
   },
 
   positionToolTip: function (triggerElement, tooltip) {
@@ -86,7 +146,7 @@ var ToolTips = {
 
     tooltip.css({ "position": "absolute" });
 
-    if ($(window).width() < horzPosition) {
+    if (jQuery(window).width() < horzPosition) {
       calcHorizPosition = (position.left - tipWidth);
       tooltip.css({ "left": calcHorizPosition });
       tooltip.removeClass("left").addClass("right");
@@ -113,18 +173,19 @@ var ToolTips = {
       over: function () {
         var self = $(this);
         if (tipIsVisible) { clearTimeout(tipIsVisible); }
-        ToolTips.toolTipSwitch(self);
+        Nucleus.ToolTips.toolTipSwitch(self);
       },
       timer: 1500,
       out: function () {
-        tipIsVisible = setTimeout(ToolTips.removeToolTip, 900);
+        tipIsVisible = setTimeout(Nucleus.ToolTips.removeToolTip, 900);
         $("#tool_tip_wrap").on("mouseenter", function () {
           clearTimeout(tipIsVisible);
         });
         $("#tool_tip_wrap").on("mouseleave", function () {
-          tipIsVisible = setTimeout(ToolTips.removeToolTip, 900);
+          tipIsVisible = setTimeout(Nucleus.ToolTips.removeToolTip, 900);
         });
       }
     });
   }
+
 };

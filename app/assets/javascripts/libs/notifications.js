@@ -1,54 +1,25 @@
-var Flash = {
+Nucleus.Notice = {
 
-  injectFlashBox: function() {
-    $('#flash').addClass("flash_wrap");
-    $("#flash").hide();
+  errorNotice: function (message) {
+    // remove any previoius modals first
+    Nucleus.Modal.removeModal();
+    Nucleus.Modal.createModal('notification', message, 'error');
   },
 
-  setFlash: function() {
-    var flashMessage = $("#flash").html();
-    var msg = $.trim(flashMessage);
-    if (msg !== "") {
-      Flash.activateNotice(flashMessage);
+  confirmationNotice: function (message, title, callback, callbackContext) {
+    Nucleus.Modal.removeModal();
+    Nucleus.Modal.createModal('notification', message, 'confirmation', title, callback, callbackContext);
+  },
+
+  validationNotice: function (message) {
+  	Nucleus.Modal.removeModal();
+  	if (typeof message === 'object') {
+    	Nucleus.Modal.createModal('notification', message.map(function(message) {
+        return "<p>" + message + "</p>";
+      }).join(''), 'error');
+    } else {
+      Nucleus.Modal.createModal('notification', message, 'error');
     }
-  },
-
-  activateNotice: function(flashMessage) {
-    var flashDiv = $("#flash");
-    flashDiv.html(flashMessage);
-    flashDiv.slideDown(600).delay(2500).slideUp(600, function() {flashDiv.html('')});
   }
-};
-
-var AjaxNotice = {
-
-  initializeGlobalEvents: function () {
-    $(document).ajaxStart(function() {
-      AjaxNotice.addAjaxNotice();
-    });
-
-    $(document).ajaxStop(function() {
-      AjaxNotice.removeAjaxNotice();
-    });
-  },
-
-  addAjaxNotice: function () {
-    AjaxNotice.slideInNotice();
-  },
-
-  removeAjaxNotice: function () {
-    AjaxNotice.slideOutNotice();
-  },
-
-  slideInNotice: function () {
-    $('body').append(AjaxNotice.getHtml());
-  },
-
-  slideOutNotice: function () {
-    $("#ajax_notice").remove();
-  },
-
-  getHtml: function () {
-    return '<div id="ajax_notice" class="green_button"><div id="facebookG"><div id="blockG_1" class="facebook_blockG"></div><div id="blockG_2" class="facebook_blockG"></div><div id="blockG_3" class="facebook_blockG"></div></div> Working...</div>'
-  }
+  
 }

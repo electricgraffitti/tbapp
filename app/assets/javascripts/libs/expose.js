@@ -1,4 +1,4 @@
-var Expose = {
+Nucleus.Expose = {
 
   color: "#000000",
   opacity: "0.1",
@@ -9,9 +9,9 @@ var Expose = {
 
   appendExpose: function (exposeHtml, content) {
     $("body").append(exposeHtml);
-    exposeHtml.css({ zIndex: 8999, backgroundColor: Expose.color, opacity: Expose.opacity });
+    exposeHtml.css({ zIndex: 8999, backgroundColor: Nucleus.Expose.color, opacity: Nucleus.Expose.opacity });
     $("body").append(content);
-    Expose.sizeExpose(exposeHtml);
+    Nucleus.Expose.sizeExpose(exposeHtml);
   },
 
   sizeExpose: function (exposeHtml) {

@@ -1,73 +1,177 @@
-var Utility = {
+﻿Nucleus.Utilities = {
 
-  nonAlphaNumericInput: function(event) {
-    // TODO setup keyCodes
-    return true;
+  externalControllerLookup: function (name) {
+    return Nucleus.__container__.lookup('controller:' + name);
   },
 
-  arrayShuffle: function (o) {
-    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
+  capitalizeFirstLetter: function(str) {
+    return str.substring(0, 1).toUpperCase() + str.substring(1, str.length);
   },
 
-  objectArrayShuffle: function (objects) {
-    for(var j, x, i = objects.length; i; j = Math.floor(Math.random() * i), x = objects[--i], objects[i] = objects[j], objects[j] = x);
-    return Utility.setRandomArrayIndex(objects);
+  lowercaseString: function (str) {
+    return str.toLowerCase();
   },
 
-  setRandomArrayIndex: function (objects) {
-    for (var i=0; i < objects.length; i++) { 
-      objects[i].question_index = i + 1;
+  getDateYear: function () {
+    var d = new Date();
+    return d.getFullYear();
+  },
+
+  sortBy: function (field, reverse, primer) {
+    var key = function (x) { return primer ? primer(x.get(field)) : x.get(field); };
+
+    return function (a, b) {
+      var A = key(a), B = key(b);
+      return ((A < B) ? -1 : ((A > B) ? 1 : 0)) * [-1, 1][+!!reverse];
+    };
+  },
+
+  filterBy: function (field, value, array) {
+    var ret = [];
+    array.forEach(function (item) {
+      if (item.get(field) === value) {
+        ret.push(item);
+      }
+    });
+    return ret;
+  },
+
+  convertFloatToCurrency: function (theFloat) {
+    return theFloat.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  },
+
+  regExpEscape: function(s) {
+    return String(s).replace(/([-()\[\]{}+?*.$\^|,:#<!\\])/g, '\\$1').replace(/\x08/g, '\\x08');
+  },
+
+  nonAlphaNumericInput: function (event) {
+    if ((event.keyCode >= 48 && event.keyCode <= 57) // Numbers
+         || (event.keyCode >= 65 && event.keyCode <= 90) // Letters
+         || (event.keyCode >= 96 && event.keyCode <= 105) // 10 Key Numbers
+         || (event.keyCode == 46 // Delete
+            || event.keyCode == 32 // Backspace
+            || event.keyCode == 8 // Backspace
+            || event.keyCode == 9 // Tab
+            || event.keyCode == 27 // Escape
+            || event.keyCode == 13 // Enter
+            || event.keyCode == 189 // Dash
+            || event.keyCode == 190 // Period
+            )
+         || (event.keyCode >= 35 && event.keyCode <= 40)
+       ) {
+      return false;
+    } else {
+      event.preventDefault();
+      return true;
     }
-    return objects;
   },
 
-	getDateYear: function () {
-		var d = new Date();
-		return d.getFullYear();
-	},
-
-  unifyString: function(string) {
-    var splitString = string.split(' '),
-        combinedString = splitString.join('-');
-
-    return combinedString;
-  },
-
-  calculateFileSize: function (size) {
-    var kbs = Math.round(parseFloat(size / 1000)),
-        returnString;
-        
-    switch (true) {
-      case (kbs > 1024):
-        returnString = (kbs / 1024).toPrecision(2) + ' Mb';
-        break;
-      case (size < 1024):
-        returnString = size + ' bytes';
-        break;
-      default:
-        returnString = kbs + ' kb';
-        break;
+  onlyNumericInput: function (view, event, returnType) {
+    // Allow: backspace, delete, tab, escape, and enter
+    if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 ||
+    // Allow: Ctrl+A
+    (event.keyCode == 65 && event.ctrlKey === true) ||
+    // Allow: home, end, left, right
+    (event.keyCode >= 35 && event.keyCode <= 39)) {
+      view.set('isError', false);
+      // let it happen, don't do anything
+      return;
+    } else {
+      // Ensure that it is a number and stop the keypress
+      if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+        view.set('isError', true);
+        Nucleus.Notice.errorNotice('Only numbers allowed.');
+        event.preventDefault();
+      }
     }
-
-    return returnString;
   },
 
-  isNumeric: function(strString) {
-   var validChars = "0123456789",
-       strChar,
-       checkResult = true;
-
-  if (strString.length == 0) return false;
-
-   //  test strString consists of valid characters listed above
-  for (i = 0; i < strString.length && checkResult == true; i++) {
-    strChar = strString.charAt(i);
-    if (validChars.indexOf(strChar) == -1) {
-      checkResult = false;
+  onlyDecimalInput: function (view, event) {
+    // Allow: backspace, delete, tab, escape, and enter
+    if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 ||
+    // Allow: Ctrl+A
+    (event.keyCode == 65 && event.ctrlKey === true) ||
+    // Allow: home, end, left, right
+    (event.keyCode >= 35 && event.keyCode <= 39) ||
+    // Allow decimal
+    (event.keyCode == 190 || event.keyCode == 110)) {
+      view.set('isError', false);
+      // let it happen, don't do anything
+      return;
+    } else {
+      // Ensure that it is a number and stop the keypress
+      if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+        view.set('isError', true);
+        Nucleus.Notice.errorNotice('Only numbers allowed.');
+        event.preventDefault();
+      }
     }
+  },
+
+  currencyToDecimal: function (value) {
+    if (typeof value === 'number') {
+      return value;
+    } else {
+      return Number(value.replace(/[^0-9\.]+/g, ""));
+    }
+  },
+
+  kc: function (callback) {
+    var keys = [],
+        konami = '38,38,40,40,37,39,37,39,66,65';
+
+    $(document).keydown(function (event) {
+      keys.push(event.keyCode);
+      if (keys.toString().indexOf(konami) >= 0) {
+        callback();
+        keys = [];
+      }
+    });
+  },
+
+  blue: function () {
+    var keys = [],
+        konami = '38,38,40,40,37,39,37,39,66,76,85,69';
+
+    $(document).keydown(function (event) {
+      keys.push(event.keyCode);
+      if (keys.toString().indexOf(konami) >= 0) {
+        $('body').addClass('verisk_blue');
+        keys = [];
+      }
+    });
+  },
+
+  eeOne: function () {
+    Nucleus.Utilities.kc(Nucleus.Utilities.hammerTime);
+  },
+
+  eeTwo: function () {
+    Nucleus.Utilities.kc(Nucleus.Utilities.porkins);
+  },
+
+  hammerTime: function (event) {
+    var easterEgg = "<img id='eeOwo' class='eetwo' src='Content/images/eeone.gif'/>",
+        injectElement = $('#eewrap');
+
+    injectElement.html(easterEgg);
+    $('#eeOne').toggleClass('eeone');
+
+    $('#eeOne').on('click', function () {
+      injectElement.html('');
+    });
+  },
+
+  porkins: function (event) {
+    var easterEgg = "<img id='eeTwo' class='eetwo' src='Content/images/wayne.gif'/>",
+        injectElement = $('#eewrap');
+
+    injectElement.html(easterEgg);
+    $('#eeTwo').toggleClass('eetwo');
+
+    $('#eeTwo').on('click', function () {
+      injectElement.html('');
+    });
   }
-   return checkResult;
- }
 
-};
+}

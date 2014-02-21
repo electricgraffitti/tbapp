@@ -1,13 +1,13 @@
-TBook.LocationsView = TBook.View.extend({
+TBook.LocationsView = TBook.ColumnView.extend({
   templateName: 'locations/locations'
 });
 
-TBook.LocationsNewView = Tbook.View.extend({
+TBook.LocationsNewView = TBook.ColumnView.extend({
   
   templateName: 'locations/new_location'
 
 });
 
-TBook.LocationView = TBook.View.extend({
+TBook.LocationView = TBook.ColumnView.extend({
   templateName: 'locations/location'
 });

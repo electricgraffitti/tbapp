@@ -1,18 +1,55 @@
-var Navigation = {
+﻿Nucleus.Navigation = {
 
-  setCurrentNav: function() {
-    var url = location.pathname,
-        all_links = $('ul#main_nav li'),
-        current_link = $('ul#main_nav li a[href$="' + url + '"]'),
-        active_link = current_link.parent("li");
+  mainNavSuperfish: function () {
+    var mainNav = $("#main_nav");
 
-    if (url == "/") {
-      all_links.removeClass('active');
-      $('.home').addClass('active');
+    mainNav.superfish({
+      delay: 100,                            // one tenth second delay on mouseout 
+      animation: { opacity: 'show', height: 'show' },  // fade-in and slide-down animation 
+      speed: 'fast',                          // faster animation speed 
+      autoArrows: false,                           // disable generation of arrow mark-up 
+      dropShadows: false                            // disable drop shadows 
+    });
+
+  },
+
+  switchClientTrigger: function () {
+    var switchClientTrigger = $("#switch_client"),
+        swc = $("#switch_client_control"),
+        header = $("#mast_header"),
+        navBar = $("#master_navigation"),
+        footer = $("#footer");
+
+    swc.height($(window).height() - (header.outerHeight() + navBar.outerHeight() + footer.outerHeight() + 1));
+
+    $(window).on("throttledresize", function () {
+      swc.height($(window).height() - (header.outerHeight() + navBar.outerHeight() + footer.outerHeight() + 1));
+    });
+    Nucleus.Navigation.popOutCloseTrigger(swc);
+
+    // Trigger to open/close the side panel list
+    switchClientTrigger.on("click", function (e) {
+
+      e.preventDefault();
+      Nucleus.Navigation.sidePanelPopout(swc);
+    });
+  },
+
+  popOutCloseTrigger: function (el) {
+    var closeButton = $("#switch_client_close");
+    closeButton.click(function (e) {
+      Nucleus.Navigation.sidePanelPopout(el);
+      e.preventDefault();
+    });
+  },
+
+  sidePanelPopout: function (el) {
+    var elWidth = el.width();
+    if (el.hasClass("closed")) {
+      el.animate({ right: 0 }, 700).removeClass("closed");
     } else {
-      all_links.removeClass('active');
-      active_link.addClass('active');
+      el.animate({ right: "-" + (elWidth + 3) }, 700).addClass("closed");
     }
   }
 
-};
+}

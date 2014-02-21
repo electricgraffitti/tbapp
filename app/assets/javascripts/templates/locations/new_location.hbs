@@ -1,0 +1,31 @@
+<div class="component listed_provider_conditions">
+  <div class="component_header">
+    <div class="column_component_right">
+      <div class="component_header_left">
+        <label class="component_title">Add Location</label>
+      </div>
+    </div>
+  </div>
+  <div class="component_content">
+    <div class="form_component form_section section_left add_location_main" {{action preventBubble bubbles=false on='click'}} >
+      <header>Add Location</header>
+      <div class="form_row">
+        <div class="field">
+          <label>Location Name</label>
+          {{input value=locationName name=location placeholder='Location Name'}}
+        </div>
+        <div class="field">
+          <label>Location Number</label>
+          {{input value=locationNumber name=location placeholder='Location Number'}}
+        </div>
+      </div>
+      <div class="cancel_links">
+        <button class="btn btn-default" {{action validateLocationForm flag on='click'}}>Save Location</button>
+        <span> or <span {{action clearLocationForm bubbles=false on='click'}} class='span_link'>Cancel</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{outlet}}
+
