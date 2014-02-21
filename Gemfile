@@ -13,6 +13,7 @@ gem 'simple_form'
 gem 'less-rails-bootstrap'
 gem 'therubyracer'
 gem "active_model_serializers"
+gem 'ember-rails'
 
 group :development do
   gem 'annotate'
