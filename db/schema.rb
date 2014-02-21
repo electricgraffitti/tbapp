@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140221052021) do
+ActiveRecord::Schema.define(version: 20140221152900) do
 
   create_table "account_details", force: true do |t|
     t.string   "company_name"
@@ -71,6 +71,9 @@ ActiveRecord::Schema.define(version: 20140221052021) do
     t.integer  "account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "extended_warranty_start_date"
+    t.datetime "extended_warranty_end_date"
+    t.string   "extended_warranty_provider"
   end
 
   add_index "extended_warranties", ["account_id"], name: "index_extended_warranties_on_account_id", using: :btree
@@ -123,6 +126,12 @@ ActiveRecord::Schema.define(version: 20140221052021) do
     t.integer  "service_records_count"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "removal_date"
+    t.integer  "estimated_weight"
+    t.integer  "refrigerant_removal_quantity"
+    t.integer  "scrap_value"
+    t.text     "capitalization_reason"
+    t.string   "physical_location"
   end
 
   add_index "items", ["account_id"], name: "index_items_on_account_id", using: :btree
@@ -348,6 +357,9 @@ ActiveRecord::Schema.define(version: 20140221052021) do
     t.date     "warranty_card_mailed_in_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "warranty_start_date"
+    t.datetime "warranty_end_date"
+    t.string   "warranty_provider"
   end
 
   add_index "warranties", ["account_id"], name: "index_warranties_on_account_id", using: :btree

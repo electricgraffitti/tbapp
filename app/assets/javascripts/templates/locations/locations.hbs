@@ -1,15 +1,33 @@
-<div class="component component_left">
-  <div class="component_header">
-    <div class="component_header_left">
-      <label class="page_title">Locations</label>
-    </div>
-    <div class="component_header_right">
-      <ul class='toolbar'>
-        <li class='icon icon-16 add'>Add Location</li>
-      </ul>
+<div id="columns">
+  <div id="left_column_main" class="main_column left_main_column column">
+    <div class="component">
+      <div class="component_header">
+        <div class="component_header_left">
+          <label class="page_title">Locations</label>
+        </div>
+        <div class="component_header_right">
+          {{partial "locations/locations_toolbar"}}
+        </div>
+      </div>
+      <div class="component_scroller">
+        {{#if controller }}
+          <ul class="striped">
+              {{#each location in visibleLocations }}
+                {{#with location}}
+                  {{partial 'locations/listed_locations'}}
+                {{/with}}
+              {{/each}}
+          </ul>
+        {{ else }}
+          {{emptyComponentMessage emptyLocationsMessage}}
+        {{/if}}
+      </div>
     </div>
   </div>
-  <div class="component_content">
-    comp 1
+  <div id="right_column_main" class="main_column right_main_column column">
+    {{ outlet }}
   </div>
 </div>
+
+
+
