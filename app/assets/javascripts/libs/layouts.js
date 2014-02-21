@@ -1,27 +1,5 @@
-Nucleus.Layouts = {
+var Layouts = {
 
-  updatePageTitle: function (titleText) {
-    if (titleText != null) {
-      this.titleText = titleText;
-      Ember.run.debounce(this, this.setPageTitle, 100);
-    }
-  },
-
-  setPageTitle: function () {
-    //http://bugs.jquery.com/ticket/7825
-    $(document).attr('title', this.titleText);
-    this.titleText = null;
-  },
-
-  testingButton: function() {
-    $('#test_toggle').on('click', function(e) {
-      $('#ember-testing-container').toggle();
-      e.preventDefault();
-    });
-  },
-
-  // resize all is a debounced method of 100ms
-  // (aka, it will attempt to run it, and after 100ms of not being called again it will actually)
   resizeAll: function () {
     Ember.run.debounce(this, this._resizeAll, 100);
   },
@@ -31,78 +9,43 @@ Nucleus.Layouts = {
   },
 
   _resizeAll: function () {
-    Nucleus.Layouts.resizeStage();
-    Nucleus.Layouts.resizeTopSections();
-    Nucleus.Layouts.resizeBottomSections();
-    Nucleus.Layouts.resizeWorkList();
-    // This isnt really layout related, but it sets up the tooltips after all the DOM is in place and makes sure that it is also debounced.
-    // It would be really nice to move tooltips and modals into Ember as components.
-    Nucleus.ToolTips.triggerToolTips();
+    Layouts.resizeStage();
+    Layouts.resizeTopSections();
+    Layouts.resizeBottomSections();
   },
 
   _resizeSearchViews: function () {
-    Nucleus.Layouts.resizeStage();
-    Nucleus.Layouts.resizeWorkList();
-    Nucleus.Layouts.resizeMainColumns();
-    Nucleus.ToolTips.triggerToolTips();
-  },
-
-  getStaticHeights: function () {
-    var headerHeight = $("#mast_header").height(),
-        navigationHeight = $("#master_navigation").height(),
-        footerHeight = $("#footer").height();
-       
-       return (headerHeight + navigationHeight + footerHeight + 3);
+    Layouts.resizeStage();
+    Layouts.resizeMainColumns();
   },
 
   resizeStage: function () {
-    var staticHeights = Nucleus.isPopup ? 0 : this.getStaticHeights(),
-        quickOptionsHeight = $("#quick_options").height(),
-        stageElement = $("#stage");
+    var quickLaunch = $("#quick_launch"),
+        stageElement = $("#stage"),
+        stockHeight = $(window).height() - $("#main_header").height();
 
     if ($(window).width() >= 1280) {
-      $("#nucleus").width($(window).width());
+      $("#tracking-book").width($(window).width());
     }
 
-    stageElement.width($(window).width());
-    stageElement.height($(window).height() - staticHeights);
-    $("#results").height(stageElement.height() - quickOptionsHeight);
-    $("#data_views").width(stageElement.width() - 240);
-    $("#data_list_views").height(stageElement.height() - ($("#meta_data").height() - 1));
+    stageElement.width($(window).width() - quickLaunch.width());
+    quickLaunch.height(stockHeight)
+    stageElement.height(stockHeight);
 
     var resizeCallback = function () {
-      var resizedStage = $('#stage');
+      var resizedQuickLaunch = $("#quick_launch"),
+          resizedStageElement = $("#stage"),
+          newStockHeight = $(window).height() - $("#main_header").height();
 
       if ($(this).width() >= 1280) {
-        $("#nucleus").width($(this).width());
+        $("#tracking-book").width($(this).width());
       }
-      resizedStage.width($(window).width());
-      resizedStage.height($(window).height() - staticHeights);
+      resizedStageElement.width($(window).width() - quickLaunch.width());
+      resizedQuickLaunch.height(stockHeight)
+      resizedStageElement.height(stockHeight);
     };
 
     this.setupResizeEvent("resizeStage", resizeCallback);
-
-  },
-
-  resizeWorkList: function () {
-    var worklistComponent = $("#worklist_component"),
-      queue = $("#worklist_queues"),
-      worklistHeader = $('#worklist_header'),
-      worklistToolbar = $('#worklist_toolbar'),
-      worklistPanels = $('#worklist_panels'),
-      header = $("#mast_header"),
-      navBar = $("#master_navigation"),
-      footer = $("#footer");
-
-    worklistComponent.height($(window).height() - (header.outerHeight() + navBar.outerHeight() + footer.outerHeight() + 1));
-    worklistPanels.height(worklistComponent.outerHeight() - (worklistHeader.outerHeight() + worklistToolbar.outerHeight() + 14));
-
-    var resizeCallback = function () {
-      worklistComponent.height($(window).height() - (header.outerHeight() + navBar.outerHeight() + footer.outerHeight() + 1));
-      worklistPanels.height(worklistComponent.outerHeight() - (worklistHeader.outerHeight() + worklistToolbar.outerHeight() + 14));
-    };
-
-    this.setupResizeEvent("resizeWorkList", resizeCallback);
   },
 
   resetTopSection: function (newHeight, defaultHeight) {
@@ -174,9 +117,8 @@ Nucleus.Layouts = {
   },
 
   resizeMainColumns: function () {
-    //Nucleus.Layouts.resizeLeftColumn();
-    Nucleus.Layouts.resizeColumnHeights();
-    Nucleus.Layouts.resizeRightColumn();
+    Layouts.resizeColumnHeights();
+    Layouts.resizeRightColumn();
   },
 
   resizeColumnHeights: function () {

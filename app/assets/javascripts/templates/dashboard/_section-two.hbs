@@ -1,0 +1,36 @@
+{{#if sectionTwo }}
+<div class="component component_right">
+  <div class="component_header">
+    <div class="component_wrap">
+      <div class="component_header_left">
+        <label class="component_title">Widget 2</label>
+      </div>
+      <div class="component_header_right">
+        toolbar
+      </div>
+    </div>
+  </div>
+  <div class="component_content">
+    <div class="component_table headless striped">
+      stuff
+    </div>
+  </div>
+</div>
+{{else}}
+  {{! TODO: pull into component? }}
+<div class="component component_right">
+    <div class="component_header">
+      <div class="component_wrap">
+        <div class="component_header_left">
+          <label class="component_title">Dx Codes</label>
+        </div>
+        <div class="component_header_right">
+          {{partial 'claim_secondary_toolbar'}}
+        </div>
+      </div>
+    </div>
+    <div class="component_content">
+      {{emptyComponentMessage emptyDxMessage}}
+    </div>
+</div>
+{{/if}}

@@ -3,7 +3,7 @@ TBook.View = Ember.View.extend({
 	classNames: ['j-resize-view'],
 
 	didInsertElement: function() {
-		Resize.resizeSections();
+		Layouts.resizeAll();
 	}
 
 });

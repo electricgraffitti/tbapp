@@ -2,18 +2,22 @@
 	<span id='logo' class='icon logo_icon'>Tracking Book</span>
 	<section id='user_actions'>
 		<ul>
-			<li>Account Settings</li>
-			<li>Logout</li>
+			<li class='icon icon-16 account' title='My Account'>Account Settings</li>
+			<li><a href='/users/logout' class='icon icon-16 logout' title='Logout'>Logout</a></li>
 		</ul>
 	</section>
 </header>
 <section id='main_section'>
 	<section id='quick_launch'>
 		<ul>
-			<li class='icon quick_launch add_locations'>Dashboard</li>
-			<li class='icon quick_launch add_locations'>Items</li>		
-			<li class='icon quick_launch add_locations'>Warranties</li>
-			<li class='icon quick_launch add_locations'>Locations</li>
+			{{!-- <li>{{#link-to 'dashboard' class='icon icon-24 dashboard' title='Dashboard'}}Dashboard{{/link-to}}</li> --}}
+			<li>{{#link-to 'locations' class='icon icon-24 locations' title='Locations'}}Locations{{/link-to}}</li>
+			<li>{{#link-to 'items' class='icon icon-24 items' title='Items' title='Dashboard'}}Items{{/link-to}}</li>		
+			<li>{{#link-to 'warranties' class='icon icon-24 warranties' title='Warranties'}}Warranties{{/link-to}}</li>
 		</ul>
 	</section>
+	<div id="stage">
+		{{outlet}}
+	</div>
 </section>
+
