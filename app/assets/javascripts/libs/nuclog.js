@@ -1,12 +1,12 @@
 ﻿  /**
-  @Object Nucleus.Logger
-  
-  Dependencies: 
+  @Object TBook.Logger
+
+  Dependencies:
     JQuery and console existing (Open the dev tools in ie8)
     Meta Element <meta name="nuclog" id="nuclog" content="true">
 
   **/
-Nucleus.Logger = {
+TBook.Logger = {
 
   _on: null,
 
@@ -31,7 +31,7 @@ Nucleus.Logger = {
                        .replace(/^\s+at\s+/gm, '')
                        .replace(/^Object.<anonymous>\s*\(/gm, '{anonymous}()@');
 
-    
+
       console.log('%c ' + stack, this.getScheme(schemeIndex));
     } catch (e) {
       // Screw you IE 8
@@ -45,7 +45,7 @@ Nucleus.Logger = {
     var d = new Date,
         timestamp = d.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1") + "." + d.getMilliseconds();
 
-    
+
 
     if (val && val.length > 0) {
       timestamp += ": " + val;

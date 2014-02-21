@@ -1,4 +1,4 @@
-﻿Nucleus.URL = {
+﻿TBook.URL = {
 
   /**
   @private
@@ -21,12 +21,12 @@
   **/
   generalErrorHandler: function () {
     $(document).ajaxError(function (event, response, ajaxSettings, thrownError) {
-      var router = Nucleus.URL.router();
-      
+      var router = TBook.URL.router();
+
       if (response.status === 401) {
-        window.location.href = Nucleus.getLoginPage();
+        window.location.href = TBook.getLoginPage();
       }
-      
+
       // if a callback has defined an error callback, use it!
       if (ajaxSettings.error !== undefined) {
         return;
@@ -52,7 +52,7 @@
   @method router
   **/
   router: function () {
-    return Nucleus.__container__.lookup('router:main');
+    return TBook.__container__.lookup('router:main');
   },
 
   /**
@@ -89,13 +89,13 @@
   getRoot: function (rootType) {
     switch (rootType) {
       case "Retro":
-        return Nucleus.retroDomain;
+        return TBook.retroDomain;
         break;
       case "ClinicalOps":
-        return Nucleus.localDomain;
+        return TBook.localDomain;
         break;
       default:
-        return Nucleus.localDomain;
+        return TBook.localDomain;
     }
   },
 
@@ -104,7 +104,7 @@
 
   Pass an Object hash and generate a URL.
   This has been extracted so it can be tested.
-  
+
   @arguments
   root - 'Retro' or 'ClinicalOps',
   params - Key Value Object that we iterate over making a url params string
@@ -115,7 +115,7 @@
   **/
   generateUrlString: function (root, params, encoded) {
     var returnString = '',
-        urlRoot = Nucleus.URL.getRoot(root),
+        urlRoot = TBook.URL.getRoot(root),
         paramsString = '';
 
     $.each(params, function (k, v) {
@@ -126,7 +126,7 @@
       paramsString += '=';
       paramsString += v;
       if (encoded === true) {
-        paramsString = Nucleus.URL.urlEncode(paramsString);
+        paramsString = TBook.URL.urlEncode(paramsString);
       }
     });
   },

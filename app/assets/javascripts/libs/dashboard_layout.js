@@ -1,7 +1,7 @@
-var DashboardLayout = {
+ TBook.DashboardLayout = {
 
 	init: function() {
-		DashboardLayout.resizeSections();
+		TBook.DashboardLayout.resizeSections();
 	},
 
 	resizeSections: function () {

@@ -16,10 +16,9 @@
 //= require vendor/handlebars
 //= require vendor/ember
 //= require vendor/ember-data
-
-//= require_tree ./../libs
 //= require ./../config/app_init
 //= require ./../config/router
+//= require_tree ./../libs
 //= require ./../config/adapters
 //= require ./../config/base_model
 //= require ./../config/base_view

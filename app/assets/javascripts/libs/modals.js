@@ -1,5 +1,5 @@
 //createModal: function (modalType, insertedContent, notificationType, title, callback, callbackContext, secondaryModal)
-Nucleus.Modal = {
+TBook.Modal = {
 
   initModal: function () {
     var modalTrigger = $(".modal_trigger");
@@ -12,72 +12,72 @@ Nucleus.Modal = {
           notificationType = $(this).data("notificationtype"),
           modalCallback = $(this).data('callback');
 
-      Nucleus.Modal.removeModal();
-      Nucleus.Modal.createModal(modalType, modalContent, notificationType, modalTitle, modalCallback);
+      TBook.Modal.removeModal();
+      TBook.Modal.createModal(modalType, modalContent, notificationType, modalTitle, modalCallback);
 
     });
 
   },
 
   removeModal: function () {
-    var modal = $("#nucleus_modal_wrap");
+    var modal = $("#TBook_modal_wrap");
     modal.remove();
-    Nucleus.Expose.removeExpose();
-    Nucleus.Modal.removeKeyboard();
+    TBook.Expose.removeExpose();
+    TBook.Modal.removeKeyboard();
   },
 
   isInModal: function (element) {
-    return ($(element).parents("#nucleus_modal_wrap").length > 0);
+    return ($(element).parents("#TBook_modal_wrap").length > 0);
   },
 
   createModal: function (modalType, insertedContent, notificationType, title, callback, callbackContext, secondaryModal) {
-    var modalHtml = Nucleus.Modal.generateHtml(modalType, notificationType),
-        modalTitle = (title != undefined) ? title : Nucleus.Modal.setModalTitle(notificationType),
+    var modalHtml = TBook.Modal.generateHtml(modalType, notificationType),
+        modalTitle = (title != undefined) ? title : TBook.Modal.setModalTitle(notificationType),
         modalData = insertedContent;
 
     modalHtml.find("#modal_title").text(modalTitle);
-    modalHtml.find("#nucleus_modal_content").append(modalData);
+    modalHtml.find("#TBook_modal_content").append(modalData);
 
     if (!secondaryModal) {
-      $("#nucleus_modal_wrap").remove();
-      Nucleus.Expose.appendExpose(Nucleus.Expose.createExpose(), modalHtml);
+      $("#TBook_modal_wrap").remove();
+      TBook.Expose.appendExpose(TBook.Expose.createExpose(), modalHtml);
     } else {
       $("body").append(modalHtml);
     }
 
-    Nucleus.Modal.setChildModalZIndex(modalHtml);
-    Nucleus.Modal.setupDrag(modalHtml);
-    Nucleus.Modal.modalClose(modalHtml, secondaryModal, callback, callbackContext);
-    Nucleus.Modal.setRoundedCorners(modalHtml);
-    Nucleus.Modal.centerModal();
-    Nucleus.Modal.setChildModalTop(modalHtml);
-    Nucleus.Modal.setupCallback(modalHtml, notificationType, callback, callbackContext);
-    Nucleus.Modal.hookupKeyboard();
+    TBook.Modal.setChildModalZIndex(modalHtml);
+    TBook.Modal.setupDrag(modalHtml);
+    TBook.Modal.modalClose(modalHtml, secondaryModal, callback, callbackContext);
+    TBook.Modal.setRoundedCorners(modalHtml);
+    TBook.Modal.centerModal();
+    TBook.Modal.setChildModalTop(modalHtml);
+    TBook.Modal.setupCallback(modalHtml, notificationType, callback, callbackContext);
+    TBook.Modal.hookupKeyboard();
   },
 
   hookupKeyboard: function () {
-    $(document).on('keyup', Nucleus.Modal.escapeFunction);
+    $(document).on('keyup', TBook.Modal.escapeFunction);
   },
 
   removeKeyboard: function () {
-    $(document).off('keyup', Nucleus.Modal.escapeFunction);
+    $(document).off('keyup', TBook.Modal.escapeFunction);
   },
 
   escapeFunction: function (e) {
     if (e.keyCode == 27) {
 
-      Nucleus.Modal.removeModal();
+      TBook.Modal.removeModal();
     }
   },
 
   getModalCount: function () {
-    var modals = $(".nucleus_modal_wrap"),
+    var modals = $(".TBook_modal_wrap"),
         modalCount = modals.length;
     return modalCount;
   },
 
   setChildModalTop: function (modalHtml) {
-    var modalCount = Nucleus.Modal.getModalCount(),
+    var modalCount = TBook.Modal.getModalCount(),
         newTopPosition = 50;
 
     if (modalCount > 1) {
@@ -87,13 +87,13 @@ Nucleus.Modal = {
   },
 
   setChildModalZIndex: function (modalHtml) {
-    var updatedIndex = 9000 + Nucleus.Modal.getModalCount();
+    var updatedIndex = 9000 + TBook.Modal.getModalCount();
 
     modalHtml.css({ zIndex: updatedIndex });
   },
 
   centerModal: function () {
-    var modal = $("#nucleus_modal_wrap");
+    var modal = $("#TBook_modal_wrap");
     modal.css("margin-left", "-" + (modal.width() / 2) + "px");
     modal.css("margin-top", "-" + ((modal.height() / 2) + 10) + "px");
   },
@@ -111,7 +111,7 @@ Nucleus.Modal = {
             } else {
               callback();
             }
-            Nucleus.Modal.removeModal();
+            TBook.Modal.removeModal();
             return this;
           });
           break;
@@ -122,7 +122,7 @@ Nucleus.Modal = {
             } else {
               callback();
             }
-            Nucleus.Modal.removeModal();
+            TBook.Modal.removeModal();
           });
           break;
         default:
@@ -138,7 +138,7 @@ Nucleus.Modal = {
     return;
     // If IE you get square corners.
     // if (($.browser.msie) && ($.browser.version == '8.0')) {
-    //   modalHtml.find('#nucleus_modal_wrap').corner("10px");
+    //   modalHtml.find('#TBook_modal_wrap').corner("10px");
     // }
   },
 
@@ -150,14 +150,14 @@ Nucleus.Modal = {
       if (callback != undefined) {
         callback.call(callbackContext, cancelOverride);
         modalHtml.remove();
-        Nucleus.Expose.removeExpose();
+        TBook.Expose.removeExpose();
         return false;
       } else {
         modalHtml.remove();
         if (secondaryModal === true) {
           return;
         } else {
-          Nucleus.Expose.removeExpose();
+          TBook.Expose.removeExpose();
         }
         return;
       }
@@ -165,12 +165,12 @@ Nucleus.Modal = {
   },
 
   closeConfirmAndParent: function (parentCancelLink) {
-    var parentModal = parentCancelLink.parents("#nucleus_modal_wrap").first(),
-        confirmModal = $("#nucleus_modal_wrap.notification");
+    var parentModal = parentCancelLink.parents("#TBook_modal_wrap").first(),
+        confirmModal = $("#TBook_modal_wrap.notification");
 
     confirmModal.remove();
     parentModal.remove();
-    Nucleus.Expose.removeExpose();
+    TBook.Expose.removeExpose();
   },
 
   setupDrag: function (modalHtml) {
@@ -179,12 +179,12 @@ Nucleus.Modal = {
   },
 
   generateHtml: function (modalType, notificationType) {
-    var modalWrap = $("<div id='nucleus_modal_wrap' class='nucleus_modal_wrap curved'></div>"),
-      modalTitleBar = $("<div id='nucleus_modal_header' class='modal_header black_gradient'></div>"),
+    var modalWrap = $("<div id='TBook_modal_wrap' class='TBook_modal_wrap curved'></div>"),
+      modalTitleBar = $("<div id='TBook_modal_header' class='modal_header black_gradient'></div>"),
       modalTitle = $("<span id='modal_title'>Title</span>"),
-      modalCloseLink = $("<div id='nucleus_modal_close' title='click to close (or press esc on your keyboard)' class='close_icon icon small_icon modal_close'>Close</div>"),
-      modalContentWrap = $("<div id='nucleus_modal_content_wrap' class='modal_content_wrap'></div>"),
-      modalContent = $("<div id='nucleus_modal_content' class='modal_content'></div>");
+      modalCloseLink = $("<div id='TBook_modal_close' title='click to close (or press esc on your keyboard)' class='close_icon icon small_icon modal_close'>Close</div>"),
+      modalContentWrap = $("<div id='TBook_modal_content_wrap' class='modal_content_wrap'></div>"),
+      modalContent = $("<div id='TBook_modal_content' class='modal_content'></div>");
 
     modalContentWrap.append(modalContent);
     modalTitleBar.append(modalTitle).append(modalCloseLink);
@@ -192,15 +192,15 @@ Nucleus.Modal = {
     modalWrap.addClass(notificationType);
 
     if (modalType === 'notification') {
-      return Nucleus.Modal.appendNotificationElements(notificationType, modalWrap);
+      return TBook.Modal.appendNotificationElements(notificationType, modalWrap);
     } else {
       return modalWrap;
     }
   },
 
   appendNotificationElements: function (notificationType, modalWrap) {
-    var modalContentWrap = modalWrap.find("#nucleus_modal_content_wrap"),
-      modalNotification = $("<div id='nucleus_modal_notification' class='icon large_icon'></div>"),
+    var modalContentWrap = modalWrap.find("#TBook_modal_content_wrap"),
+      modalNotification = $("<div id='TBook_modal_notification' class='icon large_icon'></div>"),
       modalConfirmationLinks = $("<div id='confirmation_links'><div id='complete_link' class='work_button'>OK</div><span>or</span><span class='span_link modal_close'>Cancel</span></div>");
 
     modalWrap.addClass("notification");
@@ -275,11 +275,11 @@ Nucleus.Modal = {
         type: "POST",
         success: function (d) {
           callback();
-          Nucleus.Modal.removeModal();
+          TBook.Modal.removeModal();
         },
         error: function (d, type, message) {
-          Nucleus.Modal.removeModal();
-          Nucleus.Modal.createModal(message, 'error');
+          TBook.Modal.removeModal();
+          TBook.Modal.createModal(message, 'error');
         }
       });
     });

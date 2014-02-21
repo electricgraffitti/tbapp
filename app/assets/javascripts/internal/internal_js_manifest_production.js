@@ -16,13 +16,12 @@
 //= require vendor/handlebars
 //= require vendor/ember-min
 //= require vendor/ember-model
-
+//= require ./../config/app_init
+//= require ./../config/router
 //= require_tree ./../libs
-//= require ./../msmapp
-//= require ./../router
-//= require ./../base_objects/adapters
-//= require ./../base_objects/msm_model
-//= require ./../base_objects/msmapp_view
+//= require ./../config/adapters
+//= require ./../config/base_model
+//= require ./../config/base_view
 //= require_tree ./../mixins
 //= require_tree ./../controllers
 //= require_tree ./../models

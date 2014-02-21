@@ -1,4 +1,4 @@
-Nucleus.Expose = {
+TBook.Expose = {
 
   color: "#000000",
   opacity: "0.1",
@@ -9,9 +9,9 @@ Nucleus.Expose = {
 
   appendExpose: function (exposeHtml, content) {
     $("body").append(exposeHtml);
-    exposeHtml.css({ zIndex: 8999, backgroundColor: Nucleus.Expose.color, opacity: Nucleus.Expose.opacity });
+    exposeHtml.css({ zIndex: 8999, backgroundColor: TBook.Expose.color, opacity: TBook.Expose.opacity });
     $("body").append(content);
-    Nucleus.Expose.sizeExpose(exposeHtml);
+    TBook.Expose.sizeExpose(exposeHtml);
   },
 
   sizeExpose: function (exposeHtml) {

@@ -1,6 +1,6 @@
 TBook.View = Ember.View.extend({
-  didInsertElement: function () { 
-    Nucleus.Layouts.resizeAll();
+  didInsertElement: function () {
+    Layouts.resizeAll();
   }
 });
 
@@ -21,9 +21,9 @@ TBook.ListView = TBook.View.extend({
 
   didInsertElement: function () {
     this._super();
-    Nucleus.CSS.zebraStripe(this.$());
+    TBook.CSS.zebraStripe(this.$());
   },
-  
+
   contextChange: function () {
     this.rerender();
     Ember.run.next(this, function() {
@@ -39,11 +39,11 @@ TBook.SearchView = Ember.View.extend({
   }
 });
 
-TBook.SearchGridView = Nucleus.SearchView.extend({
+TBook.SearchGridView = TBook.SearchView.extend({
 
   didInsertElement: function () {
     this._super();
-    Nucleus.CSS.zebraStripe(this.$());
+    TBook.CSS.zebraStripe(this.$());
   },
 
   contextChange: function () {

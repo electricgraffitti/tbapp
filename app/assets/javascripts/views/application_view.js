@@ -1,7 +1,7 @@
 TBook.ApplicationView = Ember.View.extend({
 
 	didInsertElement: function () {
-		AjaxNotice.initializeGlobalEvents();
+		TBook.AjaxNotice.initializeGlobalEvents();
 		Layouts.resizeAll();
 	}
 

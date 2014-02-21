@@ -1,15 +1,15 @@
-﻿Nucleus.Popup = {
+﻿TBook.Popup = {
 
   testMode: "",
 
   initScripts: function () {
-    Nucleus.Popup.activateLinks();
+    TBook.Popup.activateLinks();
   },
 
   activateLinks: function (link) {
     $('body').on("click", '.popup_link', function (e) {
       e.preventDefault();
-      Nucleus.Popup.triggerPopup($(this));
+      TBook.Popup.triggerPopup($(this));
       return false;
     });
   },
@@ -22,19 +22,19 @@
         popupHeight = link.attr("popupHeight");
 
     if (name) {
-      return Nucleus.Popup.generateReusedWindow(title, url, name, popupWidth, popupHeight);
+      return TBook.Popup.generateReusedWindow(title, url, name, popupWidth, popupHeight);
     }
     else {
-      return Nucleus.Popup.generateWindow(title, url, popupWidth, popupHeight);
+      return TBook.Popup.generateWindow(title, url, popupWidth, popupHeight);
     }
   },
 
   generateWindow: function (title, url, width, height) {
-    return Nucleus.Popup.generatePositionedWindow(title, url, "", "", "", width, height);
+    return TBook.Popup.generatePositionedWindow(title, url, "", "", "", width, height);
   },
 
   generateReusedWindow: function (title, url, name, width, height) {
-    return Nucleus.Popup.generatePositionedWindow(title, url, name, "", "", width, height);
+    return TBook.Popup.generatePositionedWindow(title, url, name, "", "", width, height);
   },
 
   generatePositionedWindow: function (title, url, name, top, left, width, height) {
@@ -49,7 +49,7 @@
     win = window.open(url, name, winOptions + "width=" + width + ", height=" + height + ", toolbar=0, location=0, directories=0, status=0, menubar=0, copyhistory=0, resizable=1, scrollbars=0", true);
     if (win) win.focus();
 
-    if (Nucleus.Popup.testMode === 'test') {
+    if (TBook.Popup.testMode === 'test') {
       setTimeout(function () { if (win) win.close(); }, 1000);
     }
     return win;
@@ -66,7 +66,7 @@
       this.patientClaimHistoryWindow = this.triggerPopup(patientClaimHistoryLink);
     }
 
-    if (Nucleus.Popup.testMode === 'test') {
+    if (TBook.Popup.testMode === 'test') {
       patientClaimHistoryLink.click();
     }
   }

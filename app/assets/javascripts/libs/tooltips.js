@@ -1,21 +1,21 @@
-﻿Nucleus.ToolTips = {
+﻿TBook.ToolTips = {
 
   initToolTips: function () {
-    Nucleus.ToolTips.triggerToolTips();
+    TBook.ToolTips.triggerToolTips();
   },
 
   toolTipSwitch: function (triggerElement) {
     var toolTipType = triggerElement.data("tooltiptype");
-    Nucleus.ToolTips.removeToolTip();
+    TBook.ToolTips.removeToolTip();
     switch (toolTipType) {
       case 'micro':
-        Nucleus.ToolTips.microToolTip(triggerElement, toolTipType);
+        TBook.ToolTips.microToolTip(triggerElement, toolTipType);
         break;
       case 'info':
-        Nucleus.ToolTips.infoToolTip(triggerElement, toolTipType);
+        TBook.ToolTips.infoToolTip(triggerElement, toolTipType);
         break;
       default:
-        Nucleus.ToolTips.microToolTip(triggerElement, toolTipType);
+        TBook.ToolTips.microToolTip(triggerElement, toolTipType);
         break;
     }
   },
@@ -26,18 +26,18 @@
   },
 
   microToolTip: function (triggerElement, toolTipType) {
-    var toolTipContent = Nucleus.ToolTips.getMicroTipValue(triggerElement),
-        toolTip = Nucleus.ToolTips.createToolTip(toolTipType, toolTipContent);
+    var toolTipContent = TBook.ToolTips.getMicroTipValue(triggerElement),
+        toolTip = TBook.ToolTips.createToolTip(toolTipType, toolTipContent);
 
-    Nucleus.ToolTips.drawToolTip(triggerElement, toolTip);
+    TBook.ToolTips.drawToolTip(triggerElement, toolTip);
   },
 
   infoToolTip: function (triggerElement, toolTipType) {
-    var toolTipContent = Nucleus.ToolTips.getRemoteContent(triggerElement.data('tooltipdataurl')),
-        toolTipHeader = Nucleus.ToolTips.buildToolTipHeader(triggerElement, toolTipContent),
-        toolTip = Nucleus.ToolTips.createToolTip(toolTipType, toolTipContent, toolTipHeader);
+    var toolTipContent = TBook.ToolTips.getRemoteContent(triggerElement.data('tooltipdataurl')),
+        toolTipHeader = TBook.ToolTips.buildToolTipHeader(triggerElement, toolTipContent),
+        toolTip = TBook.ToolTips.createToolTip(toolTipType, toolTipContent, toolTipHeader);
 
-    Nucleus.ToolTips.drawToolTip(triggerElement, toolTip);
+    TBook.ToolTips.drawToolTip(triggerElement, toolTip);
   },
 
   getRemoteContent: function (toolTipContentUrl) {
@@ -66,9 +66,9 @@
   },
 
   createToolTip: function (toolTipType, content, header) {
-    var toolTip = Nucleus.ToolTips.createToolTipWrapperHtml(),
-        toolTipContent = Nucleus.ToolTips.createToolTipContentHtml(),
-        toolTipArrow = Nucleus.ToolTips.createToolTipArrowHtml();
+    var toolTip = TBook.ToolTips.createToolTipWrapperHtml(),
+        toolTipContent = TBook.ToolTips.createToolTipContentHtml(),
+        toolTipArrow = TBook.ToolTips.createToolTipArrowHtml();
 
     toolTipContent.html(content);
     toolTip.append(header);
@@ -108,9 +108,9 @@
   },
 
   buildToolTipHeader: function (triggerElement, toolTipContent) {
-    var headerHtml = Nucleus.ToolTips.createToolTipHeaderHtml(),
-        toolTipPopupTrigger = Nucleus.ToolTips.infoTipPopupTriggerHtml(triggerElement),
-        headerTextValue = Nucleus.ToolTips.calculateHeaderText(triggerElement, toolTipContent);
+    var headerHtml = TBook.ToolTips.createToolTipHeaderHtml(),
+        toolTipPopupTrigger = TBook.ToolTips.infoTipPopupTriggerHtml(triggerElement),
+        headerTextValue = TBook.ToolTips.calculateHeaderText(triggerElement, toolTipContent);
 
     headerHtml.text(headerTextValue);
     headerHtml.append(toolTipPopupTrigger);
@@ -129,11 +129,11 @@
   drawToolTip: function (triggerElement, tooltip) {
     var isTableTip = triggerElement.data('istabletip');
     jQuery("body").append(tooltip);
-    Nucleus.ToolTips.positionToolTip(triggerElement, tooltip);
+    TBook.ToolTips.positionToolTip(triggerElement, tooltip);
     if (isTableTip === true) {
-      Nucleus.ToolTips.adjustForTableTip(tooltip);
+      TBook.ToolTips.adjustForTableTip(tooltip);
     }
-    Nucleus.Popup.initScripts();
+    TBook.Popup.initScripts();
   },
 
   positionToolTip: function (triggerElement, tooltip) {
@@ -173,16 +173,16 @@
       over: function () {
         var self = $(this);
         if (tipIsVisible) { clearTimeout(tipIsVisible); }
-        Nucleus.ToolTips.toolTipSwitch(self);
+        TBook.ToolTips.toolTipSwitch(self);
       },
       timer: 1500,
       out: function () {
-        tipIsVisible = setTimeout(Nucleus.ToolTips.removeToolTip, 900);
+        tipIsVisible = setTimeout(TBook.ToolTips.removeToolTip, 900);
         $("#tool_tip_wrap").on("mouseenter", function () {
           clearTimeout(tipIsVisible);
         });
         $("#tool_tip_wrap").on("mouseleave", function () {
-          tipIsVisible = setTimeout(Nucleus.ToolTips.removeToolTip, 900);
+          tipIsVisible = setTimeout(TBook.ToolTips.removeToolTip, 900);
         });
       }
     });

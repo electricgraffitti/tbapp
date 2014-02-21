@@ -1,7 +1,7 @@
-﻿Nucleus.Utilities = {
+﻿TBook.Utilities = {
 
   externalControllerLookup: function (name) {
-    return Nucleus.__container__.lookup('controller:' + name);
+    return TBook.__container__.lookup('controller:' + name);
   },
 
   capitalizeFirstLetter: function(str) {
@@ -80,7 +80,7 @@
       // Ensure that it is a number and stop the keypress
       if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
         view.set('isError', true);
-        Nucleus.Notice.errorNotice('Only numbers allowed.');
+        TBook.Notice.errorNotice('Only numbers allowed.');
         event.preventDefault();
       }
     }
@@ -102,7 +102,7 @@
       // Ensure that it is a number and stop the keypress
       if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
         view.set('isError', true);
-        Nucleus.Notice.errorNotice('Only numbers allowed.');
+        TBook.Notice.errorNotice('Only numbers allowed.');
         event.preventDefault();
       }
     }
@@ -143,11 +143,11 @@
   },
 
   eeOne: function () {
-    Nucleus.Utilities.kc(Nucleus.Utilities.hammerTime);
+    TBook.Utilities.kc(TBook.Utilities.hammerTime);
   },
 
   eeTwo: function () {
-    Nucleus.Utilities.kc(Nucleus.Utilities.porkins);
+    TBook.Utilities.kc(TBook.Utilities.porkins);
   },
 
   hammerTime: function (event) {

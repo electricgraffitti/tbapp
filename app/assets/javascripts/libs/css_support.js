@@ -1,4 +1,4 @@
-﻿Nucleus.CSS = {
+﻿TBook.CSS = {
 
   zebraStripe: function (viewElement) {
     var rowWrap = $(viewElement).find('.striped'),
@@ -18,7 +18,7 @@
     }
 
     if (gridValuePrefix === '$') {
-      gridValue = Nucleus.Utilities.convertFloatToCurrency(gridValue);
+      gridValue = TBook.Utilities.convertFloatToCurrency(gridValue);
     }
 
     if (gridValuePrefix === undefined) {
@@ -38,7 +38,7 @@
     }
 
     if (gridValuePrefix === '$') {
-      gridValue = Nucleus.Utilities.convertFloatToCurrency(gridValue);
+      gridValue = TBook.Utilities.convertFloatToCurrency(gridValue);
     }
 
     if (gridValuePrefix === undefined) {
