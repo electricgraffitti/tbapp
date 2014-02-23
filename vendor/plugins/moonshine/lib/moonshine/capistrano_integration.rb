@@ -695,12 +695,12 @@ module Moonshine
             version = fetch(:rubygems_version, '1.8.21')
             run [
               'cd /tmp',
-              "sudo rm -rf rubygems-#{version}* || true",
+              "#{sudo} rm -rf rubygems-#{version}* || true",
               "wget -q http://production.cf.rubygems.org/rubygems/rubygems-#{version}.tgz",
               "tar xfz rubygems-#{version}.tgz",
               "cd /tmp/rubygems-#{version}",
-              'sudo ruby setup.rb',
-              'sudo ln -s /usr/bin/gem1.8 /usr/bin/gem || true',
+              "#{sudo} ruby setup.rb",
+              "#{sudo} ln -s /usr/bin/gem1.8 /usr/bin/gem || true",
             ].join(' && ')
           end
 
