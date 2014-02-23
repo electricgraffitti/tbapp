@@ -677,14 +677,14 @@ module Moonshine
             p = "ruby-#{pv}"
             run [
               'cd /tmp',
-              "sudo rm -rf #{p}* || true",
-              'sudo mkdir -p /usr/lib/ruby/gems/2.1.0/gems || true',
+              "#{sudo} rm -rf #{p}* || true",
+              "#{sudo} mkdir -p /usr/lib/ruby/gems/2.1.0/gems || true",
               "wget -q http://ftp.ruby-lang.org/pub/ruby/2.1/#{p}.tar.gz",
               "tar xzf #{p}.tar.gz",
               "cd /tmp/#{p}",
               './configure --prefix=/usr',
               'make',
-              'sudo make install'
+              "#{sudo} make install"
             ].join(' && ')
             set :rubygems_version, fetch(:rubygems_version, '2.2.2')
             set :bundler_version, fetch(:bundler_version, '1.5.1')

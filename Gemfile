@@ -15,6 +15,7 @@ gem 'therubyracer'
 gem "active_model_serializers"
 gem 'ember-rails'
 gem 'plugger'
+gem 'capistrano', '2.15.5'
 
 group :development do
   gem 'annotate'
