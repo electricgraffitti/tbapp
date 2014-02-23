@@ -628,17 +628,17 @@ module Moonshine
             p = "ruby-#{pv}"
             run [
               'cd /tmp',
-              "sudo rm -rf #{p}* || true",
-              'sudo mkdir -p /usr/lib/ruby/gems/2.0.0/gems || true',
+              "#{sudo} rm -rf #{p}* || true",
+              "#{sudo} mkdir -p /usr/lib/ruby/gems/2.0.0/gems || true",
               "wget -q http://ftp.ruby-lang.org/pub/ruby/2.0/#{p}.tar.gz",
               "tar xzf #{p}.tar.gz",
               "cd /tmp/#{p}",
               './configure --prefix=/usr',
               'make',
-              'sudo make install'
+              "#{sudo} make install"
             ].join(' && ')
-            set :rubygems_version, fetch(:rubygems_version, '2.1.11')
-            set :bundler_version, fetch(:bundler_version, '1.3.5')
+            set :rubygems_version, fetch(:rubygems_version, '2.2.2')
+            set :bundler_version, fetch(:bundler_version, '1.5.1')
           end
 
           task :src200railsexpress do
@@ -651,10 +651,10 @@ module Moonshine
             pv = "2.0.0-p353"
             p = "ruby-#{pv}"
             run [
-              'sudo apt-get install autoconf libyaml-dev -y || true',
+              "#{sudo} apt-get install autoconf libyaml-dev -y || true",
               'cd /tmp',
-              "sudo rm -rf #{p}* || true",
-              'sudo mkdir -p /usr/lib/ruby/gems/2.0.0/gems || true',
+              "#{sudo} rm -rf #{p}* || true",
+              "#{sudo} mkdir -p /usr/lib/ruby/gems/2.0.0/gems || true",
               "wget -q http://ftp.ruby-lang.org/pub/ruby/2.0/#{p}.tar.gz",
               "tar xzf #{p}.tar.gz",
               "cd /tmp/#{p}",
@@ -665,10 +665,10 @@ module Moonshine
               "patch -p1 </tmp/moonshine/patches/ruby/2.0.0/p353/railsexpress/05-fix-missing-c-return-event.patch",
               './configure --prefix=/usr',
               'make',
-              'sudo make install'
+              "#{sudo} make install"
             ].join(' && ')
-            set :rubygems_version, fetch(:rubygems_version, '2.1.11')
-            set :bundler_version, fetch(:bundler_version, '1.3.5')
+            set :rubygems_version, fetch(:rubygems_version, '2.2.2')
+            set :bundler_version, fetch(:bundler_version, '1.5.1')
           end
 
           task :src210 do
@@ -713,7 +713,7 @@ module Moonshine
           end
 
           task :install_moonshine_deps do
-            sudo 'gem install rake --no-rdoc --no-ri' unless fetch(:ruby).start_with?('src210')
+            sudo 'gem install rake --no-rdoc --no-ri' unless fetch(:ruby).start_with?('src210') || fetch(:ruby).start_with?('src200')
             sudo 'gem install i18n --no-rdoc --no-ri' # workaround for missing activesupport-3.0.2 dep on i18n
 
             shadow_puppet_version = fetch(:shadow_puppet_version, '~> 0.7.0')
