@@ -713,7 +713,7 @@ module Moonshine
           end
 
           task :install_moonshine_deps do
-            sudo 'gem install rake --no-rdoc --no-ri' unless fetch(:ruby).start_with?('src200')
+            sudo 'gem install rake --no-rdoc --no-ri' unless fetch(:ruby).start_with?('src210')
             sudo 'gem install i18n --no-rdoc --no-ri' # workaround for missing activesupport-3.0.2 dep on i18n
 
             shadow_puppet_version = fetch(:shadow_puppet_version, '~> 0.7.0')
