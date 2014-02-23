@@ -17,7 +17,7 @@ gem 'plugger'
 gem 'capistrano', '2.15.5'
 
 group :development do
-  ruby '2.1.0'
+  ruby '2.0.0'
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
