@@ -13,6 +13,14 @@ Bundler.require(:default, Rails.env)
 
 module Tbapp
   class Application < Rails::Application
+          # don't attempt to auto-require the moonshine manifests into the rails env
+      # config.paths.app.manifests 'app/manifests', :eager_load => false
+      path_rejector = lambda { |s| s.include?("app/manifests") }
+      config.eager_load_paths = config.eager_load_paths.reject(&path_rejector)
+
+      # Remove the path from being lazily loaded
+      ActiveSupport::Dependencies.autoload_paths.reject!(&path_rejector)    
+
 
     # don't generate RSpec tests for views and helpers
     config.generators do |g|

@@ -14,6 +14,7 @@ gem 'less-rails-bootstrap'
 gem 'therubyracer'
 gem "active_model_serializers"
 gem 'ember-rails'
+gem 'plugger'
 
 group :development do
   gem 'annotate'
