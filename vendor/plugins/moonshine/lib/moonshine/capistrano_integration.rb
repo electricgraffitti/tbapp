@@ -497,11 +497,11 @@ module Moonshine
             remove_ruby_from_apt
             run [
               'cd /tmp',
-              'sudo rm -rf ruby-enterprise-1.8.6-20090610* || true',
-              'sudo mkdir -p /usr/lib/ruby/gems/1.8/gems || true',
+              "#{sudo} rm -rf ruby-enterprise-1.8.6-20090610* || true",
+              "#{sudo} mkdir -p /usr/lib/ruby/gems/1.8/gems || true",
               'wget -q http://assets.railsmachine.com/other/ruby-enterprise-1.8.6-20090610.tar.gz',
               'tar xzf ruby-enterprise-1.8.6-20090610.tar.gz',
-              'sudo /tmp/ruby-enterprise-1.8.6-20090610/installer --dont-install-useful-gems -a /usr'
+              "#{sudo} /tmp/ruby-enterprise-1.8.6-20090610/installer --dont-install-useful-gems -a /usr"
             ].join(' && ')
           end
 
@@ -521,11 +521,11 @@ module Moonshine
                           end
             run [
               'cd /tmp',
-              "sudo rm -rf ruby-enterprise-1.8.7-#{ree_release}* || true",
-              "sudo mkdir -p /usr/lib/ruby/gems/1.8/gems || true",
+              "#{sudo} rm -rf ruby-enterprise-1.8.7-#{ree_release}* || true",
+              "#{sudo} mkdir -p /usr/lib/ruby/gems/1.8/gems || true",
               "wget -q #{ree_src_uri} -O ruby-enterprise-1.8.7-#{ree_release}.tar.gz",
               "tar xzf ruby-enterprise-1.8.7-#{ree_release}.tar.gz",
-              "sudo /tmp/ruby-enterprise-1.8.7-#{ree_release}/installer --dont-install-useful-gems --no-dev-docs -a /usr"
+              "#{sudo} /tmp/ruby-enterprise-1.8.7-#{ree_release}/installer --dont-install-useful-gems --no-dev-docs -a /usr"
             ].join(' && ')
           end
 
@@ -533,14 +533,14 @@ module Moonshine
             remove_ruby_from_apt
             run [
               'cd /tmp',
-              'sudo rm -rf ruby-1.8.7-p249* || true',
-              'sudo mkdir -p /usr/lib/ruby/gems/1.8/gems || true',
+              "#{sudo} rm -rf ruby-1.8.7-p249* || true",
+              "#{sudo} mkdir -p /usr/lib/ruby/gems/1.8/gems || true",
               'wget -q ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7-p249.tar.bz2',
               'tar xjf ruby-1.8.7-p249.tar.bz2',
               'cd /tmp/ruby-1.8.7-p249',
               './configure --prefix=/usr',
               'make',
-              'sudo make install'
+              "#{sudo} make install"
             ].join(' && ')
           end
 
@@ -550,14 +550,14 @@ module Moonshine
             p = "ruby-#{pv}"
             run [
               'cd /tmp',
-              "sudo rm -rf #{p}* || true",
-              "sudo mkdir -p /usr/lib/ruby/gems/1.9/gems || true",
+              "#{sudo} rm -rf #{p}* || true",
+              "#{sudo} mkdir -p /usr/lib/ruby/gems/1.9/gems || true",
               "wget -q http://ftp.ruby-lang.org/pub/ruby/1.9/#{p}.tar.gz",
               "tar xzf #{p}.tar.gz",
               "cd /tmp/#{p}",
               './configure --prefix=/usr',
               'make',
-              'sudo make install'
+              "#{sudo} make install"
             ].join(' && ')
           end
 
@@ -567,14 +567,14 @@ module Moonshine
             p = "ruby-#{pv}"
             run [
               'cd /tmp',
-              "sudo rm -rf #{p}* || true",
-              'sudo mkdir -p /usr/lib/ruby/gems/1.9/gems || true',
+              "#{sudo} rm -rf #{p}* || true",
+              "#{sudo} mkdir -p /usr/lib/ruby/gems/1.9/gems || true",
               "wget -q http://ftp.ruby-lang.org/pub/ruby/1.9/#{p}.tar.gz",
               "tar xzf #{p}.tar.gz",
               "cd /tmp/#{p}",
               './configure --prefix=/usr',
               'make',
-              'sudo make install'
+              "#{sudo} make install"
             ].join(' && ')
           end
 
@@ -592,10 +592,10 @@ module Moonshine
             pv = "1.9.3-p484"
             p = "ruby-#{pv}"
             run [
-              'sudo apt-get install autoconf libyaml-dev -y || true',
+              "#{sudo} apt-get install autoconf libyaml-dev -y || true",
               'cd /tmp',
-              "sudo rm -rf #{p}* || true",
-              'sudo mkdir -p /usr/lib/ruby/gems/1.9/gems || true',
+              "#{sudo} rm -rf #{p}* || true",
+              "#{sudo} mkdir -p /usr/lib/ruby/gems/1.9/gems || true",
               "wget -q http://ftp.ruby-lang.org/pub/ruby/1.9/#{p}.tar.gz",
               "tar zxvf #{p}.tar.gz",
               "cd /tmp/#{p}",
@@ -618,7 +618,7 @@ module Moonshine
               'export CFLAGS="-march=core2 -O2 -pipe -fomit-frame-pointer"',
               "./configure --prefix=/usr",
               "make",
-              "sudo make install"
+              "#{sudo} make install"
             ].join(' && ')
           end
 

@@ -95,7 +95,7 @@ module Moonshine::Manifest::Rails::Passenger
     # Build Passenger from source
     exec "build_passenger",
       :cwd => configuration[:passenger][:path],
-      :command => 'sudo /usr/bin/ruby -S rake clean apache2',
+      :command => "#{sudo} /usr/bin/ruby -S rake clean apache2",
       :unless => [
         "ls `passenger-config --root`/#{passenger_lib_dir}/apache2/mod_passenger.so",
         "ls `passenger-config --root`/#{passenger_lib_dir}/ruby/ruby-*/passenger_native_support.so",
