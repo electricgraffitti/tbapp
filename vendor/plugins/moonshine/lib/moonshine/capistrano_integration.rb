@@ -734,7 +734,7 @@ module Moonshine
 
         namespace :passenger do
           task :compile, :roles => :app do
-            run 'gem list -i passenger && cd /usr/local/src/passenger && sudo /usr/bin/ruby -S rake clean apache2 || true'
+            run "gem list -i passenger && cd /usr/local/src/passenger && #{sudo} /usr/bin/ruby -S rake clean apache2 || true"
           end
         end
 
