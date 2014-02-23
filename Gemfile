@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-ruby '2.1.0'
 gem 'rails', '4.0.2'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
@@ -18,6 +17,7 @@ gem 'plugger'
 gem 'capistrano', '2.15.5'
 
 group :development do
+  ruby '2.1.0'
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
@@ -30,11 +30,12 @@ group :development do
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
-end
-
-group :development, :test do
   gem 'rspec-rails'
   gem 'thin'
+end
+
+group :production, :test do
+  ruby '2.0.0'
 end
 
 group :test do
