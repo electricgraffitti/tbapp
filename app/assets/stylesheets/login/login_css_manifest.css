@@ -18,6 +18,7 @@
 .panel header {font-size: 18px;padding: 10px;}
 .public .form-group {margin:0px;}
 .panel footer {padding: 20px 10px 5px;font-size: 14px;position: relative;float: left;}
+.public .form-group {width: 100%;}
 
 #login_panel.panel {height: 305px;}
 #signup_panel.panel {height: 424px;}
