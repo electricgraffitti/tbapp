@@ -23,4 +23,6 @@ Tbapp::Application.routes.draw do
   resources :items
   resources :service_records
 
+  root to: "devise/sessions#new", as: "login"
+
 end
