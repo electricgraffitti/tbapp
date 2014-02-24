@@ -1,0 +1,18 @@
+<label>
+  {{ label }}
+  {{#if isRequired }}{{required}}{{/if}}
+  {{#if isInvalid }}<span class='icon small_icon field_error'>Reason code required</span>{{/if}}
+</label>
+<span class="select_wrap" {{action hideOptionsList on='mouseLeave'}}>
+	<div class="selected_option pointer" {{action toggleOptionsList on='click'}}>
+		{{ selectedOption }}
+		{{ toggleButton }}
+	</div>
+	<ul {{bind-attr class='optionsVisible:is_visible:is_hidden :select_options'}} >
+    {{#if hasRendered}}
+      {{#each selectOptions }}
+        <li class='option' {{action optionIsSelected this}}>{{unbound optionName}}</li>
+		  {{/each}}
+    {{/if}}
+	</ul>
+</span>

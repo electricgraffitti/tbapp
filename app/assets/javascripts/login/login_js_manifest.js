@@ -11,11 +11,18 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require vendor/jquery
-//= require ./../libs/notifications
+// require_tree ./../vendor/flat-ui
+
+//= require vendor/handlebars
+//= require vendor/ember
+//= require vendor/ember-data
+//= require ./../config/app_init
+//= require ./../config/router
+//= require_tree ./../libs
 //= require_self
 
 $(function() {
-	Flash.injectFlashBox();
-  Flash.setFlash();
+	TBook.Flash.injectFlashBox();
+  TBook.Flash.setFlash();
   $('#username').focus();
 });

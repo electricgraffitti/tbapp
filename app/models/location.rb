@@ -31,16 +31,8 @@ class Location < ActiveRecord::Base
   has_many :location_roles
   has_many :users, :through => :location_roles
 
-  # Validations
-
-  # Scopes
-  scope :editable_locations, lambda {|u| where('location_roles.user_id = ? AND location_admin = ?', u, true).includes(:location_roles)}
-  scope :viewable_locations, lambda {|u| where('location_roles.user_id = ? AND location_admin = ?', u, false).includes(:location_roles)}
-  scope :assigned_locations, lambda {|u| where('location_roles.user_id = ?', u).includes(:location_roles)}
   ################################### Methods
   
-  include Permissions
-
   def setup_new_location(account, address, user)
     self.items_count = 0
     self.parts_count = 0
@@ -60,15 +52,6 @@ class Location < ActiveRecord::Base
     else
       return false
     end
-  end
-  
-  def set_base_location_attributes(u)
-    self.account_id = u.account.id
-    self.items_count = 0
-    self.parts_count = 0 
-    self.warranties_count = 0
-    self.extended_warranties_count = 0
-    return self
   end
   
 end

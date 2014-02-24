@@ -1,0 +1,31 @@
+﻿<label>
+	{{ label }}
+	{{#if isRequired }}{{required}}{{/if}}
+  {{#if isInvalid }}<span class='icon small_icon field_error'>Required</span>{{/if}}
+</label>
+<section class="select_wrap" >
+	{{input value=filterInput type='text' placeholder=placeholderText}}
+	<span class="select_toggle" {{action focusInput on='click'}}><span class="toggle"></span></span>
+
+	<ul {{bind-attr class='optionsVisible:is_visible:is_hidden :select_options'}}>
+		<section class='list_options'>
+			<li class='option' {{action selectAll this on='click'}}>All</li>
+			<li class='option' {{action clearAll this on='click'}}>Clear</li>
+		</section>
+
+		<section class="available_options">
+			{{#each filteredOptions }}
+				<li {{bind-attr class='isActive:is_active isHidden:is_hidden :option'}} {{action optionIsSelected this on='click'}}>{{ optionName }}</li>
+			{{/each}}
+		</section>
+
+		{{#if selectedOptions }}
+			<section class="selected_options">
+				{{#each selectedOptions }}
+					<li class='is_active option' {{action removeFromSelectedList this on='click'}}>{{ optionName }}</li>
+				{{/each}}
+			</section>
+		{{/if}}
+
+	</ul>
+</section>

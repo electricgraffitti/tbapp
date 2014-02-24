@@ -8,9 +8,8 @@ TBook.Location = DS.Model.extend({
   reminders_count: DS.attr('number'),
   user_vendors_count: DS.attr('number'),
   service_records_count: DS.attr('number'),
+  location: DS.belongsTo('address'),
 
-  
   locationName: Ember.computed.alias('name')
-
 
 });

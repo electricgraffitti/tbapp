@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+
 gem 'rails', '4.0.2'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
@@ -16,9 +16,13 @@ gem "active_model_serializers"
 gem 'ember-rails'
 gem 'plugger'
 gem 'capistrano', '2.15.5'
+gem 'geocoder'
 
 group :development do
   gem 'annotate'
+  gem 'debugger'
+  gem 'pry'
+  gem 'pry-debugger'
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
   gem 'guard-bundler'

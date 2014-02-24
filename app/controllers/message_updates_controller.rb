@@ -1,4 +1,6 @@
 class MessageUpdatesController < ApplicationController
+
+  before_filter :authenticate_user!
   # GET /message_updates
   # GET /message_updates.json
   def index

@@ -4,3 +4,4 @@ window.TBook = Ember.Application.create({
 });
 
 TBook.Store = DS.Store.extend();
+TBook.ajax = ic.ajax;

@@ -18,9 +18,43 @@
           {{input value=locationNumber name=location placeholder='Location Number' class='form-control'}}
         </div>
       </div>
-      <div class="cancel_links">
-        <button class="btn btn-default btn-wide" {{action validateLocationForm flag on='click'}}>Save Location</button>
-        <span> or <span {{action clearLocationForm bubbles=false on='click'}} class='span_link'>Cancel</span></span>
+      <div class="form_row">
+        <div class="form-group">
+          <label>Location Street</label>
+          {{input value=locationStreet name=location placeholder='Location Street' class='form-control'}}
+        </div>
+        <div class="form-group">
+          <label>Location City</label>
+          {{input value=locationCity name=location placeholder='Location City' class='form-control'}}
+        </div>
+      </div>
+      <div class="form_row">
+        <div class="form-group">
+          <label>Location State</label>
+          {{view Ember.Select
+             classNames="form-control"
+             content=stateObjs
+             optionValuePath="content.id"
+             optionLabelPath="content.full_name"
+             prompt="Please select a state"
+             selection=locationState}}
+{{!--           {{single-select label='Location State' 
+            defaultOptionName='Select A State'
+            selectedOption=locationState 
+            selectOptions=stateObjs 
+            focusAction='reviewGroupFocus' 
+            onSelection='reviewGroupSelect' 
+            resetOn=clearLocationForm
+            maxItems=1500}} --}}
+        </div>
+        <div class="form-group">
+          <label>Location Zipcode</label>
+          {{input value=locationZip name=location placeholder='Location Zipcode' class='form-control'}}
+        </div>
+      </div>        
+      <div class="form-group cancel_links">
+        <button class="btn btn-default btn-wide" {{action 'validateLocation' on='click'}}>Save Location</button>
+        <span> or <span {{action 'clearLocationForm' bubbles=false on='click'}} class='span_link'>Cancel</span></span>
       </div>
     </div>
   </div>

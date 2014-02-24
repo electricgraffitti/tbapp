@@ -1,0 +1,13 @@
+<ul class='single_row grouped_row full_row'>
+{{#each mod in mods}}
+    <li class='line_badge empty_badge'></li>
+    <li class='line_mod data_point'>
+      <span class="grid_label">M:</span>
+      <span class="grid_value clipped" title=""> {{mod.modifier_code}}</span>
+    </li>
+  
+    <li class='line_mod_description data_point'>
+      <span class="grid_value clipped" title=""> {{mod.modifier_desc}}</span>
+    </li>
+  {{/each}}
+</ul>

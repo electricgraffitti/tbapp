@@ -1,23 +1,15 @@
 class LocationsController < ApplicationController
   
-  before_filter :require_user  
+  before_filter :authenticate_user!
   layout 'internal'
   
   # GET /locations
   # GET /locations.json
   def index
-    if current_user.is_admin?
-      @locations = current_user.accessible_locations
-    else
-      @editable_locations = current_user.accessible_locations
-      @viewable_locations = current_user.viewable_locations
-    end
-    @location_count = current_user.account.locations_count
-    @location = Location.new
-    @location.build_address
+    # TODO: Scope to user
+    @locations = Location.all
 
     respond_to do |format|
-      format.html # index.html.erb
       format.json { render json: @locations }
     end
   end
@@ -65,16 +57,13 @@ class LocationsController < ApplicationController
   # POST /locations
   # POST /locations.json
   def create
-    @location = Location.new(params[:location])
-    @location.set_base_location_attributes(current_user)
-    redirect_link = return_link(params[:return_path], locations_path)
+    @location = Location.new(location_params)
+    @location.account_id = current_user.account.id
 
     respond_to do |format|
       if @location.save
-        format.html { redirect_to(redirect_link, notice: 'The Location #{@location.name} was added to your account.')}
-        format.json { render json: @location, status: :created, location: @location }
+        format.json { render json: @location, serializer: LocationSerializer }
       else
-        format.html { render action: "new" }
         format.json { render json: @location.errors, status: :unprocessable_entity }
       end
     end
@@ -107,4 +96,13 @@ class LocationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+private
+  def location_params
+    params.require(:location).permit(:name, :location_number, address_attributes: [:id, :street, :city, :zipcode, :state, :state_id])
+    # params.require(:location).permit(:name, :location_number).tap do |whitelisted|
+    #   whitelisted[:address] = params[:location][:address]
+    # end
+  end
+
 end

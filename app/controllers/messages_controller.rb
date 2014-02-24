@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   
-  before_filter :require_user  
+  before_filter :authenticate_user! 
   layout 'internal'
   
   # GET /messages

@@ -1,4 +1,6 @@
 class ServiceRecordsController < ApplicationController
+
+  before_filter :authenticate_user!
   # GET /service_records
   # GET /service_records.json
   def index

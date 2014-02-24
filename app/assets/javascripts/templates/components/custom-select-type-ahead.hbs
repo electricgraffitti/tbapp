@@ -1,0 +1,20 @@
+<label>
+  {{ label }}
+  {{#if isRequired }}{{required}}{{/if}}
+  {{#if isInvalid }}<span class='icon small_icon field_error'>Reason code required</span>{{/if}}
+</label>
+
+<section class="select_wrap" >
+  {{input value=filter type='text' placeholder='Type to filter'}}
+  <span class="select_toggle" {{action toggleOpenClose}}>
+    <span class="toggle"></span>
+  </span>
+
+  <ul {{bind-attr class='optionsVisible:is_visible:is_hidden :select_options :type_ahead'}} {{action killHighlightSelected on='mouseEnter'}}>
+    {{#each visibleOptions }}
+    <li {{bind-attr class=':option isActive:is_active'}} {{action optionIsSelected this}}>{{unbound optionName}}</li>
+    {{else}}
+    <li class='option'>No results found</li>
+    {{/each}}
+  </ul>
+</section>

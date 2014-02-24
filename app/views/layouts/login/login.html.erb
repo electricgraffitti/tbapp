@@ -19,7 +19,7 @@
   <%= javascript_include_tag "vendor/modernizr", "vendor/browser_select" %>
 </head>
 <body>
-  <div class="public">
+  <div id="tracking-book" class="public">
     <%= render :partial => 'layouts/shared/flash', :locals => {:flash => flash} %>
     <%= yield %>
   </div>

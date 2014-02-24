@@ -1,11 +1,5 @@
 <ul class='single_row grouped_row full_row'>
-  <li class='line_actions'>
-    <span {{bind-attr class='providerScoreDisplay :icon :small_icon'}} {{action popupProviderScorecard this on="click"}}>Provider Arrow</span>
-    <span {{bind-attr class='providerIconState :icon :small_icon :provider_icon_small'}} {{action popupProviderProfile this on="click"}}>Provider Icon</span>
-  </li>
-  <li class='listed_provider_seq data_point'>ID {{ provider_sequence }}</li>
-  <li class='listed_resolved_id data_point'>G: {{ group_tin }}</li>
-  <li class='listed_provider_name data_point' {{bind-attr title=providerName}}>Name: {{ providerName }}</li>
-  <li class='listed_provider_speciality data_point' {{bind-attr title=specialty}}>Specialty: {{ specialty }}</li>
-  <li class='listed_provider_state data_point'>State: {{ state }}</li>
+  <li class='listed_provider_seq data_point'>Location Name: {{ name }}</li>
+  <li class='listed_resolved_id data_point'>Location Number: {{ location_number }}</li>
+  <li class='listed_provider_state data_point'>State: NV</li>
 </ul>

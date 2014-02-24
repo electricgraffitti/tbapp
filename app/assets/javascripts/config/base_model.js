@@ -1,4 +1,4 @@
-// TBook.Model = Ember.Model.extend();
+TBook.Model = DS.Model.extend();
 
 // TBook.Model.reopen({
   
@@ -42,25 +42,6 @@
 //       jsonRoot[get(this.constructor, 'serialKey')] = json;
 //       return jsonRoot;
 //     }
-//   }
-
-// });
-
-// TBook.Model.reopenClass({
-//   adapter: Ember.RESTAdapter.create(),
-
-//   findAllByProperty: function(params) {
-//     var objs = this.findAll(),
-//                 content = [];
-
-//     objs.forEach(function(obj) {
-//       if (obj.hasParams(params)) {
-//         content.pushObject(obj);
-//       }
-//     });
-    
-//     return content;
-
 //   }
 
 // });

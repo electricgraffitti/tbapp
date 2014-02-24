@@ -34,42 +34,4 @@ class Account < ActiveRecord::Base
   has_one :account_detail
   accepts_nested_attributes_for :account_detail
 
-  # Scopes
-
-  ################################# Methods
-  
-  include Permissions
-  
-  # sums the warrany count for a locations array
-  def get_warranty_count(locations)
-    lc = 0
-    locations.each do |l|
-      lc = l.warranties_count + lc
-    end
-    return lc
-  end
-
-  # Part of the initial account sign up process
-  def setup_new_account(user, address)
-    self.locations_count = 0
-    self.items_count = 0
-    self.reminders_count = 0
-    self.parts_count = 0
-    self.warranties_count = 0
-    self.extended_warranties_count = 0
-    self.user_vendors_count = 0
-    self.service_records_count = 0
-    if self.account_type == "Business"
-      self.business_account = 1
-    end
-    if self.valid?
-      loc = Location.new
-      location_check = loc.setup_new_location(self, address, user)
-      if location_check == false
-        return false
-      end
-    else
-      return false
-    end
-  end
 end

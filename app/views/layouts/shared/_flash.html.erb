@@ -1,26 +1,15 @@
-
+<div id="flash" class="flash flash_html round_bottom">
  <% unless flash[:notice].blank? %>
-	<div class="dialog dialog-warning">
-	  <div class="container">
-	  	<%= flash[:notice]%>
-	  </div>
-	</div>
+   <%= flash[:notice]%>
  <% end %>
-
  <% unless flash[:error].blank? %>
-	<div class="dialog dialog-danger">
-	  <div class="container"><%= flash[:error]%></div>
-	</div>
+   <%= flash[:error]%>
  <% end %>
-
- <% unless flash[:success].blank? %>
-	<div class="dialog dialog-success">
-	  <div class="container"><%= flash[:success]%></div>
-	</div>
+  <% unless flash[:success].blank? %>
+   <%= flash[:success]%>
  <% end %>
-
  <% unless flash[:info].blank? %>
-	<div class="dialog dialog-info">
-	  <div class="container"><%= flash[:info]%></div>
-	</div>
+   <%= flash[:info]%>
  <% end %>
+
+</div>

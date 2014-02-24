@@ -2,15 +2,15 @@
 
   classNames: ['multi_select_component', 'field'],
   optionsVisible: false,
-  selectedAction: null,
+  onSelection: null,
   focusAction: null,
   requiredProperty: null,
   isRequired: false,
   isInvalid: false,
   currentFocusedOption: null,
+  resetOn: false,
 
   placeholderText: function () {
-
     if (Ember.isEmpty(this.get('selectedOptions'))) {
       return 'Select one or more';
     } else if (this.get('selectedOptions').length === 1) {
@@ -26,17 +26,17 @@
 
   filteredOptions: function () {
     var filterValue = this.get('filterInput'),
-      completeList = this.get('availableOptions'),
-      regex = new RegExp(this.get('filterInput'), 'i'),
-      filterList = null;
+      completeList = this.get('selectOptions'),
+      escapedValue = Nucleus.Utilities.regExpEscape(this.get('filterInput')),
+      regex = new RegExp(escapedValue, 'i');
 
     if (!filterValue || filterValue === this.get('placeholderText')) {
-      return this.get('availableOptions');
+      return this.get('selectOptions');
     }
     return completeList.filter(function (item) {
-      return item.optionName.match(regex);
+      return regex.test(item.optionName);
     });
-  } .property('filterInput', 'availableOptions.@each'),
+  } .property('filterInput', 'selectOptions.length'),
 
   resetOptionsList: function () {
     if (this.get('selectedOptions.length') === 0) {
@@ -47,8 +47,12 @@
     }
   } .observes('selectedOptions.length'),
 
+  focusActions: function () {
+    this.sendAction('focusAction', this.get('optionsVisible'));
+  } .observes('optionsVisible'),
+
   focusIn: function () {
-    if (this.get('optionsVisible') === true) {
+    if (this.get('optionsVisible')) {
       return false;
     }
     this.set('filterInput', null);
@@ -61,9 +65,9 @@
       enterKey = e.keyCode === 13;
 
     // Dont allow certain keyCodes that break the regex filter
-    if (TBook.Utilities.nonAlphaNumericInput(e)) {
-      e.preventDefault();
-    }
+    //if (Nucleus.Utilities.nonAlphaNumericInput(e)) {
+    //  e.preventDefault();
+    //}
 
     if (arrowKey) {
       this.send('changeSelection', {
@@ -80,6 +84,7 @@
     this.set('optionsVisible', false);
     this.$('input').blur();
     this.resetFilters();
+    this.sendAction('onSelection', this.get('selectedOptions'));
   },
 
   resetFocus: function () {
@@ -87,6 +92,10 @@
     this.$('input').blur();
     this.$('input').focus();
   },
+
+  watchReset: function () {
+    this.resetOptionsList();
+  } .observes('resetOn').on('init'),
 
   resetFilters: function () {
     this.set('currentFocusedOption', null);
@@ -98,7 +107,7 @@
   },
 
   resetHiddenStates: function () {
-    this.get('availableOptions').setEach('isHidden', false);
+    this.get('selectOptions').setEach('isHidden', false);
   },
 
   getCurrentIndex: function (direction) {
@@ -150,12 +159,16 @@
     });
   },
 
+  watchSelection: function () {
+    this.sendAction('onSelection', this.get('selectedOptions'));
+  } .observes('selectedOptions.@each'),
+
   actions: {
 
     selectAll: function () {
       this.set('selectedOptions', []);
-      this.get('selectedOptions').pushObjects(this.get('availableOptions'));
-      this.get('availableOptions').forEach(function (option) {
+      this.get('selectedOptions').pushObjects(this.get('selectOptions'));
+      this.get('selectOptions').forEach(function (option) {
         Ember.set(option, 'isHidden', true);
       });
       this.resetActiveStates();
@@ -178,9 +191,7 @@
     enterSelection: function () {
       var currentSelected = this.get('currentFocusedOption');
 
-      if (Ember.isEmpty(currentSelected)) {
-        return false;
-      } else {
+      if (!Ember.isEmpty(currentSelected)) {
         this.send('optionIsSelected', currentSelected);
       }
     },
@@ -193,7 +204,7 @@
 
     optionIsSelected: function (option) {
       if (this.get('selectedOptions').contains(option)) {
-        return false;
+        return;
       }
       this.get('selectedOptions').pushObject(option);
       Ember.set(option, 'isHidden', true);
