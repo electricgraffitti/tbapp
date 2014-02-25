@@ -31,7 +31,6 @@ TBook.LocationsNewController = Ember.Controller.extend({
   	}, function(reject) {
   		self.handleCreateError(reject);
   	});
-
 	},
 
 	setNewLocation: function (data) {
@@ -40,7 +39,6 @@ TBook.LocationsNewController = Ember.Controller.extend({
 	},
 
 	handleCreateError: function (reject) {
-    debugger;
 		Modal.loadValidationModal('<p>There was a problem.</p>');
 	},
 
