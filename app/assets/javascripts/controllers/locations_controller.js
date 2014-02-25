@@ -12,15 +12,13 @@ TBook.LocationsNewController = Ember.Controller.extend({
 		var self = this, params = {};
 
 		params.location = {};
-		params.location.address = {};
+		params.location.address_attributes = {};
   	params.location.name = this.get('locationName');
   	params.location.location_number = this.get('locationNumber');
-		params.location.address.street = this.get('locationStreet');
-  	params.location.address.city = this.get('locationCity');
-    params.location.address.state = this.get('locationState');
-    params.location.address.zipcode = this.get('locationZip');
-    params.location.address.longitude = this.get('locationLong');
-  	params.location.address.latitude = this.get('locationLat');
+		params.location.address_attributes.street = this.get('locationStreet');
+  	params.location.address_attributes.city = this.get('locationCity');
+    params.location.address_attributes.state_id = this.get('locationState').get('id');
+    params.location.address_attributes.zipcode = this.get('locationZip');
 
   	dataObj = {
   		type: 'POST',
@@ -30,8 +28,8 @@ TBook.LocationsNewController = Ember.Controller.extend({
 
   	TBook.ajax('/locations', dataObj).then(function(result) {
   		self.setNewLocation(result);
-  	}, function() {
-  		self.handleCreateError(result);
+  	}, function(reject) {
+  		self.handleCreateError(reject);
   	});
 
 	},
@@ -41,8 +39,9 @@ TBook.LocationsNewController = Ember.Controller.extend({
 		this.resetForm();
 	},
 
-	handleCreateError: function () {
-		Modal.loadValidationModal('There was a problem.');
+	handleCreateError: function (reject) {
+    debugger;
+		Modal.loadValidationModal('<p>There was a problem.</p>');
 	},
 
 	resetForm: function () {
@@ -67,6 +66,22 @@ TBook.LocationsNewController = Ember.Controller.extend({
 
       if (Ember.isEmpty(this.get('locationNumber'))) {
         validationMessages.push('A Location Number is required');
+      }
+
+      if (Ember.isEmpty(this.get('locationStreet'))) {
+        validationMessages.push('A Location Street is required');
+      }
+
+      if (Ember.isEmpty(this.get('locationCity'))) {
+        validationMessages.push('A Location City is required');
+      }
+
+      if (Ember.isEmpty(this.get('locationState'))) {
+        validationMessages.push('A Location State is required');
+      }
+
+      if (Ember.isEmpty(this.get('locationZip'))) {
+        validationMessages.push('A Location Zipcode is required');
       }
 
       if (validationMessages.length > 0) {

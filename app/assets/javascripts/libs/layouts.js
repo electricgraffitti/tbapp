@@ -123,28 +123,17 @@ var Layouts = {
 
   resizeColumnHeights: function () {
     var columns = $('#columns'),
-        header = $("#mast_header"),
-        navBar = $("#master_navigation"),
-        footer = $("#footer"),
+        stage = $("#stage"),
         componentScroller = columns.find('.component_scroller'),
         componentHeader = columns.find('.component_header');
 
-    if ($(window).width() >= 1280) {
-      $('#columns').width($(window).width());
-    } else {
-      $('#columns').width(1280);
-    }
-
-    columns.height($(window).height() - (header.outerHeight() + navBar.outerHeight() + footer.outerHeight() + 1));
+    columns.width(stage.width());
+    columns.height(stage.height());
     componentScroller.height(columns.height() - (componentHeader.outerHeight() + 27));
 
     var resizeCallback = function () {
-      if ($(window).width() >= 1280) {
-        $('#columns').width($(window).width());
-      } else {
-        $('#columns').width(1280);
-      }
-      columns.height($(window).height() - (header.outerHeight() + navBar.outerHeight() + footer.outerHeight() + 1));
+      columns.width(stage.width());
+      columns.height(stage.height());
       componentScroller.height(columns.height() - (componentHeader.outerHeight() + 27));
     };
 

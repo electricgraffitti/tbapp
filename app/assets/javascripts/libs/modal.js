@@ -4,7 +4,7 @@ var Modal = {
     var modalWrap = $("<div id='modal_wrap'></div>"),
         modalTitle = $("<span id='modal_title'></span>"),
         modalHeader = $("<div id='modal_header' class='dark_silver_gray_gradient'></div>"),
-        modalCloseLink = $("<div id='close_modal_link' class='button small_close_button'>X</div>"),
+        modalCloseLink = $("<div id='close_modal_link' class='icon small_close_button'>X</div>"),
         modalContent = $("<div id='modal_content'></div>");
         
         if (isError === true) {
