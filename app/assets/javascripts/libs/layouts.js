@@ -24,7 +24,9 @@ var Layouts = {
         stageElement = $("#stage"),
         stockHeight = $(window).height() - $("#main_header").height();
 
-    if ($(window).width() >= 1280) {
+    if ($(window).width() <= 1280) {
+      $("#tracking-book").width(1280);
+    } else {
       $("#tracking-book").width($(window).width());
     }
 
@@ -37,9 +39,12 @@ var Layouts = {
           resizedStageElement = $("#stage"),
           newStockHeight = $(window).height() - $("#main_header").height();
 
-      if ($(this).width() >= 1280) {
-        $("#tracking-book").width($(this).width());
+      if ($(window).width() <= 1280) {
+        $("#tracking-book").width(1280);
+      } else {
+        $("#tracking-book").width($(window).width());
       }
+
       resizedStageElement.width($(window).width() - quickLaunch.width());
       resizedQuickLaunch.height(stockHeight)
       resizedStageElement.height(stockHeight);
@@ -132,6 +137,11 @@ var Layouts = {
     componentScroller.height(columns.height() - (componentHeader.outerHeight() + 27));
 
     var resizeCallback = function () {
+      var columns = $('#columns'),
+        stage = $("#stage"),
+        componentScroller = columns.find('.component_scroller'),
+        componentHeader = columns.find('.component_header');
+
       columns.width(stage.width());
       columns.height(stage.height());
       componentScroller.height(columns.height() - (componentHeader.outerHeight() + 27));
@@ -146,10 +156,14 @@ var Layouts = {
         rightColumn = $("#right_column_main"),
         components = leftColumn.find(".component");
      
-    leftColumn.width($(window).width() - rightColumn.outerWidth());
+    leftColumn.width($('#stage').width() - rightColumn.outerWidth());
     
     var resizeCallback = function () {
-      leftColumn.width($(window).width() - rightColumn.outerWidth());
+      var leftColumn = $("#left_column_main"),
+          rightColumn = $("#right_column_main"),
+          components = leftColumn.find(".component");
+
+      leftColumn.width($('#stage').width() - rightColumn.outerWidth());
     };
 
     this.setupResizeEvent("resizeLeftColumn", resizeCallback);
@@ -161,10 +175,15 @@ var Layouts = {
         rightColumnComponents = rightColumn.find('.component'),
         rightColumnComponentsCount = rightColumnComponents.length;
 
-    rightColumn.width($('#columns').width() - (leftColumn.outerWidth() + 2));
+    rightColumn.width($('#stage').width() - leftColumn.outerWidth());
 
     var resizeCallback = function () {
-      rightColumn.width($('#columns').width() - (leftColumn.outerWidth() + 2));
+      var leftColumn = $("#left_column_main"),
+          rightColumn = $("#right_column_main"),
+          rightColumnComponents = rightColumn.find('.component'),
+          rightColumnComponentsCount = rightColumnComponents.length;
+
+      rightColumn.width($('#stage').width() - leftColumn.outerWidth());
     };
 
     this.setupResizeEvent("resizeRightColumn", resizeCallback);
