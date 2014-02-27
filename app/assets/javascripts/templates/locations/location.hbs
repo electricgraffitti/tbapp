@@ -1,15 +1,18 @@
-<div class="component component_left">
+<div class="component component_right">
   <div class="component_header">
     <div class="component_header_left">
-      <label class="page_title">Locations</label>
+      <label class="page_title">Location</label>
     </div>
     <div class="component_header_right">
       <ul class='toolbar'>
-        <li class='icon icon-16 add'>Add Location</li>
+        <li>{{#link-to 'location_items' this class='icon icon-16 items' title='View Items'}}View Items{{/link-to}}</li>
+        <li>{{#link-to 'location_service_records' this class='icon icon-16 service_records' title='View Service Records'}}View Service Records{{/link-to}}</li>
+        <li>{{#link-to 'location_warranties' this class='icon icon-16 warranties' title='View Warranties'}}View Warranties{{/link-to}}</li>
       </ul>
     </div>
   </div>
   <div class="component_content">
-    comp 1
+    
   </div>
 </div>
+{{outlet}}

@@ -7,6 +7,8 @@ TBook.Address = DS.Model.extend({
   state_name: DS.attr(),
   account_detail: DS.belongsTo('account_detail'),
   state: DS.belongsTo('state'),
-  location: DS.belongsTo('location')
-  
+  location: DS.belongsTo('location'),
+
+  stateName: Ember.computed.alias('state_name')
+
 });

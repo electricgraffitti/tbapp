@@ -1,4 +1,5 @@
 TBook.Location = DS.Model.extend({
+  account_id: DS.attr(),
   item_count: DS.attr('number'),
   parts_count: DS.attr('number'),
   warranties_count: DS.attr('number'),
@@ -12,9 +13,6 @@ TBook.Location = DS.Model.extend({
   account: DS.belongsTo('account'),
 
   locationName: Ember.computed.alias('name'),
-  // locationState: Ember.computed.alias('address.stateName')
-  locationState: function() {
-    return this.get('address.state_name');
-  }.property('address')
+  locationState: Ember.computed.alias('address.stateName')
 
 });

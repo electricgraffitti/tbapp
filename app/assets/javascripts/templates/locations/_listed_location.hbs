@@ -1,4 +1,4 @@
-<li class='header_row full_row row listed_single_row'>
+<li {{bind-attr class='isSelected:active :header_row :full_row :row :listed_single_row'}} {{action 'selectLocationRow' this on='click'}}>
 	<ul class='single_row grouped_row full_row'>
 	  <li class='location_name data_point'>
 	  	<span class="grid_label">Location Name: </span> 

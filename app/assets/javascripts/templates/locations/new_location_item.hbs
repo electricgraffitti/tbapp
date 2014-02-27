@@ -1,0 +1,62 @@
+<div class="component component_right">
+  <div class="component_header">
+    <div class="component_header_left">
+      <label class="page_title">Add Item</label>
+    </div>
+  </div>
+  <div class="component_content">
+    <div class="form_component form_section section_left add_location_main">
+      <div class="form_row">
+        <div class="form-group">
+          <label>Item Name</label>
+          {{input value=itemName name=item placeholder='Item Name' class='form-control'}}
+        </div>
+        <div class="form-group">
+          <label>Item Serial Number</label>
+          {{input value=serialNumber name=item placeholder='Item Serial Number' class='form-control'}}
+        </div>
+      </div>
+      <div class="form_row">
+        <div class="form-group">
+          <label>Item Make</label>
+          {{input value=itemMake name=item placeholder='Item Make' class='form-control'}}
+        </div>
+        <div class="form-group">
+          <label>Item Model</label>
+          {{input value=itemModel name=item placeholder='Item Model' class='form-control'}}
+        </div>
+      </div>
+      <div class="form_row">
+        <div class="form-group">
+          <label>Purchase Date</label>
+          {{date-field valueBinding="purchaseDate"}} 
+        </div>
+        <div class="form-group">
+          <label>Original Cost</label>
+          {{number-field valueBinding="originalCost" name=item placeholder='Original Cost' class='form-control'}}
+        </div>
+      </div>
+      <div class="form_row">
+        <div class="form-group">
+          <label>Purchased From</label>
+          {{input value=purchasedFrom name=item placeholder='Purchased From' class='form-control'}}
+        </div>
+        <div class="form-group">
+          <label>Physical Location</label>
+          {{input value=itemPhysicalLocation name=item placeholder='Physical Location' class='form-control'}}
+        </div>
+      </div>
+      <div class="form_row">
+        <div class="form-group">
+          <label>Notes</label>
+          {{textarea value=itemNotes name=item placeholder='Notes' class='form-control'}}
+        </div>
+      </div>     
+      <div class="form-group cancel_links">
+        <button class="btn btn-default btn-wide" {{action 'validateItem' on='click'}}>Add Item</button>
+        <span> or <span {{action 'clearItemForm' bubbles=false on='click'}} class='span_link'>Clear</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+{{outlet}}

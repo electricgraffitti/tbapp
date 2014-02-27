@@ -82,29 +82,13 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    @item = Item.new(params[:item])
-    @account = current_user.account
-    @item.account_id = @account.id
-
-    if params[:location_token]
-      location = Location.find(params[:location_token])
-      if location
-        location_authorized = location.get_account_access(current_user)
-        if location_authorized != nil
-          @item.location_id = location_authorized.id
-        else
-          @item.location_id = nil
-        end
-      end
-    end
+    @item = Item.new(item_params)
+    @item.account_id = current_user.account.id
 
     respond_to do |format|
       if @item.save
-        redirect_link = return_link(params[:return_path], item_path(@item))
-        format.html { redirect_to(redirect_link, notice: 'Item was successfully created.') }
-        format.json { render json: @item, status: :created, location: @item }
+        format.json { render json: @item, serializer: ItemSerializer }
       else
-        format.html { render action: "new" }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
@@ -137,4 +121,14 @@ class ItemsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+private
+  def item_params
+    params.require(:items).permit(:id, :name, :serial_number, :make, :model, :purchase_date,
+             :original_cost, :location_id, :notes, :purchased_from,
+             :removal_date, :estimated_weight, :refrigerant_removal_quantity,
+             :scrap_value, :capitalization_reason, :physical_location, :user_vendor_id,
+             :vendor_id)
+  end
+
 end

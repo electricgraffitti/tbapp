@@ -72,7 +72,8 @@ a:hover, .public footer a:hover {color: #82cc0a;}
 .row_item_header, 
 .row_header,
 .spreadsheet_header,
-.expanded_item { background: #ececec; }
+.expanded_item,
+.striped li.listed_single_row:nth-child(even) { background: #ececec; }
 
 .component_table,
 .option_list {background: #fff;}
@@ -136,6 +137,11 @@ ul.listed_single_row_component_content .spreadsheet  li.row:last-of-type { borde
 .listed_single_row:hover,
 .listed_single_row.active.row,
 .listed_single_row.active.row:hover {border: 1px solid #82CC0A;}
+ 
+.component_content.active.row.even,
+.component_content.active.row, 
+.listed_item.active.row, .listed_item.active.row.even,
+.listed_single_row.active.row, .listed_single_row.active.row.even {background-color: #F4FFE0;}
 
 .row.last {border-bottom: none;} 
 

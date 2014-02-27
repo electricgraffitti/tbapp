@@ -111,6 +111,29 @@ Ember.Handlebars.helper('avatar-uploader', Ember.TextField.extend({
 	}
 }));
 
+Ember.Handlebars.helper('date-field', Ember.TextField.extend({
+  type: 'date',
+  hasFocus: false,
+  placeholderBinding: 'MM/DD/YYYY',
+  classNames: 'form-control'
+}));
+
+Ember.Handlebars.helper('number-field', Ember.TextField.extend({
+  type: 'number',
+  attributeBindings: ['min', 'max', 'step'],
+  numbericValue : function (key,v) {
+    if (arguments.length === 1)
+      return parseFloat(this.get('value'));
+    else
+      this.set('value', v !== undefined ? v+'' : '');
+  }.property('value'),
+  didInsertElement: function() {
+    this.$().keypress(function(key) {
+      if((key.charCode!=46)&&(key.charCode!=45)&&(key.charCode < 48 || key.charCode > 57)) return false;
+    })  
+  }
+}));
+
 Ember.Handlebars.helper('document-uploader', Ember.TextField.extend({
 	type: 'file',
 	classNames: 'custom_upload pointer',

@@ -5,7 +5,10 @@ TBook.Router.map(function() {
 	this.resource('locations', {path: '/locations'}, function() {
 		this.route('new');
 		this.resource('location', {path: '/locations/:location_id'}, function () {
-
+			this.route('new_location_item');
+			this.resource('location_items');
+			this.resource('location_warranties');
+			this.resource('location_service_records');
 		});
 	});
 
