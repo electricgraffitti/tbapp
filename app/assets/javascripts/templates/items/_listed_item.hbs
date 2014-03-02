@@ -1,0 +1,12 @@
+<li {{bind-attr class='isSelected:active :header_row :full_row :row :listed_single_row'}} {{action 'selectLocationRow' this on='click'}}>
+	<ul class='single_row grouped_row full_row'>
+	  <li class='location_name data_point'>
+	  	<span class="grid_label">#: </span> 
+	  	<span class="grid_value">{{ custom_order_number }}</span>
+	  </li>
+	  <li class='location_state data_point'>
+	  	<span class="grid_label">Service Date: </span> 
+	  	<span class="grid_value">{{ service_date }}</span>
+	  </li>
+	</ul>
+</li>

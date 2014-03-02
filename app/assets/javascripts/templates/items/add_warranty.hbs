@@ -1,0 +1,51 @@
+<div class="component component_right">
+  <div class="component_header">
+    <div class="component_wrap">
+      <div class="component_header_left">
+        <label class="component_title">Add Warranty</label>
+      </div>
+    </div>
+  </div>
+  <div class="content_component_wrap component_wrap">
+    <div class="component_content">
+      <div class="form_component form_section section_left add_location_main">
+        <div class="form_row">
+          <div class="form-group">
+            <label>Start Date</label>
+            {{date-field valueBinding="startDate"}}
+          </div>
+          <div class="form-group">
+            <label>End Date</label>
+            {{date-field valueBinding="endDate"}}
+          </div>
+        </div>
+        <div class="form_row">
+          <div class="form-group">
+            <label>Parts Expiration</label>
+            {{date-field valueBinding="partsExp"}}
+          </div>
+          <div class="form-group">
+            <label>Labor Expiration</label>
+            {{date-field valueBinding="laborExp"}}
+          </div>
+        </div>
+        <div class="form_row">
+          <div class="form-group">
+            <label>Warranty Provider</label>
+            {{input value=warrantyProvider name=warranty placeholder='Warranty Provider' class='form-control'}}
+          </div>
+        </div>
+        <div class="form_row">
+          <div class="form-group">
+            <label>Terms</label>
+            {{textarea value=warrantyTerms name=warranty placeholder='Terms' class='form-control'}}
+          </div>
+        </div>                
+        <div class="form-group cancel_links">
+          <button class="btn btn-default btn-wide" {{action 'validateServiceRecord' on='click'}}>Save Record</button>
+          <span> or <span {{action 'clearServiceRecordForm' bubbles=false on='click'}} class='span_link'>Cancel</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

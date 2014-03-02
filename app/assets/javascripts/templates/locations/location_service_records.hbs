@@ -1,14 +1,22 @@
-<div class="component component_right">
+<div class="last_component component component_right">
   <div class="component_header">
-    <div class="component_header_left">
-      <label class="page_title">Location Service Records</label>
-    </div>
-    <div class="component_header_right">
+  	<div class="component_wrap">
+	    <div class="component_header_left">
+	      <label class="page_title">Location Service Records</label>
+	    </div>
+	    <div class="component_header_right">
 
-    </div>
+	    </div>
+  	</div>
   </div>
-  <div class="component_content">
-    
+  <div class="component_wrap">
+  	<div class="component_scroller">
+      {{#each service_record in controller }}
+        {{#with service_record}}
+          {{partial 'items/listed_service_record'}}
+        {{/with}}
+      {{/each}}
+  	</div>
   </div>
 </div>
 {{outlet}}

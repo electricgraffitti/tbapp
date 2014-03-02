@@ -5,6 +5,8 @@ TBook.ApplicationRoute = Ember.Route.extend({
   },
 
   afterModel: function (model, transition) {
-  	this.transitionTo('locations');
+    // if (transition.targetName === 'index') {
+    //   this.transitionTo('locations');
+    // }
   }
 });

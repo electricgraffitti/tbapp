@@ -13,7 +13,6 @@ TBook.LocationsController = Ember.ArrayController.extend(
       this.transitionToRoute('location', location);
     }
   }
-
 });
 
 TBook.LocationsNewController = Ember.Controller.extend({
@@ -106,13 +105,15 @@ TBook.LocationsNewController = Ember.Controller.extend({
 			this.resetForm();
 		}
 	}
-
 });
 
 TBook.LocationController = Ember.ObjectController.extend({
 });
 
 TBook.LocationItemsController = Ember.ArrayController.extend({
+
+  emptyLocationsMessage: 'You have not added any items to this location.'
+
 });
 
 TBook.LocationNewLocationItemController = Ember.Controller.extend({
@@ -130,7 +131,7 @@ TBook.LocationNewLocationItemController = Ember.Controller.extend({
     params.item.purchased_from = this.get('purchasedFrom');
     params.item.physical_location = this.get('itemPhysicalLocation');
     params.item.notes = this.get('itemNotes');
-    params.item.location_id = this.get('location.id');
+    params.item.location_id = this.get('itemLocation.id');
 
     dataObj = {
       type: 'POST',
@@ -146,7 +147,10 @@ TBook.LocationNewLocationItemController = Ember.Controller.extend({
   },
 
   setNewLocationItem: function(data) {
-    console.log(data);
+    var item = this.store.createRecord('item', data.item);
+    this.get('itemLocation.items').pushObject(item);
+    this.resetForm();
+    this.transitionToRoute('location_items');
   },
 
   handleCreateError: function (reject) {

@@ -9,61 +9,38 @@ var Layouts = {
   },
 
   _resizeAll: function () {
+    var self = this;
     Layouts.resizeStage();
     Layouts.resizeTopSections();
     Layouts.resizeBottomSections();
+    $(window).resize(function() {
+      Ember.run.debounce(self, self._resizeAll, 150);
+    });
   },
 
   _resizeSearchViews: function () {
+    var self = this;
     Layouts.resizeStage();
     Layouts.resizeMainColumns();
+    $(window).resize(function() {
+      Ember.run.debounce(self, self._resizeSearchViews, 150);
+    });
   },
 
   resizeStage: function () {
-    var quickLaunch = $("#quick_launch"),
+    var mainHeader = $('#main_header'),
+        mainWindow = $('#main_section'),
+        quickLaunch = $("#quick_launch"),
         stageElement = $("#stage"),
-        stockHeight = $(window).height() - $("#main_header").height();
+        stockHeight = $(window).height() - mainHeader.height();
 
-    if ($(window).width() <= 1280) {
-      $("#tracking-book").width(1280);
-    } else {
-      $("#tracking-book").width($(window).width());
-    }
+    $("#tracking-book").width($(window).width());
+    mainHeader.width($(window).width());
+    mainWindow.width($(window).width());
 
-    stageElement.width($(window).width() - quickLaunch.width());
+    stageElement.width(mainWindow.width() - quickLaunch.width());
     quickLaunch.height(stockHeight)
     stageElement.height(stockHeight);
-
-    var resizeCallback = function () {
-      var resizedQuickLaunch = $("#quick_launch"),
-          resizedStageElement = $("#stage"),
-          newStockHeight = $(window).height() - $("#main_header").height();
-
-      if ($(window).width() <= 1280) {
-        $("#tracking-book").width(1280);
-      } else {
-        $("#tracking-book").width($(window).width());
-      }
-
-      resizedStageElement.width($(window).width() - quickLaunch.width());
-      resizedQuickLaunch.height(stockHeight)
-      resizedStageElement.height(stockHeight);
-    };
-
-    this.setupResizeEvent("resizeStage", resizeCallback);
-  },
-
-  resetTopSection: function (newHeight, defaultHeight) {
-    var topSection = $("#top_section"),
-        components = topSection.find('.component');
-
-    if (newHeight < defaultHeight) {
-       components.each(function(idx, component) {
-       if ($(component).height() > defaultHeight) {
-            $(component).height(defaultHeight);
-          }
-       });
-    }
   },
 
   resizeTopSections: function () {
@@ -71,54 +48,33 @@ var Layouts = {
       mainContainers = topSection.find(".component_left"),
       secondaryContainers = topSection.find(".component_right");
 
-    secondaryContainers.width($(window).width() - (mainContainers.outerWidth() + 2));
-    mainContainers.height(topSection.height());
-    secondaryContainers.height(topSection.height());
-
-    var resizeCallback = function () {
-      secondaryContainers.width($(window).width() - (mainContainers.outerWidth() + 2));
-      mainContainers.height(topSection.height());
-      secondaryContainers.height(topSection.height());
-    };
-
-    this.setupResizeEvent("resizeTopSections", resizeCallback);
+    secondaryContainers.width(topSection.width() - (mainContainers.outerWidth() + 1));
   },
 
   resizeBottomSections: function () {
     var topSection = $("#top_section"),
-      bottomSection = $('#bottom_section'),
+        bottomSection = $('#bottom_section'),
       componentHeader = bottomSection.find('.component_header'),
       componentScroller = bottomSection.find('.component_scroller'),
       mainContainers = bottomSection.find(".component_left"),
       secondaryContainers = bottomSection.find(".component_right"),
-      stageElement = $("#stage"),
-      initStageScrollBar = stageElement.hasScrollBar('horizontal'),
-      initScrollbarHeight = 0;
+      secondaryContainerHeader = bottomSection.find(".component_header"),
+      secondaryContainerWrap = secondaryContainers.find('.content_component_wrap'),
+      stageElement = $("#main_section");
 
-    if (initStageScrollBar) {
-      initScrollbarHeight = 17;
-    }
+    //   initStageScrollBar = stageElement.hasScrollBar('horizontal'),
+    //   initScrollbarHeight = 0;
 
-    bottomSection.height(stageElement.height() - (topSection.height() + initScrollbarHeight)).width($(window).width());
+    // if (initStageScrollBar) {
+    //   initScrollbarHeight = 17;
+    // }
+
+    bottomSection.height(stageElement.height() - (topSection.height() + 2));
     componentScroller.height(bottomSection.height() - (componentHeader.outerHeight() + 27));
     mainContainers.height(bottomSection.height());
-    secondaryContainers.width($(window).width() - mainContainers.outerWidth());
-
-    var resizeCallback = function () {
-      var stageScrollBar = $("#stage").hasScrollBar('horizontal'),
-        scrollbarHeight = 0;
-
-      if (stageScrollBar) {
-        scrollbarHeight = 17;
-      }
-
-      bottomSection.height($("#stage").height() - (topSection.height() + scrollbarHeight)).width($("#stage").width());
-      componentScroller.height(bottomSection.height() - (componentHeader.outerHeight() + 27));
-      mainContainers.height(bottomSection.height());
-      secondaryContainers.width($(window).width() - mainContainers.outerWidth());
-    };
-
-    this.setupResizeEvent("resizeBottomSections", resizeCallback);
+    secondaryContainers.width(bottomSection.width() - mainContainers.outerWidth());
+    secondaryContainers.height(bottomSection.height());
+    secondaryContainerWrap.height(bottomSection.height() - secondaryContainerHeader.height());
   },
 
   resizeMainColumns: function () {
@@ -129,80 +85,28 @@ var Layouts = {
   resizeColumnHeights: function () {
     var columns = $('#columns'),
         stage = $("#stage"),
-        componentScroller = columns.find('.component_scroller'),
-        componentHeader = columns.find('.component_header');
+        leftColumn = $("#left_column_main"),
+        rightColumn = $("#right_column_main"),
+        componentScroller = leftColumn.find('.component_scroller'),
+        componentHeader = leftColumn.find('.component_header');
 
     columns.width(stage.width());
     columns.height(stage.height());
+    leftColumn.height(stage.height());
+    rightColumn.height(stage.height());
     componentScroller.height(columns.height() - (componentHeader.outerHeight() + 27));
-
-    var resizeCallback = function () {
-      var columns = $('#columns'),
-        stage = $("#stage"),
-        componentScroller = columns.find('.component_scroller'),
-        componentHeader = columns.find('.component_header');
-
-      columns.width(stage.width());
-      columns.height(stage.height());
-      componentScroller.height(columns.height() - (componentHeader.outerHeight() + 27));
-    };
-
-    this.setupResizeEvent("resizeColumnHeights", resizeCallback);
-  },
-
-  // This could be used to make a left column expand if a right column is non-existent
-  resizeLeftColumn: function () {
-    var leftColumn = $("#left_column_main"),
-        rightColumn = $("#right_column_main"),
-        components = leftColumn.find(".component");
-     
-    leftColumn.width($('#stage').width() - rightColumn.outerWidth());
-    
-    var resizeCallback = function () {
-      var leftColumn = $("#left_column_main"),
-          rightColumn = $("#right_column_main"),
-          components = leftColumn.find(".component");
-
-      leftColumn.width($('#stage').width() - rightColumn.outerWidth());
-    };
-
-    this.setupResizeEvent("resizeLeftColumn", resizeCallback);
   },
 
   resizeRightColumn: function () {
     var leftColumn = $("#left_column_main"),
         rightColumn = $("#right_column_main"),
-        rightColumnComponents = rightColumn.find('.component'),
-        rightColumnComponentsCount = rightColumnComponents.length;
+        topComponent = rightColumn.find('#com-r1'),
+        lastComponent = rightColumn.find('.last_component'),
+        lastComponentHeader = lastComponent.find('.component_header'),
+        lastComponentContent = lastComponent.find('.component_wrap');
 
     rightColumn.width($('#stage').width() - leftColumn.outerWidth());
-
-    var resizeCallback = function () {
-      var leftColumn = $("#left_column_main"),
-          rightColumn = $("#right_column_main"),
-          rightColumnComponents = rightColumn.find('.component'),
-          rightColumnComponentsCount = rightColumnComponents.length;
-
-      rightColumn.width($('#stage').width() - leftColumn.outerWidth());
-    };
-
-    this.setupResizeEvent("resizeRightColumn", resizeCallback);
-  },
-
-  setupResizeEvent: function (previousHookName, callback) {
-    var key = previousHookName + "-key",
-      previousHook = this[key];
-
-    // remove any previous hook from the resize event
-    if (previousHook) {
-      $(window).off("throttledresize", previousHook);
-    }
-
-    // hook up the callback to the resize event
-    $(window).on("throttledresize", callback);
-
-    // keep track of any resize event (in case we need to remove it later)
-    this[key] = callback;
+    lastComponentContent.height($('#stage').height() - (topComponent.height() + lastComponentHeader.height()));
   }
 
 };

@@ -1,0 +1,44 @@
+<div id="top_section">
+  <div class="component component_left">
+    <div class="component_header">
+      <div class="component_header_left">
+        <label class="page_title">Item: {{name}}</label>
+      </div>
+      <div class="component_header_right">
+      <ul class='toolbar'>
+        <li>{{#link-to 'item_service_records' class='icon icon-16 service_records' title='View Service Records'}}Service Records{{/link-to}}</li>
+        <li>{{#link-to 'item_warranties' class='icon icon-16 warranties' title='View Service Records'}}Service Records{{/link-to}}</li>
+        <li>{{#link-to 'item_service_records.capitalize_item' class='icon icon-16 capitalize' title='View Service Records'}}Service Records{{/link-to}}</li>
+      </ul>
+      </div>
+    </div>
+    <div class="detail_content">
+      {{partial "items/item_details"}}
+    </div>
+  </div>
+  <div class="component component_right">
+    <div class="component_header">
+      <div class="component_wrap">
+        <div class="component_header_left">
+          <label class="component_title">Location</label>
+        </div>
+        <div class="component_header_right">
+          <ul class='toolbar'>
+            <li>{{#link-to 'location' location class='icon icon-16 locations' title='View Location'}}View Location{{/link-to}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="component_wrap">
+      <div class="detail_content">      
+        {{#with location}}
+          {{partial 'locations/location_sidebar_detail'}}
+        {{/with}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="bottom_section">
+  {{outlet}}
+</div>

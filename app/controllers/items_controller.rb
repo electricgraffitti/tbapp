@@ -3,54 +3,16 @@ class ItemsController < ApplicationController
   before_filter :authenticate_user!
   layout 'internal'
   
-  # GET /items
-  # GET /items.json
   def index
-    @account = current_user.account
-    @locations = current_user.assigned_locations
-    @accessible_locations = current_user.accessible_locations
-    @tracked_items = current_user.accessible_items
-
-    @item = Item.new
-    @item.photos.build
-    @item.documents.build
-
+    @items = Item.all
     respond_to do |format|
-      format.html # index.html.erb
       format.json { render json: @items }
     end
   end
 
-  # GET /items/1
-  # GET /items/1.json
   def show
     @item = Item.find(params[:id])
-    @photo = @item.photos.last
-    
-    @warranty = @item.set_warranty_object
-    @warranty.documents.build if @warranty.documents.empty?
-    
-    @extended_warranty = @item.set_extended_warranty_object
-    @extended_warranty.documents.build if @extended_warranty.documents.empty?
-    
-    @parts = @item.parts
-    
-    @part = Part.new
-    @part.photos.build
-    @part.documents.build
-    
-    @p_warranty = Warranty.new
-    @p_warranty.documents.build if @p_warranty.documents.empty?
-    
-    @p_ext_warranty = ExtendedWarranty.new
-    @p_ext_warranty.documents.build if @p_ext_warranty.documents.empty?
-
-    @reminder = Reminder.new
-    @reminder.photos.build
-    @reminder.documents.build
-
     respond_to do |format|
-      format.html # show.html.erb
       format.json { render json: @item }
     end
   end
@@ -124,11 +86,10 @@ class ItemsController < ApplicationController
 
 private
   def item_params
-    params.require(:items).permit(:id, :name, :serial_number, :make, :model, :purchase_date,
+    params.require(:item).permit(:id, :name, :serial_number, :make, :model, :purchase_date,
              :original_cost, :location_id, :notes, :purchased_from,
              :removal_date, :estimated_weight, :refrigerant_removal_quantity,
              :scrap_value, :capitalization_reason, :physical_location, :user_vendor_id,
              :vendor_id)
   end
-
 end

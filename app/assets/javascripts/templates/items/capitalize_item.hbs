@@ -1,0 +1,51 @@
+<div class="component component_right">
+  <div class="component_header">
+    <div class="component_wrap">
+      <div class="component_header_left">
+        <label class="component_title">Capitalize Item</label>
+      </div>
+    </div>
+  </div>
+  <div class="content_component_wrap component_wrap">
+    <div class="component_content">
+      <div class="form_component form_section section_left add_location_main">
+        <div class="form_row">
+          <div class="form-group">
+            <label>Removal Date</label>
+            {{date-field valueBinding="removalDate"}}
+          </div>
+          <div class="form-group">
+            <label>Estimated Weight</label>
+            {{number-field valueBinding="estimatedWeight" name=item placeholder='Estimated Weight' class='form-control'}}
+          </div>
+        </div>
+        <div class="form_row">
+          <div class="form-group">
+            <label>Refridgerant Removal Quantity</label>
+            {{number-field valueBinding="removalQuantity" name=item placeholder='Removal Quantity' class='form-control'}}
+          </div>
+          <div class="form-group">
+            <label>Scrap Value</label>
+            {{number-field valueBinding="scrapValue" name=item placeholder='Scrap Value' class='form-control'}}
+          </div>
+        </div>
+        <div class="form_row">
+          <div class="form-group">
+            <label>Technician Name</label>
+            {{input value=technicianName name=item placeholder='Technician Name' class='form-control'}}
+          </div>
+        </div>
+        <div class="form_row">
+          <div class="form-group">
+            <label>Capitalization Reason</label>
+            {{textarea value=capReason name=item placeholder='Capitalization Reason' class='form-control'}}
+          </div>
+        </div>                
+        <div class="form-group cancel_links">
+          <button class="btn btn-default btn-wide" {{action 'validateServiceRecord' on='click'}}>Save Record</button>
+          <span> or <span {{action 'clearServiceRecordForm' bubbles=false on='click'}} class='span_link'>Cancel</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

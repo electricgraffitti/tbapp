@@ -1,0 +1,25 @@
+<div class="component component_left">
+  <div class="component_header">
+    <div class="component_header_left">
+      <label class="component_title">Warranties</label>
+    </div>
+    <div class="component_header_right">
+      <ul class='toolbar'>
+        <li>{{#link-to 'item_warranties.add_warranty' class='icon icon-16 add' title='Add Warranty'}}Add Warranty{{/link-to}}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="component_content">
+    {{#if controller}}
+      <div class="component_scroller">
+        {{#each warranty in controller}}
+
+        {{/each}}
+      </div>
+    {{else}}
+      {{emptyComponentMessage emptyLocationsMessage}}
+    {{/if}}
+  </div>
+</div>
+{{outlet}}
+

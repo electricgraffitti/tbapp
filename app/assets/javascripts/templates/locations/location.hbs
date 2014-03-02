@@ -1,18 +1,22 @@
-<div class="component component_right">
+<div id='com-r1' class="component component_right">
   <div class="component_header">
-    <div class="component_header_left">
-      <label class="page_title">Location</label>
-    </div>
-    <div class="component_header_right">
-      <ul class='toolbar'>
-        <li>{{#link-to 'location_items' this class='icon icon-16 items' title='View Items'}}View Items{{/link-to}}</li>
-        <li>{{#link-to 'location_service_records' this class='icon icon-16 service_records' title='View Service Records'}}View Service Records{{/link-to}}</li>
-        <li>{{#link-to 'location_warranties' this class='icon icon-16 warranties' title='View Warranties'}}View Warranties{{/link-to}}</li>
-      </ul>
+    <div class="component_wrap">
+      <div class="component_header_left">
+        <label class="page_title">Location</label>
+      </div>
+      <div class="component_header_right">
+        <ul class='toolbar'>
+          <li>{{#link-to 'location_items' this class='icon icon-16 items' title='View Items'}}View Items{{/link-to}}</li>
+          <li>{{#link-to 'location_service_records' this class='icon icon-16 service_records' title='View Service Records'}}View Service Records{{/link-to}}</li>
+          <li>{{#link-to 'location_warranties' this class='icon icon-16 warranties' title='View Warranties'}}View Warranties{{/link-to}}</li>
+        </ul>
+      </div>
     </div>
   </div>
-  <div class="component_content">
-    
+  <div class="component_wrap">
+    <div class="detail_content">
+      {{partial 'locations/location_sidebar_detail'}}
+    </div>
   </div>
 </div>
 {{outlet}}

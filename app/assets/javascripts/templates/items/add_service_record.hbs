@@ -1,0 +1,51 @@
+<div class="component component_right">
+  <div class="component_header">
+    <div class="component_wrap">
+      <div class="component_header_left">
+        <label class="component_title">Add Service Record</label>
+      </div>
+    </div>
+  </div>
+  <div class="content_component_wrap component_wrap">
+    <div class="component_content">
+      <div class="form_component form_section section_left add_location_main">
+        <div class="form_row">
+          <div class="form-group">
+            <label>Order Number</label>
+            {{input value=orderNumber name=service_record placeholder='Order Number' class='form-control'}}
+          </div>
+          <div class="form-group">
+            <label>P.O. Number</label>
+            {{input value=poNumber name=service_record placeholder='PO Number' class='form-control'}}
+          </div>
+        </div>
+        <div class="form_row">
+          <div class="form-group">
+            <label>Service Date</label>
+            {{date-field valueBinding="serviceDate"}}
+          </div>
+          <div class="form-group">
+            <label>Invoice Amount</label>
+            {{number-field valueBinding="invoiceAmount" name=service_record placeholder='Invoice Amount' class='form-control'}}
+          </div>
+        </div>
+        <div class="form_row">
+          <div class="form-group">
+            <label>Technician Name</label>
+            {{input value=technicianName name=service_record placeholder='Technician Name' class='form-control'}}
+          </div>
+        </div>
+        <div class="form_row">
+          <div class="form-group">
+            <label>Details</label>
+            {{textarea value=recordDetails name=service_record placeholder='Details' class='form-control'}}
+          </div>
+        </div>                
+        <div class="form-group cancel_links">
+          <button class="btn btn-default btn-wide" {{action 'validateServiceRecord' on='click'}}>Save Record</button>
+          <span> or <span {{action 'clearServiceRecordForm' bubbles=false on='click'}} class='span_link'>Cancel</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

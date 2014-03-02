@@ -11,6 +11,9 @@ TBook.Location = DS.Model.extend({
   service_records_count: DS.attr('number'),
   address: DS.belongsTo('address'),
   account: DS.belongsTo('account'),
+  items: DS.hasMany('item'),
+  warranties: DS.hasMany('warranty'),
+  service_records: DS.hasMany('service_record'),
 
   locationName: Ember.computed.alias('name'),
   locationState: Ember.computed.alias('address.stateName')

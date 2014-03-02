@@ -42,21 +42,17 @@ class ServiceRecordsController < ApplicationController
   # POST /service_records
   # POST /service_records.json
   def create
-    @service_record = ServiceRecord.new(params[:service_record])
+    @service_record = ServiceRecord.new(service_record_params)
 
     respond_to do |format|
       if @service_record.save
-        format.html { redirect_to @service_record, notice: 'Service record was successfully created.' }
-        format.json { render json: @service_record, status: :created, location: @service_record }
+        format.json { render json: @service_record, serializer: ServiceRecordSerializer }
       else
-        format.html { render action: "new" }
         format.json { render json: @service_record.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PUT /service_records/1
-  # PUT /service_records/1.json
   def update
     @service_record = ServiceRecord.find(params[:id])
 
@@ -71,8 +67,6 @@ class ServiceRecordsController < ApplicationController
     end
   end
 
-  # DELETE /service_records/1
-  # DELETE /service_records/1.json
   def destroy
     @service_record = ServiceRecord.find(params[:id])
     @service_record.destroy
@@ -81,5 +75,17 @@ class ServiceRecordsController < ApplicationController
       format.html { redirect_to service_records_url }
       format.json { head :no_content }
     end
+  end
+#  item_id             :integer(4)
+#  custom_order_number :string(255)
+#  po_number           :string(255)
+#  service_date        :datetime
+#  technician          :string(255)
+#  description         :text
+#  invoice_amount      :string(255)
+private
+  def service_record_params
+    params.require(:service_record).permit(:id, :item_id, :custom_order_number, :po_number, :service_date,
+             :technician, :description, :invoice_amount, :part_id, :user_vendor_id)
   end
 end

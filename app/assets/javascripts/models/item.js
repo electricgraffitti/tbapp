@@ -1,5 +1,4 @@
 TBook.Item = DS.Model.extend({
-  location: DS.belongsTo('location'),
   name: DS.attr('string'),
   serial_number: DS.attr('string'),
   make: DS.attr('string'),
@@ -16,6 +15,11 @@ TBook.Item = DS.Model.extend({
   physical_location: DS.attr('string'),
   removal_date: DS.attr('date'),
   created_at: DS.attr('date'),
-  purchased_from: DS.attr('string')
+  purchased_from: DS.attr('string'),
+
+  location: DS.belongsTo('location'),
+  service_records: DS.hasMany('service_record'),
+
+  serviceRecords: Ember.computed.alias('service_records')
 
 });
