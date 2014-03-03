@@ -31,8 +31,8 @@ class Item < ActiveRecord::Base
   belongs_to :location, :counter_cache => true
   belongs_to :user_vendor, :counter_cache => true
 
-  has_one :warranty
-  has_one :extended_warranty
+  has_many :warranties
+  has_many :extended_warranties
 
   has_many :parts
   accepts_nested_attributes_for :parts

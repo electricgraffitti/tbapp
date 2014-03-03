@@ -61,23 +61,18 @@ class WarrantiesController < ApplicationController
   # POST /warranties
   # POST /warranties.json
   def create
-    @warranty = Warranty.new(params[:warranty])
+    @warranty = Warranty.new(warranty_params)
     
     # Set check and values
     wc = @warranty.set_create_values(params[:warranty], current_user)
     respond_to do |format|
-      # if we recieve a valid object back in wc
       if wc
         if @warranty.save
-          redirect_link = return_link(params[:return_path], item_path(@warranty.item))
-          format.html { redirect_to(redirect_link, notice: 'Warranty was successfully created.')}
           format.json { render json: @warranty, status: :created, location: @warranty }
         else
-          format.html { render action: "new" }
           format.json { render json: @warranty.errors, status: :unprocessable_entity }
         end
       else
-        format.html { redirect_to :back, notice: 'Credentials not valid.'}
         format.json { render json: @warranty, status: :created, location: @warranty }
       end
     end
@@ -109,5 +104,12 @@ class WarrantiesController < ApplicationController
       format.html { redirect_to warranties_url }
       format.json { head :no_content }
     end
+  end
+
+private
+  def warranty_params
+    params.require(:warranty)
+          .permit(:id, :parts_exp, :labor_exp, :terms, :item_id, :part_id, 
+                  :warranty_start_date, :warranty_end_date, :warranty_provider)
   end
 end

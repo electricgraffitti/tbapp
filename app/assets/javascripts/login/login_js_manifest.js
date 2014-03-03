@@ -16,6 +16,7 @@
 //= require vendor/handlebars
 //= require vendor/ember
 //= require vendor/ember-data
+//= require vendor/ic-ajax
 //= require ./../config/app_init
 //= require ./../config/router
 //= require_tree ./../libs

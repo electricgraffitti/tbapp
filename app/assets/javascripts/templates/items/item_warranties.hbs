@@ -9,13 +9,13 @@
       </ul>
     </div>
   </div>
-  <div class="component_content">
+  <div class="component_scroller">
     {{#if controller}}
-      <div class="component_scroller">
-        {{#each warranty in controller}}
-
-        {{/each}}
-      </div>
+      {{#each warranty in controller}}
+        {{#with warranty}}
+          {{partial 'items/listed_warranties'}}
+        {{/with}}
+      {{/each}}
     {{else}}
       {{emptyComponentMessage emptyLocationsMessage}}
     {{/if}}

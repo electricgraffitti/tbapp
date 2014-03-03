@@ -1,0 +1,24 @@
+<li {{bind-attr class='isSelected:active :header_row :full_row :row :listed_single_row'}} {{action 'selectServiceRecordRow' this on='click'}}>
+	<ul class='single_row grouped_row full_row'>
+	  <li class='war_name data_point'>
+	  	<span class="grid_label">Provider: </span> 
+	  	<span class="grid_value">{{ warranty_provider }}</span>
+	  </li>
+	  <li class='war_date data_point'>
+	  	<span class="grid_label">SD: </span> 
+	  	<span class="grid_value">{{ formattedStartDate }}</span>
+	  </li>
+	  <li class='war_date data_point'>
+	  	<span class="grid_label">ED: </span> 
+	  	<span class="grid_value">{{ formattedEndDate }}</span>
+	  </li>
+	  <li class='war_date data_point'>
+	  	<span class="grid_label">PE: </span> 
+	  	<span class="grid_value">{{ formattedPartsExp }}</span>
+	  </li>
+	  <li class='war_date data_point'>
+	  	<span class="grid_label">LE: </span> 
+	  	<span class="grid_value">{{ formattedLaborExp }}</span>
+	  </li>
+	</ul>
+</li>

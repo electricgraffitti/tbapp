@@ -27,13 +27,6 @@ class Warranty < ActiveRecord::Base
   has_many :documents, :dependent => :destroy
   accepts_nested_attributes_for :documents, :allow_destroy => true, :reject_if => lambda { |a| a[:attachment].blank? }
 
-  # Validations
-
-  # Paperclip
-
-  # Scopes
-  scope :upcoming_parts_expirations, lambda {|uid| where("user_id = ? AND parts_exp >= ?", uid, Date.today)}
-  scope :upcoming_labor_expirations, lambda {|uid| where("user_id = ? AND labor_exp >= ?", uid, Date.today)}
   ################################### Methods
 
   def set_create_values(p,u)

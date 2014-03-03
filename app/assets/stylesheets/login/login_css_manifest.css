@@ -13,12 +13,13 @@
  *= require_self
  *= require_tree .
  */
- html, body {width: 100%; height:100%; background: #111;}
-.panel {position: absolute;width: 400px;top: 80px;left: 50%;margin-left: -200px;background:#1c1c1c;}
+ html, body {width: 100%; height:100%;}
+.panel {position: absolute;width: 300px;top: 160px;left: 50%;margin-left: -56px;background: #EEE;}
 .panel header {font-size: 18px;padding: 10px;}
 .public .form-group {margin:0px;}
 .panel footer {padding: 20px 10px 5px;font-size: 14px;position: relative;float: left;}
 .public .form-group {width: 100%;}
 
+#login-logo {position: absolute;left: -236px;top: 15px;width: 300px;height: 300px;z-index: -1;}
 #login_panel.panel {height: 305px;}
 #signup_panel.panel {height: 424px;}

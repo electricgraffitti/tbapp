@@ -11,13 +11,11 @@
   </div>
   <div class="component_scroller">
     {{#if controller}}
-      <div class="component_scroller">
-        {{#each service_record in controller}}
-          {{#with service_record}}
-            {{partial 'items/listed_service_record'}}
-          {{/with}}
-        {{/each}}
-      </div>
+      {{#each service_record in controller}}
+        {{#with service_record}}
+          {{partial 'items/listed_service_record'}}
+        {{/with}}
+      {{/each}}
     {{else}}
       {{emptyComponentMessage emptyLocationsMessage}}
     {{/if}}

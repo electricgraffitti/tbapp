@@ -40,9 +40,9 @@ TBook.ItemServiceRecordsAddServiceRecordRoute = Ember.Route.extend({
 
 TBook.ItemServiceRecordsCapitalizeItemRoute = Ember.Route.extend({});
 
-TBook.ItemWarranties = Ember.Route.extend({
+TBook.ItemWarrantiesRoute = Ember.Route.extend({
   model: function() {
-  	return this.store.all('warranties');
+  	return this.store.all('warranty');
   }
 });
 
@@ -52,7 +52,13 @@ TBook.ItemWarrantyRoute = Ember.Route.extend({
   }
 });
 
-TBook.ItemWarrantiesAddWarrantyRoute = Ember.Route.extend({});
+TBook.ItemWarrantiesAddWarrantyRoute = Ember.Route.extend({
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    var item = this.controllerFor('item').get('model');
+    controller.set('warrantyItem', item);
+  }
+});
 
 TBook.AccountItemsRoute = Ember.Route.extend({
   model: function(params) {

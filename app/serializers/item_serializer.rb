@@ -10,7 +10,7 @@ class ItemSerializer < ActiveModel::Serializer
              :vendor_id
 
   has_many :service_records
-  # has_one :warranty
+  has_many :warranties
   # has_one :extended_warranty
   
   # has_many :reminders
