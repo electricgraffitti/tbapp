@@ -24,8 +24,8 @@ class Part < ActiveRecord::Base
   belongs_to :account, :counter_cache => true
   belongs_to :location, :counter_cache => true
   belongs_to :item, :counter_cache => true
-  has_one :warranty
-  has_one :extended_warranty
+  has_many :warranties
+  has_many :extended_warranties
 
   has_many :service_records
   accepts_nested_attributes_for :service_records
@@ -36,9 +36,5 @@ class Part < ActiveRecord::Base
 
   # Validations
   validates_presence_of :name, :make, :model_number, :replacement_date, :on => :create, :message => "is Required"
-
-  # Scopes
-
-  ################################### Methods
   
 end

@@ -1,0 +1,20 @@
+<li {{bind-attr class='isSelected:active :header_row :full_row :row :listed_single_row'}} {{action 'selectPartRow' this on='click'}}>
+	<ul class='single_row grouped_row full_row'>
+	  <li class='part_name data_point'>
+	  	<span class="grid_label">Name: </span> 
+	  	<span class="grid_value">{{ name }}</span>
+	  </li>
+	  <li class='part_make data_point'>
+	  	<span class="grid_label">Make: </span> 
+	  	<span class="grid_value">{{ make }}</span>
+	  </li>
+	  <li class='part_model data_point'>
+	  	<span class="grid_label">Model: </span> 
+	  	<span class="grid_value">{{ model_number }}</span>
+	  </li>
+	  <li class='part_replacement_date data_point'>
+	  	<span class="grid_label">Replacement Date: </span> 
+	  	<span class="grid_value">{{ formattedReplacementDate }}</span>
+	  </li>
+	</ul>
+</li>

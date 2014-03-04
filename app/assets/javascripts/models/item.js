@@ -20,6 +20,7 @@ TBook.Item = DS.Model.extend({
   location: DS.belongsTo('location'),
   service_records: DS.hasMany('service_record'),
   warranties: DS.hasMany('warranty'),
+  parts: DS.hasMany('part'),
 
   serviceRecords: Ember.computed.alias('service_records')
 

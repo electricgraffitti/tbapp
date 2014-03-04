@@ -12,7 +12,7 @@ TBook.ItemRoute = Ember.Route.extend({
 
 TBook.ItemServiceRecordsRoute = Ember.Route.extend({
   model: function() {
-  	return this.store.all('service_record');
+  	return this.modelFor('item').get('service_records');
   }
 });
 
@@ -25,7 +25,6 @@ TBook.ItemServiceRecordRoute = Ember.Route.extend({
     this._super(controller, model);
     model.set('isSelected', true);
   }
-
 });
 
 TBook.ItemServiceRecordsAddServiceRecordRoute = Ember.Route.extend({
@@ -35,14 +34,15 @@ TBook.ItemServiceRecordsAddServiceRecordRoute = Ember.Route.extend({
     var item = this.controllerFor('item').get('model');
     controller.set('serviceRecordItem', item);
   }
-
 });
 
 TBook.ItemServiceRecordsCapitalizeItemRoute = Ember.Route.extend({});
 
 TBook.ItemWarrantiesRoute = Ember.Route.extend({
   model: function() {
-  	return this.store.all('warranty');
+    // This may need to be just the model
+    // Then we can build up warranties for the Item and all its Parts
+  	return this.modelFor('item').get('warranties');
   }
 });
 
@@ -57,6 +57,34 @@ TBook.ItemWarrantiesAddWarrantyRoute = Ember.Route.extend({
     this._super(controller, model);
     var item = this.controllerFor('item').get('model');
     controller.set('warrantyItem', item);
+  }
+});
+
+TBook.ItemPartsRoute = Ember.Route.extend({
+  model: function() {
+    return this.modelFor('item').get('parts');
+  }
+});
+
+TBook.ItemPartsAddItemPartRoute = Ember.Route.extend({
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    var item = this.controllerFor('item').get('model');
+    controller.set('partItem', item);
+  }
+});
+
+TBook.ItemPartRoute = Ember.Route.extend({
+  model: function(params) {
+    return this.store.find('part', params.part_id);
+  }
+});
+
+TBook.ItemPartAddItemPartWarranty = Ember.Route.extend({
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    var item = this.controllerFor('item').get('model');
+    controller.set('partItem', item);
   }
 });
 

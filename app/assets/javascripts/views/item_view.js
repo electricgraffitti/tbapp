@@ -34,6 +34,22 @@ TBook.ItemWarrantiesAddWarrantyView = TBook.View.extend({
   templateName: 'items/add_warranty'
 });
 
+TBook.ItemPartsView = TBook.View.extend({
+  templateName: 'items/item_parts'
+});
+
+TBook.ItemPartsAddItemPartView = TBook.View.extend({
+  templateName: 'items/add_item_part'
+});
+
+TBook.ItemPartView = TBook.View.extend({
+  templateName: 'items/item_part'
+});
+
+TBook.ItemPartAddPartWarrantyView = TBook.View.extend({
+  templateName: 'items/add_warranty'
+});
+
 TBook.AccountItemsView = TBook.View.extend({
   templateName: 'items/account_items'
 });

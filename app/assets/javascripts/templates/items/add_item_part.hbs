@@ -1,0 +1,45 @@
+<div class="component component_right">
+  <div class="component_header">
+    <div class="component_wrap">
+      <div class="component_header_left">
+        <label class="component_title">Add Part</label>
+      </div>
+    </div>
+  </div>
+  <div class="content_component_wrap component_wrap">
+    <div class="component_content">
+      <div class="form_component form_section section_left add_location_main">
+        <div class="form_row">
+          <div class="form-group">
+            <label>Part Name</label>
+            {{input value=partName name=part placeholder='Part Name' class='form-control'}}
+          </div>
+          <div class="form-group">
+            <label>Replacement Date</label>
+            {{date-field valueBinding="replacementDate"}}
+          </div>          
+        </div>
+        <div class="form_row">
+          <div class="form-group">
+            <label>Make</label>
+            {{input value=partMake name=part placeholder='Make' class='form-control'}}
+          </div>
+          <div class="form-group">
+            <label>Model Number</label>
+            {{input value=modelNumber name=part placeholder='Model Number' class='form-control'}}
+          </div>          
+        </div>
+        <div class="form_row">
+          <div class="form-group">
+            <label>Part Description</label>
+            {{textarea value=partDescription name=part placeholder='Part Description' class='form-control'}}
+          </div>
+        </div>                
+        <div class="form-group cancel_links">
+          <button class="btn btn-default btn-wide" {{action 'validatePart' on='click'}}>Add Part</button>
+          <span> or <span {{action 'clearPartForm' bubbles=false on='click'}} class='span_link'>Cancel</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,7 +11,8 @@ class ItemSerializer < ActiveModel::Serializer
 
   has_many :service_records
   has_many :warranties
-  # has_one :extended_warranty
+  has_many :parts
+  # has_many :extended_warranties
   
   # has_many :reminders
 end

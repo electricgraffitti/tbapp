@@ -14,15 +14,24 @@ TBook.Router.map(function() {
 
 	this.resource('items', {path: '/items'}, function() {
 		this.resource('item', {path: ':item_id'}, function () {
+
 			this.resource('item_service_records', function() {
 				this.route('add_service_record');
 				this.route('capitalize_item');
 				this.resource('item_service_record', {path: ':service_record_id'}, function() {
 				});
 			});
+
 			this.resource('item_warranties', function() {
 				this.route('add_warranty');
 				this.resource('item_warranty', {path: ':warranty_id'}, function() {
+				});
+			});
+
+			this.resource('item_parts', function() {
+				this.route('add_item_part');
+				this.resource('item_part', {path: ':part_id'}, function() {
+					this.route('add_item_part_warranty');
 				});
 			});
 		});

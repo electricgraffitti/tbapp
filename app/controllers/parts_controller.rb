@@ -3,8 +3,6 @@ class PartsController < ApplicationController
   before_filter :authenticate_user!
   layout 'internal'
   
-  # GET /parts
-  # GET /parts.json
   def index
     @parts = Part.all
 
@@ -14,8 +12,6 @@ class PartsController < ApplicationController
     end
   end
 
-  # GET /parts/1
-  # GET /parts/1.json
   def show
     @part = Part.find(params[:id])
 
@@ -25,8 +21,6 @@ class PartsController < ApplicationController
     end
   end
 
-  # GET /parts/new
-  # GET /parts/new.json
   def new
     @part = Part.new
     @item = Item.find(params[:item_id])
@@ -42,8 +36,6 @@ class PartsController < ApplicationController
     @part = Part.find(params[:id])
   end
 
-  # POST /parts
-  # POST /parts.json
   def create
     # cache the account id
     account_id = current_user.account_id
@@ -53,29 +45,24 @@ class PartsController < ApplicationController
 
     # if we return an item then set the part, else return back to form
     if item
-      @part = Part.new(params[:part])
+      @part = Part.new(part_params)
       @part.item_id = item.id
       @part.account_id = account_id
       @part.location_id = item.location_id
       respond_to do |format|
         if @part.save
-          format.html { redirect_to(item_path(item), notice: 'Part was successfully added.') }
-          format.json { render json: @part, status: :created, location: @part }
+          format.json { render json: @part, serializer: PartSerializer }
         else
-          format.html { render action: "new" }
           format.json { render json: @part.errors, status: :unprocessable_entity }
         end
       end
     else
       respond_to do |format|
-        format.html {redirect_to :back, notice: "Invalid item. Please try again"}
+        format.json { render json: {part_error: 'Item is not in your account'}, status: :unprocessable_entity }
       end
     end
   end
 
-
-  # PUT /parts/1
-  # PUT /parts/1.json
   def update
     @part = Part.find(params[:id])
 
@@ -100,5 +87,11 @@ class PartsController < ApplicationController
       format.html { redirect_to parts_url }
       format.json { head :no_content }
     end
+  end
+
+private
+  def part_params
+    params.require(:part)
+          .permit(:id, :item_id, :name, :make, :model_number, :replacement_date, :description)
   end
 end

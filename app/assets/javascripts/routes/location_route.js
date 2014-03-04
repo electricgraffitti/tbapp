@@ -59,7 +59,18 @@ TBook.LocationNewLocationItemRoute = Ember.Route.extend({
 
 TBook.LocationWarrantiesRoute = Ember.Route.extend({
   model: function(params) {
-    return Em.A();
+    return this.modelFor('location').get('warranties');
+  },
+
+  setupController: function (controller, model) {
+    this._super(controller, model);
+    controller.set('location', this.controllerFor('location').get('model'));
+  },
+
+  actions: {
+    selectItemRow: function (item) {
+      this.transitionTo('item_warranties', item);
+    }
   }
 });
 

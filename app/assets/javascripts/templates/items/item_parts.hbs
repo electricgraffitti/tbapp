@@ -1,0 +1,25 @@
+<div class="component component_left">
+  <div class="component_header">
+    <div class="component_header_left">
+      <label class="component_title">Parts</label>
+    </div>
+    <div class="component_header_right">
+      <ul class='toolbar'>
+        <li>{{#link-to 'item_parts.add_item_part' class='icon icon-16 add' title='Add Part'}}Add Part{{/link-to}}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="component_scroller">
+    {{#if controller}}
+      {{#each part in controller}}
+        {{#with part}}
+          {{partial 'items/listed_parts'}}
+        {{/with}}
+      {{/each}}
+    {{else}}
+      {{emptyComponentMessage emptyLocationsMessage}}
+    {{/if}}
+  </div>
+</div>
+{{outlet}}
+

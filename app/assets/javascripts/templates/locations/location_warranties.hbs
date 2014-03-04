@@ -10,8 +10,18 @@
   	</div>
   </div>
   <div class="component_wrap">
-	  <div class="component_content">
-	    
+	  <div class="component_scroller">
+      {{#if controller }}
+        <ul class="striped">
+		      {{#each warranty in controller }}
+		        {{#with warranty}}
+		          {{partial 'items/listed_warranties'}}
+		        {{/with}}
+		      {{/each}}
+        </ul>
+      {{ else }}
+        {{emptyComponentMessage emptyLocationsMessage}}
+      {{/if}}
 	  </div>
 	</div>
 </div>

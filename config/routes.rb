@@ -22,6 +22,7 @@ Tbapp::Application.routes.draw do
   resources :warranties
   resources :items
   resources :service_records
+  resources :parts
 
   root to: "devise/sessions#new"
 

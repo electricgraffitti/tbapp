@@ -8,6 +8,10 @@ TBook.Part = DS.Model.extend({
   account: DS.belongsTo('account'),
   location: DS.belongsTo('location'),
   warranties_count: DS.attr('number'),
-  item: DS.belongsTo('item')
+  item: DS.belongsTo('item'),
+
+  formattedReplacementDate: function () {
+    return moment(this.get('replacement_date')).format('M/D/YY');
+  }.property('replacement_date')
 
 });
