@@ -43,7 +43,7 @@ Tbapp::Application.configure do
   # config.force_ssl = true
 
   # Set to :debug to see everything in the log.
-  config.log_level = :info
+  config.log_level = :debug
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
@@ -84,10 +84,11 @@ Tbapp::Application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
 
+  config.ember.variant = :production
 
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  # config.log_formatter = ::Logger::Formatter.new
 end
