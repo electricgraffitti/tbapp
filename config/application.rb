@@ -21,14 +21,14 @@ module Tbapp
       # Remove the path from being lazily loaded
       ActiveSupport::Dependencies.autoload_paths.reject!(&path_rejector)    
 
+      path_rejector = lambda { |s| s.include?("app/manifests") }
+      config.eager_load_paths = config.eager_load_paths.reject(&path_rejector)
+      ActiveSupport::Dependencies.autoload_paths.reject!(&path_rejector)
+
 
     # don't generate RSpec tests for views and helpers
     config.generators do |g|
       g.test_framework :rspec
-      
-      
-      
-      
       g.view_specs false
       g.helper_specs false
     end
