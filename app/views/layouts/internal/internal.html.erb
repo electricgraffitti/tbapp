@@ -10,10 +10,13 @@
 	<div id="tracking-book">
 		
 	</div>
-	<% if Rails.env == 'development' %>
-		<%= javascript_include_tag "internal/internal_js_manifest" %>
-	<% else %>
-		<%= javascript_include_tag "internal/internal_js_manifest_production" %>
-	<% end %>
+	<%# <% if Rails.env == 'development' %>
+	<%# 	<%= javascript_include_tag "internal/internal_js_manifest" %>
+	<%# <% else %>
+	<%# 	<%= javascript_include_tag "internal/internal_js_manifest_production" %>
+	<%# <% end %>
+
+<%= javascript_include_tag "internal/internal_js_manifest" %>
+
 </body>
 </html>
