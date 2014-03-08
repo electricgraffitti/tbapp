@@ -31,4 +31,16 @@ TBook.Location = DS.Model.extend({
     return this.get('service_records.length');
   }.property('service_records.length'),
 
+  serviceCostSummary: function() {
+    var serviceRecords = this.get('service_records'),
+        serviceTotals = 0;
+
+    serviceRecords.forEach(function(record) {
+      serviceTotals += parseFloat(record.get('invoice_amount'));
+    });    
+
+    return serviceTotals;
+
+  }.property('service_records', 'service_records.length')
+
 });

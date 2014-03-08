@@ -12,6 +12,7 @@ TBook.ItemRoute = Ember.Route.extend({
 
 TBook.ItemServiceRecordsRoute = Ember.Route.extend(
   TBook.ListActions, {
+
   model: function() {
   	return this.modelFor('item').get('service_records');
   },
@@ -49,6 +50,7 @@ TBook.ItemServiceRecordsAddServiceRecordRoute = Ember.Route.extend({
     this._super(controller, model);
     var item = this.controllerFor('item').get('model');
     controller.set('serviceRecordItem', item);
+    controller.set('itemLocation', item.get('location'));
   }
 });
 
@@ -61,6 +63,12 @@ TBook.ItemServiceRecordsCapitalizeItemRoute = Ember.Route.extend({
   }
 
 
+});
+
+TBook.ItemServiceRecordsCapitalizationDetailsRoute = Ember.Route.extend({
+    model: function() {
+    return this.modelFor('item');
+  }
 });
 
 TBook.ItemWarrantiesRoute = Ember.Route.extend(
@@ -91,6 +99,7 @@ TBook.ItemWarrantiesAddWarrantyRoute = Ember.Route.extend({
     this._super(controller, model);
     var item = this.controllerFor('item').get('model');
     controller.set('warrantyItem', item);
+    controller.set('itemLocation', item.get('location'));
   }
 });
 
@@ -114,6 +123,7 @@ TBook.ItemPartsAddItemPartRoute = Ember.Route.extend({
     this._super(controller, model);
     var item = this.controllerFor('item').get('model');
     controller.set('partItem', item);
+    controller.set('itemLocation', item.get('location'));
   }
 });
 

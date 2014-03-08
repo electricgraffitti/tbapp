@@ -38,9 +38,16 @@ Formats Float to Currency a value in a Handlebars expression
 @method currency
 @for Handlebars
 **/
-Ember.Handlebars.helper('currency', function (value) {
-  var returnString = "$" + value;
-  return new Handlebars.SafeString(returnString);
+// Ember.Handlebars.helper('currency', function (value) {
+//   var returnString = "$" + value;
+//   return new Handlebars.SafeString(returnString);
+// });
+
+Ember.Handlebars.helper('currency', function(value) {
+  var p = parseFloat(value).toFixed(2).split(".");
+    return "$" + p[0].split("").reverse().reduce(function(acc, num, i, orig) {
+        return  num + (i && !(i % 3) ? "," : "") + acc;
+    }, "") + "." + p[1];
 });
 
 Handlebars.registerHelper('emptyComponentMessage', function (message) {

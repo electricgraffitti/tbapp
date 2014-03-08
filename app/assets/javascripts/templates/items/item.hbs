@@ -9,7 +9,11 @@
         <li>{{#link-to 'item_parts' class='icon icon-16 parts' title='View Parts'}}Parts{{/link-to}}</li>
         <li>{{#link-to 'item_service_records' class='icon icon-16 service_records' title='View Service Records'}}Service Records{{/link-to}}</li>
         <li>{{#link-to 'item_warranties' class='icon icon-16 warranties' title='View Warranties'}}Warranties{{/link-to}}</li>
-        <li>{{#link-to 'item_service_records.capitalize_item' class='icon icon-16 capitalize' title='Capitalize Item'}}Capitalize Item{{/link-to}}</li>
+        {{#if isCapitalized }}
+          <li>{{#link-to 'item_service_records.capitalization_details' this class='icon icon-16 capitalize' title='Capitalization Details'}}Capitalization Details{{/link-to}}</li>
+        {{else}}
+          <li>{{#link-to 'item_service_records.capitalize_item' class='icon icon-16 capitalize' title='Capitalize Item'}}Capitalize Item{{/link-to}}</li>
+        {{/if}}
       </ul>
       </div>
     </div>

@@ -23,7 +23,8 @@ TBook.ItemServiceRecordsController = Ember.ArrayController.extend(
 TBook.ItemServiceRecordController = Ember.ObjectController.extend({
 });
 
-TBook.ItemServiceRecordsAddServiceRecordController = Ember.Controller.extend({
+TBook.ItemServiceRecordsAddServiceRecordController = Ember.Controller.extend(
+  TBook.ListActions, {
 	
 	createServiceRecord: function () {
 		var self = this, params = {};
@@ -56,6 +57,8 @@ TBook.ItemServiceRecordsAddServiceRecordController = Ember.Controller.extend({
     serviceRecord = store.createRecord('service_record', data.service_record);
 		this.resetForm();
     this.get('serviceRecordItem.serviceRecords').pushObject(serviceRecord);
+    this.get('itemLocation.service_records').pushObject(serviceRecord);
+    this.setSelectedObject(serviceRecord, this.get('serviceRecordItem.serviceRecords'));
     this.transitionToRoute('item_service_record', serviceRecord);
 	},
 
@@ -117,6 +120,8 @@ TBook.ItemServiceRecordsAddServiceRecordController = Ember.Controller.extend({
 	}
 });
 
+TBook.ItemServiceRecordsCapitalizationDetailsController = Ember.Controller.extend({});
+
 TBook.ItemServiceRecordsCapitalizeItemController = Ember.Controller.extend({
   
   capitalizeItem: function (item) {
@@ -146,7 +151,7 @@ TBook.ItemServiceRecordsCapitalizeItemController = Ember.Controller.extend({
 
   viewCapitalization: function(data) {
     this.resetForm();
-    this.transitionToRoute('item_service_records');
+    this.transitionToRoute('item_service_records.capitalization_details');
   },
 
   handleCreateError: function (reject) {
@@ -205,7 +210,6 @@ TBook.ItemServiceRecordsCapitalizeItemController = Ember.Controller.extend({
 
   }
 
-
 });
 
 TBook.ItemWarrantiesController = Ember.ArrayController.extend(
@@ -227,7 +231,8 @@ TBook.ItemWarrantiesController = Ember.ArrayController.extend(
 TBook.ItemWarrantyController = Ember.ObjectController.extend({
 });
 
-TBook.ItemWarrantiesAddWarrantyController = Ember.Controller.extend({
+TBook.ItemWarrantiesAddWarrantyController = Ember.Controller.extend(
+  TBook.ListActions, {
 
   createWarranty: function () {
     var self = this, params = {};
@@ -259,6 +264,8 @@ TBook.ItemWarrantiesAddWarrantyController = Ember.Controller.extend({
     warranty = store.createRecord('warranty', data.warranty);
     this.resetForm();
     this.get('warrantyItem.warranties').pushObject(warranty);
+    this.get('itemLocation.warranties').pushObject(warranty);
+    this.setSelectedObject(warranty, this.get('warrantyItem.warranties'));
     this.transitionToRoute('item_warranty', warranty);
   },
 
@@ -333,7 +340,8 @@ TBook.ItemPartsController = Ember.ArrayController.extend(
 TBook.ItemPartController = Ember.ObjectController.extend({
 });
 
-TBook.ItemPartsAddItemPartController = Ember.Controller.extend({
+TBook.ItemPartsAddItemPartController = Ember.Controller.extend(
+  TBook.ListActions, {
 
   createPart: function () {
     var self = this, params = {};
@@ -365,6 +373,8 @@ TBook.ItemPartsAddItemPartController = Ember.Controller.extend({
     part = store.createRecord('part', data.part);
     this.resetForm();
     this.get('partItem.parts').pushObject(part);
+    this.get('itemLocation.parts').pushObject(part);
+    this.setSelectedObject(part, this.get('partItem.parts'));
     this.transitionToRoute('item_part', part);
   },
 

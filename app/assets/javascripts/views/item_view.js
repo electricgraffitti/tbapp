@@ -18,6 +18,10 @@ TBook.ItemServiceRecordsAddServiceRecordView = TBook.View.extend({
   templateName: 'items/add_service_record'
 });
 
+TBook.ItemServiceRecordsCapitalizationDetailsView = TBook.View.extend({
+  templateName: 'items/capitalization_details'
+});
+
 TBook.ItemServiceRecordsCapitalizeItemView = TBook.View.extend({
   templateName: 'items/capitalize_item'
 });

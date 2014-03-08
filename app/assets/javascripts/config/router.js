@@ -17,6 +17,7 @@ TBook.Router.map(function() {
 
 			this.resource('item_service_records', function() {
 				this.route('add_service_record');
+				this.route('capitalization_details');
 				this.route('capitalize_item');
 				this.resource('item_service_record', {path: ':service_record_id'}, function() {
 				});

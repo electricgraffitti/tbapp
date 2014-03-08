@@ -51,7 +51,24 @@ TBook.Item = DS.Model.extend({
 
   warrantyCount: function () {
     return this.get('warranties.length')
-  }.property('warranties.length')
+  }.property('warranties.length'),
+
+  serviceRecordTotals: function () {
+    var serviceRecords = this.get('service_records'),
+        serviceTotals = 0;
+    serviceRecords.forEach(function(record) {
+      serviceTotals += parseFloat(record.get('invoice_amount'));
+    });
+    return serviceTotals;
+  }.property('service_records.length'),
+
+  lifetimeCost: function() {
+    var originalCost = this.get('original_cost'),
+        serviceCosts = this.get('serviceRecordTotals'),
+        totalCosts = parseFloat(originalCost) + parseFloat(serviceCosts);
+
+    return totalCosts - parseFloat(this.get('scrap_value'));
+  }.property('isCapitalized')
 
 
 });
