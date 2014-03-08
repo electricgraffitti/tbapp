@@ -31,8 +31,8 @@
         </div>
         <div class="form_row">
           <div class="form-group">
-            <label>Technician Name</label>
-            {{input value=technicianName name=item placeholder='Technician Name' class='form-control'}}
+            <label>Removal Vendor Name</label>
+            {{input value=removalVendor name=item placeholder='Removal Vendor Name' class='form-control'}}
           </div>
         </div>
         <div class="form_row">
@@ -42,7 +42,7 @@
           </div>
         </div>                
         <div class="form-group cancel_links">
-          <button class="btn btn-default btn-wide" {{action 'validateServiceRecord' on='click'}}>Save Record</button>
+          <button class="btn btn-default btn-wide" {{action 'validateCapitalization' capitalizationItem on='click'}}>Capitalize Item</button>
           <span> or <span {{action 'clearServiceRecordForm' bubbles=false on='click'}} class='span_link'>Cancel</span></span>
         </div>
       </div>

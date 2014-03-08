@@ -85,7 +85,7 @@ class ServiceRecordsController < ApplicationController
 #  invoice_amount      :string(255)
 private
   def service_record_params
-    params.require(:service_record).permit(:id, :item_id, :custom_order_number, :po_number, :service_date,
+    params.require(:service_record).permit(:id, :vendor_name, :item_id, :custom_order_number, :po_number, :service_date,
              :technician, :description, :invoice_amount, :part_id, :user_vendor_id)
   end
 end

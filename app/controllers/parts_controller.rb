@@ -92,6 +92,6 @@ class PartsController < ApplicationController
 private
   def part_params
     params.require(:part)
-          .permit(:id, :item_id, :name, :make, :model_number, :replacement_date, :description)
+          .permit(:id, :item_id, :name, :make, :vendor_name, :model_number, :replacement_date, :description)
   end
 end

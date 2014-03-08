@@ -7,9 +7,16 @@ TBook.ServiceRecord = DS.Model.extend({
   description: DS.attr('string'),
   invoice_amount: DS.attr('number'),
   service_date: DS.attr('date'),
+  vendor_name: DS.attr('string'),
 
   formattedDate: function () {
-  	return moment(this.get('service_date')).format("ddd, MMM Do YYYY, h:mm:ss a");
-  }.property('service_date')
+  	return moment(this.get('service_date')).format("MMM Do YYYY");
+  }.property('service_date'),
 
+  orderNumber: Ember.computed.alias('custom_order_number'),
+  vendorName: Ember.computed.alias('vendor_name'),
+  poNumber: Ember.computed.alias('po_number'),
+  serviceTechnician: Ember.computed.alias('technician'),
+  serviceDescription: Ember.computed.alias('description'),
+  invoiceAmount: Ember.computed.alias('invoice_amount')
 });

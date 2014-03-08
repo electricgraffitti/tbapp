@@ -16,6 +16,19 @@ TBook.Location = DS.Model.extend({
   service_records: DS.hasMany('service_record'),
 
   locationName: Ember.computed.alias('name'),
-  locationState: Ember.computed.alias('address.stateName')
+  locationNumber: Ember.computed.alias('location_number'), 
+  locationState: Ember.computed.alias('address.stateName'),
+
+  itemCount: function() {
+    return this.get('items.length');
+  }.property('items.length'),
+
+  warrantyCount: function() {
+    return this.get('warranties.length');
+  }.property('warranties.length'),
+
+  serviceRecordCount: function() {
+    return this.get('service_records.length');
+  }.property('service_records.length'),
 
 });

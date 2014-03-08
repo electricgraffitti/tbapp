@@ -1,0 +1,71 @@
+	<ul class='grouped_row full_row'>
+	  <li class='item_serial_number data_point'>
+	  	<span class="grid_label">SN: </span> 
+	  	<span class="grid_value">{{ serialNumber }}</span>
+	  </li>
+	  <li class='item_make data_point'>
+	  	<span class="grid_label">Make: </span> 
+	  	<span class="grid_value">{{ make }}</span>
+	  </li>
+	  <li class='item_model data_point'>
+	  	<span class="grid_label">Model: </span> 
+	  	<span class="grid_value">{{ modelNumber }}</span>
+	  </li>
+	  <li class='item_cost data_point'>
+	  	<span class="grid_label">Original Cost: </span> 
+	  	<span class="grid_value">{{currency original_cost }}</span>
+	  </li>
+	</ul>
+
+	<ul class='grouped_row full_row'>
+	  <li class='item_purchased_from data_point'>
+	  	<span class="grid_label">Purchased From: </span> 
+	  	<span class="grid_value">{{ purchased_from }}</span>
+	  </li>
+	  <li class='item_physical_location data_point'>
+	  	<span class="grid_label">Physical Location: </span> 
+	  	<span class="grid_value">{{ physical_location }}</span>
+	  </li>
+	</ul>
+
+	<ul class='grouped_row full_row'>	
+	  <li class='item_service_record_count data_point'>
+	  	<span class="grid_label">Service Records: </span> 
+	  	<span class="grid_value">{{#link-to 'item_service_records' }}{{serviceRecordCount}}{{/link-to}}</span>
+	  </li>
+	  <li class='item_part_count data_point'>
+	  	<span class="grid_label">Parts Count: </span> 
+	  	<span class="grid_value">{{#link-to 'item_parts' }}{{partCount}}{{/link-to}}</span>
+	  </li>
+	  <li class='item_warranty_count data_point'>
+	  	<span class="grid_label">Warranty Count: </span> 
+	  	<span class="grid_value">{{#link-to 'item_warranties' }}{{warrantyCount}}{{/link-to}}</span>
+	  </li>
+	  <li class='item_purchase_date data_point'>
+	  	<span class="grid_label">Purchase Date: </span> 
+	  	<span class="grid_value">{{ formattedDate }}</span>
+	  </li>		  
+	</ul>
+	
+	{{#if isCapitalized }}	
+		<ul class='single_row grouped_row full_row capitalized_group'>	
+		  <li class='item_service_record_count data_point'>
+		  	<span class="grid_label">Removal Date: </span><br/>
+		  	<span class="grid_value">{{ formattedRemovalDate }}</span>
+		  </li>
+		  <li class='item_part_count data_point'>
+		  	<span class="grid_label">Removal Vendor: </span> <br/>
+		  	<span class="grid_value">{{ removal_vendor }}</span>
+		  </li>
+		  <li class='item_warranty_count data_point'>
+		  	<span class="grid_label">Refrigerant LBS: </span> <br/>
+		  	<span class="grid_value">{{ removalQuantity }}</span>
+		  </li>
+		  <li class='item_purchase_date data_point'>
+		  	<span class="grid_label">Scrap Value: </span> <br/>
+		  	<span class="grid_value">{{ scrap_value }}</span>
+		  </li>
+		</ul>
+	{{/if}}
+
+

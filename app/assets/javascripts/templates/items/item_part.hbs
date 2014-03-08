@@ -1,1 +1,42 @@
+<div class="component component_right">
+  <div class="component_header">
+    <div class="component_wrap">
+      <div class="component_header_left">
+        <label class="component_title">{{ name }}</label>
+      </div>
+    </div>
+  </div>
+  <div class="content_component_wrap component_wrap">
+    <div class="component_content">
+      <div class="form_component form_section section_left add_location_main">
+        <div class="form_row">
+          <div class="form-group">
+            <label>Make</label>
+            {{ make }}
+          </div>
+          <div class="form-group">
+            <label>Model Number</label>
+            {{ model_number }}
+          </div>          
+        </div>
+        <div class="form_row">
+        	<div class="form-group">
+            <label>Vendor</label>
+            {{ vendor_name }}
+          </div>         	
+        	<div class="form-group">
+            <label>Replacement Date</label>
+            {{ formattedReplacementDate }}
+          </div> 
+        </div>
+        <div class="form_row">
+          <div class="form-group">
+            <label>Part Description</label>
+            {{ description }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {{outlet}}

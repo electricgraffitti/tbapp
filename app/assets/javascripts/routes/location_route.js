@@ -24,6 +24,12 @@ TBook.LocationRoute = Ember.Route.extend({
   },
   afterModel: function(model, transition) {
     this.transitionTo('location_items', model);
+  },
+  
+  actions: {
+    willTransition: function(transition) {
+      model.set('isSelected', false);
+    }
   }
 });
 

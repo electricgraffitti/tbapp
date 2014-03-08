@@ -2,7 +2,7 @@
   <div class="component_header">
     <div class="component_wrap">
       <div class="component_header_left">
-        <label class="component_title">Service Record Information</label>
+        <label class="component_title">Warranty Information</label>
       </div>
     </div>
   </div>
@@ -11,42 +11,37 @@
       <div class="form_component form_section section_left add_location_main">
         <div class="form_row">
           <div class="form-group">
-            <label>Order Number</label>
-            {{ orderNumber }}
+            <label>Start Date</label>
+            {{formattedStartDate}}
           </div>
           <div class="form-group">
-            <label>P.O. Number</label>
-            {{ poNumber }}
-          </div>
-        </div>
-        <div class="form_row">
-          <div class="form-group">
-            <label>Service Date</label>
-            {{ formattedDate }}
-          </div>
-          <div class="form-group">
-            <label>Invoice Amount</label>
-            {{currency invoiceAmount }}
+            <label>End Date</label>
+            {{formattedEndDate}}
           </div>
         </div>
         <div class="form_row">
           <div class="form-group">
-            <label>Vendor Name</label>
-            {{ vendorName }}
+            <label>Parts Expiration</label>
+            {{formattedPartsExp}}
           </div>
           <div class="form-group">
-            <label>Technician Name</label>
-            {{ serviceTechnician }}
+            <label>Labor Expiration</label>
+            {{formattedLaborExp}}
           </div>
         </div>
         <div class="form_row">
           <div class="form-group">
-            <label>Details</label>
-            {{ serviceDescription }}
+            <label>Warranty Provider</label>
+            {{warranty_provider}}
+          </div>
+        </div>
+        <div class="form_row">
+          <div class="form-group">
+            <label>Terms</label>
+            {{terms}}
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-

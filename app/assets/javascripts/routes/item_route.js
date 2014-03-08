@@ -24,6 +24,12 @@ TBook.ItemServiceRecordRoute = Ember.Route.extend({
   setupController: function(controller, model) {
     this._super(controller, model);
     model.set('isSelected', true);
+  },
+
+  actions: {
+    willTransition: function(transition) {
+      model.set('isSelected', false);
+    }
   }
 });
 
@@ -36,7 +42,16 @@ TBook.ItemServiceRecordsAddServiceRecordRoute = Ember.Route.extend({
   }
 });
 
-TBook.ItemServiceRecordsCapitalizeItemRoute = Ember.Route.extend({});
+TBook.ItemServiceRecordsCapitalizeItemRoute = Ember.Route.extend({
+
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    var item = this.controllerFor('item').get('model');
+    controller.set('capitalizationItem', item);
+  }
+
+
+});
 
 TBook.ItemWarrantiesRoute = Ember.Route.extend({
   model: function() {

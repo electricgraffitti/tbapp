@@ -38,9 +38,9 @@ Formats Float to Currency a value in a Handlebars expression
 @method currency
 @for Handlebars
 **/
-Handlebars.registerHelper('currency', function (value) {
-  var returnString = "$" + (value).toPrecision(2);
-  return returnString;
+Ember.Handlebars.helper('currency', function (value) {
+  var returnString = "$" + value;
+  return new Handlebars.SafeString(returnString);
 });
 
 Handlebars.registerHelper('emptyComponentMessage', function (message) {

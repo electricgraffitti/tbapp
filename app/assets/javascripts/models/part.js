@@ -1,5 +1,6 @@
 TBook.Part = DS.Model.extend({
   name: DS.attr('string'),
+  vendor_name: DS.attr('string'),
   model_number: DS.attr(),
   make: DS.attr(),
   description: DS.attr(),

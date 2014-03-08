@@ -56,7 +56,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
 
     respond_to do |format|
-      if @item.update_attributes(params[:item])
+      if @item.update_attributes(capitalize_params)
         format.json { head :no_content }
       else
         format.json { render json: @item.errors, status: :unprocessable_entity }
@@ -75,6 +75,11 @@ class ItemsController < ApplicationController
   end
 
 private
+  def capitalize_params
+    params.require(:item).permit(:removal_date, :estimated_weight, :refrigerant_removal_quantity,
+             :scrap_value, :capitalization_reason, :removal_vendor, :is_capitalized)
+  end
+
   def item_params
     params.require(:item).permit(:id, :name, :serial_number, :make, :model, :purchase_date,
              :original_cost, :location_id, :notes, :purchased_from,
