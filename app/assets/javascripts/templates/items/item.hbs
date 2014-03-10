@@ -7,7 +7,7 @@
       <div class="component_header_right">
       <ul class='toolbar'>
         <li>{{#link-to 'item_parts' class='icon icon-16 parts' title='View Parts'}}Parts{{/link-to}}</li>
-        <li>{{#link-to 'item_service_records' class='icon icon-16 service_records' title='View Service Records'}}Service Records{{/link-to}}</li>
+        <li id='service_records'>{{#link-to 'item_service_records' class='icon icon-16 service_records' title='View Service Records'}}Service Records{{/link-to}}</li>
         <li>{{#link-to 'item_warranties' class='icon icon-16 warranties' title='View Warranties'}}Warranties{{/link-to}}</li>
         {{#if isCapitalized }}
           <li>{{#link-to 'item_service_records.capitalization_details' this class='icon icon-16 capitalize' title='Capitalization Details'}}Capitalization Details{{/link-to}}</li>
@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="component_wrap">
-      <div class="detail_content">      
+      <div class="detail_content">
         {{#with location}}
           {{partial 'locations/location_sidebar_detail'}}
         {{/with}}

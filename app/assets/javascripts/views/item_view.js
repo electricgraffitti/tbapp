@@ -19,11 +19,19 @@ TBook.ItemServiceRecordsAddServiceRecordView = TBook.View.extend({
 });
 
 TBook.ItemServiceRecordsCapitalizationDetailsView = TBook.View.extend({
-  templateName: 'items/capitalization_details'
+  templateName: 'items/capitalization_details',
+
+  didInsertElement: function() {
+    $('#service_records a').removeClass('active');
+  }
 });
 
 TBook.ItemServiceRecordsCapitalizeItemView = TBook.View.extend({
-  templateName: 'items/capitalize_item'
+  templateName: 'items/capitalize_item',
+
+  didInsertElement: function() {
+    $('#service_records a').removeClass('active');
+  }
 });
 
 TBook.ItemWarrantiesView = TBook.View.extend({

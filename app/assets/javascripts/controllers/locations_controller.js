@@ -1,6 +1,6 @@
 TBook.LocationsController = Ember.ArrayController.extend(
   TBook.ListActions, {
-  
+
   locationObjects: Ember.computed.alias('model'),
   emptyLocationsMessage: 'There are no locations available.',
 
@@ -16,6 +16,9 @@ TBook.LocationsController = Ember.ArrayController.extend(
 });
 
 TBook.LocationsNewController = Ember.Controller.extend({
+  needs: ['locations'],
+
+  visibleLocations: Ember.computed.alias('controllers.locations.visibleLocations'),
 
 	createLocation: function () {
 		var self = this, params = {};
@@ -47,7 +50,7 @@ TBook.LocationsNewController = Ember.Controller.extend({
     location = store.createRecord('location', data.location);
     store.createRecord('address', data.addresses[0]);
 		this.resetForm();
-    this.get('availableLocations').pushObject(location);
+    this.get('visibleLocations').pushObject(location);
     this.transitionToRoute('location', location);
 	},
 
@@ -214,7 +217,9 @@ TBook.LocationNewLocationItemController = Ember.Controller.extend({
 });
 
 TBook.LocationWarrantiesController = Ember.ArrayController.extend({
+  emptyLocationsMessage: 'You do not have any warranties associated with this location.'
 });
 
 TBook.LocationServiceRecordsController = Ember.ArrayController.extend({
+  emptyLocationsMessage: 'You do not have any warranties associated with this location.'
 });

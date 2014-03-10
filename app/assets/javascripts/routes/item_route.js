@@ -21,10 +21,13 @@ TBook.ItemServiceRecordsRoute = Ember.Route.extend(
     var firstRecord = model.objectAt(0);
     if(model.get('length')) {
       this.setSelectedObject(firstRecord, model);
-      this.transitionTo('item_service_record', firstRecord);
+      if (transition.targetName !== 'item_service_records.capitalize_item' || transition.targetName !== 'item_service_records.capitalize_details' ) {
+        this.transitionTo('item_service_record', firstRecord);
+      }
+    } else {
+      this.transitionTo('item_service_records.add_service_record');
     }
   }
-
 });
 
 TBook.ItemServiceRecordRoute = Ember.Route.extend({

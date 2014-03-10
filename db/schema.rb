@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308075148) do
+ActiveRecord::Schema.define(version: 20140310151245) do
 
   create_table "account_details", force: true do |t|
     t.string   "company_name"
@@ -112,28 +112,29 @@ ActiveRecord::Schema.define(version: 20140308075148) do
     t.string   "make"
     t.string   "model"
     t.date     "purchase_date"
-    t.integer  "original_cost",                default: 0
+    t.integer  "original_cost"
     t.integer  "account_id"
     t.integer  "location_id"
     t.string   "notes"
-    t.integer  "parts_count",                  default: 0
-    t.integer  "warranties_count",             default: 0
+    t.integer  "parts_count"
+    t.integer  "warranties_count"
     t.string   "purchased_from"
-    t.integer  "extended_warranties_count",    default: 0
-    t.integer  "reminders_count",              default: 0
+    t.integer  "extended_warranties_count"
+    t.integer  "reminders_count"
     t.integer  "user_vendor_id"
     t.integer  "vendor_id"
-    t.integer  "service_records_count",        default: 0
+    t.integer  "service_records_count"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "removal_date"
     t.integer  "estimated_weight"
-    t.integer  "refrigerant_removal_quantity", default: 0
+    t.integer  "refrigerant_removal_quantity"
     t.integer  "scrap_value"
     t.text     "capitalization_reason"
     t.string   "physical_location"
     t.string   "removal_vendor"
     t.boolean  "is_capitalized"
+    t.integer  "item_rebate"
   end
 
   add_index "items", ["account_id"], name: "index_items_on_account_id", using: :btree
@@ -154,16 +155,16 @@ ActiveRecord::Schema.define(version: 20140308075148) do
   add_index "location_roles", ["user_id"], name: "index_location_roles_on_user_id", using: :btree
 
   create_table "locations", force: true do |t|
+    t.integer  "account_id"
+    t.integer  "items_count"
+    t.integer  "parts_count"
+    t.integer  "warranties_count"
+    t.integer  "extended_warranties_count"
     t.string   "name"
     t.string   "location_number"
-    t.integer  "account_id"
-    t.integer  "items_count",               default: 0
-    t.integer  "parts_count",               default: 0
-    t.integer  "warranties_count",          default: 0
-    t.integer  "extended_warranties_count", default: 0
-    t.integer  "reminders_count",           default: 0
-    t.integer  "user_vendors_count",        default: 0
-    t.integer  "service_records_count",     default: 0
+    t.integer  "reminders_count"
+    t.integer  "user_vendors_count"
+    t.integer  "service_records_count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -244,20 +245,20 @@ ActiveRecord::Schema.define(version: 20140308075148) do
   add_index "messages", ["message_status_id"], name: "index_messages_on_message_status_id", using: :btree
 
   create_table "parts", force: true do |t|
-    t.string   "vendor_name"
     t.string   "name"
+    t.integer  "item_id"
     t.string   "model_number"
     t.string   "make"
-    t.text     "description"
-    t.date     "replacement_date"
-    t.integer  "item_id"
     t.integer  "account_id"
     t.integer  "location_id"
     t.integer  "warranties_count"
     t.integer  "extended_warranties_count"
+    t.text     "description"
+    t.date     "replacement_date"
     t.integer  "service_records_count"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "vendor_name"
   end
 
   add_index "parts", ["account_id"], name: "index_parts_on_account_id", using: :btree
@@ -298,7 +299,6 @@ ActiveRecord::Schema.define(version: 20140308075148) do
 
   create_table "service_records", force: true do |t|
     t.integer  "user_vendor_id"
-    t.string   "vendor_name"
     t.integer  "item_id"
     t.string   "custom_order_number"
     t.string   "po_number"
@@ -309,6 +309,7 @@ ActiveRecord::Schema.define(version: 20140308075148) do
     t.integer  "part_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "vendor_name"
   end
 
   add_index "service_records", ["item_id"], name: "index_service_records_on_item_id", using: :btree

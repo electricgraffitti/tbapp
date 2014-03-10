@@ -5,12 +5,18 @@ TBook.LocationsRoute = Ember.Route.extend({
 });
 
 TBook.LocationsNewRoute = Ember.Route.extend({
-
 	setupController: function(controller, model){
 		this._super(controller, model);
-    var locations = this.controllerFor('locations').get('locationObjects');
+    var locations = this.controllerFor('locations').get('locationObjects'),
+        currentSelectedObject = locations.filterBy('isSelected', true)[0];
     controller.set('availableLocations', locations);
 		controller.set('stateObjs', this.store.findAll('state'));
+    if (currentSelectedObject) {
+      controller.set('currentSelectedObject', currentSelectedObject);
+    } else {
+      controller.set('currentSelectedObject', locations.objectAt(0));
+    }
+
 	}
 });
 
@@ -25,7 +31,7 @@ TBook.LocationRoute = Ember.Route.extend({
   afterModel: function(model, transition) {
     this.transitionTo('location_items', model);
   },
-  
+
   actions: {
     willTransition: function(transition) {
       model.set('isSelected', false);
