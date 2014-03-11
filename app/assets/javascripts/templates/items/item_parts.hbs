@@ -12,8 +12,8 @@
     </div>
   </div>
   <div class="component_scroller">
-    {{#if controller}}
-      {{#each part in controller}}
+    {{#if hasParts }}
+      {{#each part in itemParts }}
         {{#with part}}
           {{partial 'items/listed_parts'}}
         {{/with}}

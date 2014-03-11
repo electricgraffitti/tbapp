@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="component_scroller">
-    {{#if controller}}
+    {{#if hasServiceRecords }}
       {{#each service_record in serviceRecords}}
         {{#with service_record}}
           {{partial 'items/listed_service_record'}}

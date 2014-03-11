@@ -12,8 +12,8 @@
     </div>
   </div>
   <div class="component_scroller">
-    {{#if controller}}
-      {{#each warranty in controller}}
+    {{#if hasWarranties }}
+      {{#each warranty in itemWarranties}}
         {{#with warranty}}
           {{partial 'items/listed_warranties'}}
         {{/with}}

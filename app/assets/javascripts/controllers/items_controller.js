@@ -9,6 +9,7 @@ TBook.ItemServiceRecordsController = Ember.ArrayController.extend(
 
 	emptyLocationsMessage: 'There are no service records attached to this item.',
   serviceRecords: Ember.computed.alias('model'),
+  hasServiceRecords: Ember.computed.alias('serviceRecords.length'),
 
 
   actions: {
@@ -223,6 +224,8 @@ TBook.ItemWarrantiesController = Ember.ArrayController.extend(
   TBook.ListActions, {
 
 	emptyLocationsMessage: 'There are no service records attached to this item.',
+  itemWarranties: Ember.computed.alias('model'),
+  hasWarranties: Ember.computed.alias('itemWarranties.length'),
 
   actions: {
   
@@ -331,6 +334,8 @@ TBook.ItemPartsController = Ember.ArrayController.extend(
   TBook.ListActions, {
 
   emptyLocationsMessage: 'There are no service records attached to this item.',
+  itemParts: Ember.computed.alias('model'),
+  hasParts: Ember.computed.alias('itemParts.length'),
 
   actions: {
 
