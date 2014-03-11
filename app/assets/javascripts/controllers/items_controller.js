@@ -378,7 +378,7 @@ TBook.ItemPartsAddItemPartController = Ember.Controller.extend(
     part = store.createRecord('part', data.part);
     this.resetForm();
     this.get('partItem.parts').pushObject(part);
-    this.get('itemLocation.parts').pushObject(part);
+    // this.get('itemLocation.parts').pushObject(part);
     this.setSelectedObject(part, this.get('partItem.parts'));
     this.transitionToRoute('item_part', part);
   },
