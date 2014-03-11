@@ -2,7 +2,7 @@
   <ul class='single_row grouped_row full_row'>
     <li class='location_name data_point'>
       <span class="grid_label">Item Name: </span>
-      <span class="grid_value">{{unbound name }} - {{unbound serial_number }}</span>
+      <span class="grid_value" {{bind-attr title=itemName}} >{{unbound name }} - {{unbound serial_number }}</span>
     </li>
     <li class='location_state data_point'>
       <span class="grid_label">Service Records: </span>

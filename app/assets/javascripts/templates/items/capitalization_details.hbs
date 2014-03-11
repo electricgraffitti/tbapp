@@ -22,14 +22,18 @@
         <div class="form_row">
           <div class="form-group">
             <label>Refridgerant Removal Quantity</label>
-            {{ model.removalQuantity }}
+            {{ model.removalQuantity }} LBS
           </div>
           <div class="form-group">
-            <label>Estimated Weight</label>
-            {{ model.estimated_weight }}
+            <label>Rebate</label>
+            {{currency model.item_rebate }}
           </div>
         </div>
         <div class="form_row">
+          <div class="form-group">
+            <label>Estimated Weight</label>
+            {{ model.estimated_weight }} LBS
+          </div>
           <div class="form-group">
             <label>Scrap Value</label>
             {{currency model.scrap_value}}

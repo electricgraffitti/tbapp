@@ -17,6 +17,13 @@ TBook.ItemServiceRecordsRoute = Ember.Route.extend(
   	return this.modelFor('item').get('service_records');
   },
 
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    var item = this.controllerFor('item').get('model');
+    controller.set('serviceRecordItem', item);
+    controller.set('itemLocation', item.get('location'));
+  },
+
   afterModel: function(model, transition) {
     var firstRecord = model.objectAt(0);
     if(model.get('length')) {
@@ -82,6 +89,13 @@ TBook.ItemWarrantiesRoute = Ember.Route.extend(
   	return this.modelFor('item').get('warranties');
   },
 
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    var item = this.controllerFor('item').get('model');
+    controller.set('warrantyItem', item);
+    controller.set('itemLocation', item.get('location'));
+  },
+
   afterModel: function(model, transition) {
     var firstRecord = model.objectAt(0);
     if(model.get('length')) {
@@ -110,6 +124,13 @@ TBook.ItemPartsRoute = Ember.Route.extend(
   TBook.ListActions, {
   model: function() {
     return this.modelFor('item').get('parts');
+  },
+
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    var item = this.controllerFor('item').get('model');
+    controller.set('partItem', item);
+    controller.set('itemLocation', item.get('location'));
   },
 
   afterModel: function(model, transition) {

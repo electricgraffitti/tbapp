@@ -7,7 +7,7 @@ class ItemSerializer < ActiveModel::Serializer
 						 :reminders_count, :service_records_count, :removal_vendor, :is_capitalized,
              :removal_date, :estimated_weight, :refrigerant_removal_quantity,
              :scrap_value, :capitalization_reason, :physical_location, :user_vendor_id,
-             :vendor_id
+             :vendor_id, :item_rebate
 
   has_many :service_records
   has_many :warranties

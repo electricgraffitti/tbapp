@@ -8,6 +8,7 @@ TBook.ItemServiceRecordsController = Ember.ArrayController.extend(
   TBook.ListActions, {
 
 	emptyLocationsMessage: 'There are no service records attached to this item.',
+  serviceRecords: Ember.computed.alias('model'),
 
 
   actions: {
@@ -25,6 +26,7 @@ TBook.ItemServiceRecordController = Ember.ObjectController.extend({
 
 TBook.ItemServiceRecordsAddServiceRecordController = Ember.Controller.extend(
   TBook.ListActions, {
+    needs: ['item_service_records'],
 	
 	createServiceRecord: function () {
 		var self = this, params = {};
@@ -58,6 +60,7 @@ TBook.ItemServiceRecordsAddServiceRecordController = Ember.Controller.extend(
 		this.resetForm();
     this.get('serviceRecordItem.serviceRecords').pushObject(serviceRecord);
     this.get('itemLocation.service_records').pushObject(serviceRecord);
+    this.get('controllers.item_service_records.model').pushObject(serviceRecord);
     this.setSelectedObject(serviceRecord, this.get('serviceRecordItem.serviceRecords'));
     this.transitionToRoute('item_service_record', serviceRecord);
 	},
@@ -123,6 +126,9 @@ TBook.ItemServiceRecordsAddServiceRecordController = Ember.Controller.extend(
 TBook.ItemServiceRecordsCapitalizationDetailsController = Ember.Controller.extend({});
 
 TBook.ItemServiceRecordsCapitalizeItemController = Ember.Controller.extend({
+  scrapValue: 0,
+  removalQuantity: 0,
+  rebateValue: 0,
   
   capitalizeItem: function (item) {
     var self = this, params = {};
@@ -134,6 +140,7 @@ TBook.ItemServiceRecordsCapitalizeItemController = Ember.Controller.extend({
     params.item.scrap_value = this.get('scrapValue');
     params.item.removal_vendor = this.get('removalVendor');
     params.item.capitalization_reason = this.get('capReason');
+    params.item.item_rebate = this.get('rebateValue');
     params.item.is_capitalized = true;
 
     dataObj = {
@@ -143,13 +150,22 @@ TBook.ItemServiceRecordsCapitalizeItemController = Ember.Controller.extend({
     }
 
     TBook.ajax('/items/' + item.get('id'), dataObj).then(function(result) {
-      self.viewCapitalization(result);
+      self.viewCapitalization(item);
     }, function(reject) {
       self.handleCreateError(reject);
     });
   },
 
-  viewCapitalization: function(data) {
+  viewCapitalization: function(item) {
+    item.set('removal_date', this.get('removalDate'));
+    item.set('estimated_weight', this.get('estimatedWeight'));
+    item.set('refrigerant_removal_quantity', this.get('removalQuantity'));
+    item.set('scrap_value', this.get('scrapValue'));
+    item.set('removal_vendor', this.get('removalVendor'));
+    item.set('capitalization_reason', this.get('capReason'));
+    item.set('item_rebate', this.get('rebateValue'));
+    item.set('isCapitalized', true);
+
     this.resetForm();
     this.transitionToRoute('item_service_records.capitalization_details');
   },
@@ -165,6 +181,7 @@ TBook.ItemServiceRecordsCapitalizeItemController = Ember.Controller.extend({
     this.set('scrapValue', null);
     this.set('removalVendor', null);
     this.set('capReason', null);
+    this.set('rebateValue', null);
   },
 
   actions: {
@@ -178,14 +195,6 @@ TBook.ItemServiceRecordsCapitalizeItemController = Ember.Controller.extend({
 
       if (Ember.isEmpty(this.get('estimatedWeight'))) {
         validationMessages.push('An Estimated Weight is required');
-      }
-
-      if (Ember.isEmpty(this.get('removalQuantity'))) {
-        validationMessages.push('An Refidgerant Removal Quantity is required');
-      }
-
-      if (Ember.isEmpty(this.get('scrapValue'))) {
-        validationMessages.push('A Scrap Value is required');
       }
 
       if (Ember.isEmpty(this.get('removalVendor'))) {
@@ -207,9 +216,7 @@ TBook.ItemServiceRecordsCapitalizeItemController = Ember.Controller.extend({
     clearItemForm: function () {
       this.resetForm();
     }
-
   }
-
 });
 
 TBook.ItemWarrantiesController = Ember.ArrayController.extend(
@@ -225,7 +232,6 @@ TBook.ItemWarrantiesController = Ember.ArrayController.extend(
     }
   
   }
-
 });
 
 TBook.ItemWarrantyController = Ember.ObjectController.extend({
@@ -334,7 +340,6 @@ TBook.ItemPartsController = Ember.ArrayController.extend(
     }
 
   }
-
 });
 
 TBook.ItemPartController = Ember.ObjectController.extend({

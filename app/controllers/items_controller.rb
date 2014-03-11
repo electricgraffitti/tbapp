@@ -76,7 +76,7 @@ class ItemsController < ApplicationController
 
 private
   def capitalize_params
-    params.require(:item).permit(:removal_date, :estimated_weight, :refrigerant_removal_quantity,
+    params.require(:item).permit(:removal_date, :estimated_weight, :item_rebate, :refrigerant_removal_quantity,
              :scrap_value, :capitalization_reason, :removal_vendor, :is_capitalized)
   end
 

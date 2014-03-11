@@ -5,7 +5,9 @@
     </div>
     <div class="component_header_right">
       <ul class='toolbar'>
+        {{#unless partItem.isCapitalized}}
         <li>{{#link-to 'item_parts.add_item_part' class='icon icon-16 add' title='Add Part'}}Add Part{{/link-to}}</li>
+        {{/unless}}
       </ul>
     </div>
   </div>

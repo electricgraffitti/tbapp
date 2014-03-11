@@ -5,13 +5,15 @@
     </div>
     <div class="component_header_right">
       <ul class='toolbar'>
+        {{#unless serviceRecordItem.isCapitalized}}
         <li>{{#link-to 'item_service_records.add_service_record' class='icon icon-16 add' title='Add Service Record'}}Add Service Record{{/link-to}}</li>
+        {{/unless}}
       </ul>
     </div>
   </div>
   <div class="component_scroller">
     {{#if controller}}
-      {{#each service_record in controller}}
+      {{#each service_record in serviceRecords}}
         {{#with service_record}}
           {{partial 'items/listed_service_record'}}
         {{/with}}

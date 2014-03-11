@@ -30,16 +30,22 @@
 
 	<ul class='grouped_row full_row'>	
 	  <li class='item_service_record_count data_point'>
+	  	{{#link-to 'item_service_records' }}
 	  	<span class="grid_label">Service Records: </span> 
-	  	<span class="grid_value">{{#link-to 'item_service_records' }}{{serviceRecordCount}}{{/link-to}}</span>
+	  	<span class="grid_value">{{serviceRecordCount}}</span>
+	  	{{/link-to}}
 	  </li>
 	  <li class='item_part_count data_point'>
+	  	{{#link-to 'item_parts' }}
 	  	<span class="grid_label">Parts Count: </span> 
-	  	<span class="grid_value">{{#link-to 'item_parts' }}{{partCount}}{{/link-to}}</span>
+	  	<span class="grid_value">{{partCount}}</span>
+	  	{{/link-to}}
 	  </li>
 	  <li class='item_warranty_count data_point'>
+	  	{{#link-to 'item_warranties' }}
 	  	<span class="grid_label">Warranty Count: </span> 
-	  	<span class="grid_value">{{#link-to 'item_warranties' }}{{warrantyCount}}{{/link-to}}</span>
+	  	<span class="grid_value">{{warrantyCount}}</span>
+	  	{{/link-to}}
 	  </li>
 	  <li class='item_purchase_date data_point'>
 	  	<span class="grid_label">Purchase Date: </span> 
@@ -53,15 +59,19 @@
 		  	<span class="grid_label">Removal Date: </span><br/>
 		  	<span class="grid_value">{{ formattedRemovalDate }}</span>
 		  </li>
-		  <li class='item_part_count data_point'>
+		  <li class='item_removal_vendor data_point'>
 		  	<span class="grid_label">Removal Vendor: </span> <br/>
 		  	<span class="grid_value">{{ removal_vendor }}</span>
 		  </li>
-		  <li class='item_warranty_count data_point'>
+		  <li class='item_refrig_quantity data_point'>
 		  	<span class="grid_label">Refrigerant LBS: </span> <br/>
 		  	<span class="grid_value">{{ removalQuantity }}</span>
 		  </li>
-		  <li class='item_purchase_date data_point'>
+		  <li class='item_rebate data_point'>
+		  	<span class="grid_label">Rebate: </span> <br/>
+		  	<span class="grid_value">{{currency item_rebate }}</span>
+		  </li>
+		  <li class='item_scrap_value data_point'>
 		  	<span class="grid_label">Scrap Value: </span> <br/>
 		  	<span class="grid_value">{{currency scrap_value }}</span>
 		  </li>

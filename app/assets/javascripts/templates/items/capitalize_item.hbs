@@ -21,18 +21,22 @@
         </div>
         <div class="form_row">
           <div class="form-group">
-            <label>Refridgerant Removal Quantity</label>
+            <label>Refrigerant Removal Quantity</label>
             {{number-field valueBinding="removalQuantity" name=item placeholder='Removal Quantity' class='form-control'}}
           </div>
           <div class="form-group">
-            <label>Scrap Value</label>
-            {{number-field valueBinding="scrapValue" name=item placeholder='Scrap Value' class='form-control'}}
+            <label>Refrigerant Rebate</label>
+            {{number-field valueBinding="rebateValue" name=item placeholder='Refrigerant Value' class='form-control'}}
           </div>
         </div>
         <div class="form_row">
           <div class="form-group">
             <label>Removal Vendor Name</label>
             {{input value=removalVendor name=item placeholder='Removal Vendor Name' class='form-control'}}
+          </div>
+          <div class="form-group">
+            <label>Scrap Value</label>
+            {{number-field valueBinding="scrapValue" name=item placeholder='Scrap Value' class='form-control'}}
           </div>
         </div>
         <div class="form_row">

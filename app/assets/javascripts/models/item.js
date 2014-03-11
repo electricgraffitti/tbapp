@@ -12,6 +12,7 @@ TBook.Item = DS.Model.extend({
   removal_vendor: DS.attr('string'),
   estimated_weight: DS.attr('number'),
   refrigerant_removal_quantity: DS.attr('number'),
+  item_rebate: DS.attr('number'),
   scrap_value: DS.attr('number'),
   capitalization_reason: DS.attr('string'),
   physical_location: DS.attr('string'),
@@ -24,6 +25,10 @@ TBook.Item = DS.Model.extend({
   service_records: DS.hasMany('service_record'),
   warranties: DS.hasMany('warranty'),
   parts: DS.hasMany('part'),
+
+  itemName: function() {
+    return this.get('name') + ' - ' + this.get('serial_number');
+  }.property('name', 'serial_number'),
 
   modelNumber: Ember.computed.alias('model_name'),
 
@@ -67,7 +72,7 @@ TBook.Item = DS.Model.extend({
         serviceCosts = this.get('serviceRecordTotals'),
         totalCosts = parseFloat(originalCost) + parseFloat(serviceCosts);
 
-    return totalCosts - parseFloat(this.get('scrap_value'));
+    return totalCosts - (parseFloat(this.get('scrap_value')) + parseFloat(this.get('item_rebate')));
   }.property('isCapitalized')
 
 

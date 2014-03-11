@@ -5,7 +5,9 @@
     </div>
     <div class="component_header_right">
       <ul class='toolbar'>
+        {{#unless warrantyItem.isCapitalized}}
         <li>{{#link-to 'item_warranties.add_warranty' class='icon icon-16 add' title='Add Warranty'}}Add Warranty{{/link-to}}</li>
+        {{/unless}}
       </ul>
     </div>
   </div>
