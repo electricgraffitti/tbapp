@@ -22,6 +22,7 @@ TBook.ItemServiceRecordsCapitalizationDetailsView = TBook.View.extend({
   templateName: 'items/capitalization_details',
 
   didInsertElement: function() {
+    this._super();
     $('#service_records a').removeClass('active');
   }
 });
@@ -30,6 +31,7 @@ TBook.ItemServiceRecordsCapitalizeItemView = TBook.View.extend({
   templateName: 'items/capitalize_item',
 
   didInsertElement: function() {
+    this._super();
     $('#service_records a').removeClass('active');
   }
 });

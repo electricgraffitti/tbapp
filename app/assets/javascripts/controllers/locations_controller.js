@@ -217,9 +217,26 @@ TBook.LocationNewLocationItemController = Ember.Controller.extend({
 });
 
 TBook.LocationWarrantiesController = Ember.ArrayController.extend({
-  emptyLocationsMessage: 'You do not have any warranties associated with this location.'
+  emptyLocationsMessage: 'You do not have any warranties associated with this location.',
+
+  actions: {
+
+    selectWarrantyRow: function(warranty) {
+      this.transitionToRoute('item_warranty', warranty.get('item'), warranty);
+    }
+
+  }
+
 });
 
 TBook.LocationServiceRecordsController = Ember.ArrayController.extend({
-  emptyLocationsMessage: 'You do not have any warranties associated with this location.'
+  emptyLocationsMessage: 'You do not have any warranties associated with this location.',
+
+  actions: {
+    
+    selectServiceRecordRow: function(service_record) {
+      this.transitionToRoute('item_service_record', service_record.get('item'), service_record);
+    }
+  }
+
 });
